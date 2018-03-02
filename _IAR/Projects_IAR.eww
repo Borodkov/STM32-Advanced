@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspace>
+    <project>
+        <path>$WS_DIR$\..\ADC_MultiChan_TCP_CLI\EWARM\ADC_MultiChan_TCP_CLI.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\FreeRTOS_v10_Demo\EWARM\FreeRTOS_V10_Demo.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\FreeRTOS_v10_FreeRTOS-CLI-FAT-TCP\EWARM\FreeRTOS_V10_FreeRTOS-CLI-FAT-TCP.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\FreeRTOS_v10_FreeRTOS-TCP\EWARM\FreeRTOS_V10_FreeRTOS-TCP.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\FreeRTOS_v10_TCP_CLI_ADC6ch\EWARM\FreeRTOS_v10_lwIP.ewp</path>
+    </project>
+    <batchBuild />
+</workspace>

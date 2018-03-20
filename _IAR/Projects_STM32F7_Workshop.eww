@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspace>
+    <project>
+        <path>$WS_DIR$\..\STM32F7_Workshop_01_Benchmark\EWARM\01_Benchmark.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\STM32F7_Workshop_02_DataCache\EWARM\02_DataCache.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\STM32F7_Workshop_03_CPU_DMA_DataCoherency\EWARM\03_DataCoherency.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\STM32F7_Workshop_04_InstructionCacheComplex\EWARM\04_InstructionCacheComplex.ewp</path>
+    </project>
+    <batchBuild />
+</workspace>

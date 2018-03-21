@@ -1,12 +1,12 @@
 /**
   ******************************************************************************
-  * @file
-  * @author  PavelB
-  * @version V1.0
-  * @date    03-April-2017
-  * @brief
+    @file
+    @author  PavelB
+    @version V1.0
+    @date    03-April-2017
+    @brief
   ******************************************************************************
-  */
+*/
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -40,111 +40,111 @@ static USHORT   usRegHoldingBuf[REG_HOLDING_NREGS];
 /* Private function prototypes -----------------------------------------------*/
 
 /**
-  * @brief
-  * @param
-  * @retval None
-  */
+    @brief
+    @param
+    @retval None
+*/
 static void task(void const *pvParameters) {
-  eMBErrorCode eStatus;
-  portTickType xLastWakeTime;
-  /* Select either ASCII or RTU Mode. */
-  eStatus = eMBInit(MB_RTU, 0x01, 0, 115200, MB_PAR_NONE);
-  /* Enable the Modbus Protocol Stack. */
-  eStatus = eMBEnable();
+    eMBErrorCode eStatus;
+    portTickType xLastWakeTime;
+    /* Select either ASCII or RTU Mode. */
+    eStatus = eMBInit(MB_RTU, 0x01, 0, 115200, MB_PAR_NONE);
+    /* Enable the Modbus Protocol Stack. */
+    eStatus = eMBEnable();
 
-  /* Infinite loop */
-  for (;;) {
-    /* Call the main polling loop of the Modbus protocol stack. */
-    (void)eMBPoll();
-    /* Application specific actions. Count the number of poll cycles. */
-    usRegInputBuf[0]++;
-    /* Hold the current FreeRTOS ticks. */
-    xLastWakeTime = xTaskGetTickCount();
-    usRegInputBuf[1] = (unsigned portSHORT)(xLastWakeTime >> 16UL);
-    usRegInputBuf[2] = (unsigned portSHORT)(xLastWakeTime & 0xFFFFUL);
-    /* The constant value. */
-    usRegInputBuf[3] = 33;
-    osDelay(20);
-  }
+    /* Infinite loop */
+    for (;;) {
+        /* Call the main polling loop of the Modbus protocol stack. */
+        (void)eMBPoll();
+        /* Application specific actions. Count the number of poll cycles. */
+        usRegInputBuf[0]++;
+        /* Hold the current FreeRTOS ticks. */
+        xLastWakeTime = xTaskGetTickCount();
+        usRegInputBuf[1] = (unsigned portSHORT)(xLastWakeTime >> 16UL);
+        usRegInputBuf[2] = (unsigned portSHORT)(xLastWakeTime & 0xFFFFUL);
+        /* The constant value. */
+        usRegInputBuf[3] = 33;
+        osDelay(20);
+    }
 }
 
 /*----------------------------------------------------------------------------*/
 void vStartModBusTask() {
-  LCD_UsrLog("vStartModBusTask()\n");
-  /* Create that task */
-  osThreadDef(MODBUS,
-              task,
-              osPriorityHigh,
-              0,
-              0x400);
-  MODBUSHandle = osThreadCreate(osThread(MODBUS), NULL);
+    LCD_UsrLog("vStartModBusTask()\n");
+    /* Create that task */
+    osThreadDef(MODBUS,
+                task,
+                osPriorityHigh,
+                0,
+                0x400);
+    MODBUSHandle = osThreadCreate(osThread(MODBUS), NULL);
 }
 
 eMBErrorCode
-eMBRegHoldingCB(UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegisterMode eMode) {
-  eMBErrorCode    eStatus = MB_ENOERR;
-  int             iRegIndex;
+eMBRegHoldingCB(UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegisterMode eMode) {
+    eMBErrorCode    eStatus = MB_ENOERR;
+    int             iRegIndex;
 
-  if ((usAddress >= REG_HOLDING_START) &&
-      (usAddress + usNRegs <= REG_HOLDING_START + REG_HOLDING_NREGS)) {
-    iRegIndex = (int)(usAddress - usRegHoldingStart);
+    if ((usAddress >= REG_HOLDING_START) &&
+            (usAddress + usNRegs <= REG_HOLDING_START + REG_HOLDING_NREGS)) {
+        iRegIndex = (int)(usAddress - usRegHoldingStart);
 
-    switch (eMode) {
-    /* Pass current register values to the protocol stack. */
-    case MB_REG_READ:
+        switch (eMode) {
+            /* Pass current register values to the protocol stack. */
+            case MB_REG_READ:
 
-      // copy string with RTC and Temperature to the holding buf
+                // copy string with RTC and Temperature to the holding buf
 //     memcpy(usRegHoldingBuf, sDateTemp, REG_HOLDING_NREGS);
-      while (usNRegs > 0) {
+                while (usNRegs > 0) {
 //       *pucRegBuffer++ = ( unsigned char )( sDateTemp[iRegIndex++]);
 //       *pucRegBuffer++ = ( unsigned char )( sDateTemp[iRegIndex++]);
-        *pucRegBuffer++ = (unsigned char)(usRegHoldingBuf[iRegIndex] >> 8);
-        *pucRegBuffer++ = (unsigned char)(usRegHoldingBuf[iRegIndex] & 0xFF);
-        iRegIndex++;
-        usNRegs--;
-      }
+                    *pucRegBuffer++ = (unsigned char)(usRegHoldingBuf[iRegIndex] >> 8);
+                    *pucRegBuffer++ = (unsigned char)(usRegHoldingBuf[iRegIndex] & 0xFF);
+                    iRegIndex++;
+                    usNRegs--;
+                }
 
-      break;
+                break;
 
-    /* Update current register values with new values from the protocol stack. */
-    case MB_REG_WRITE:
-      while (usNRegs > 0) {
-        usRegHoldingBuf[iRegIndex] = *pucRegBuffer++ << 8;
-        usRegHoldingBuf[iRegIndex] |= *pucRegBuffer++;
-        iRegIndex++;
-        usNRegs--;
-      }
+            /* Update current register values with new values from the protocol stack. */
+            case MB_REG_WRITE:
+                while (usNRegs > 0) {
+                    usRegHoldingBuf[iRegIndex] = *pucRegBuffer++ << 8;
+                    usRegHoldingBuf[iRegIndex] |= *pucRegBuffer++;
+                    iRegIndex++;
+                    usNRegs--;
+                }
 
-      // update date & time
-      iRegIndex = (int)(usAddress - usRegHoldingStart);
-      date.Year    = (uint8_t)(usRegHoldingBuf[iRegIndex++]);
-      date.Month   = (uint8_t)(usRegHoldingBuf[iRegIndex++]);
-      date.Date    = (uint8_t)(usRegHoldingBuf[iRegIndex++]);
-      date.WeekDay = (uint8_t)(usRegHoldingBuf[iRegIndex++]);
-      time.Hours   = (uint8_t)(usRegHoldingBuf[iRegIndex++]);
-      time.Minutes = (uint8_t)(usRegHoldingBuf[iRegIndex++]);
-      time.Seconds = (uint8_t)(usRegHoldingBuf[iRegIndex++]);
-      HAL_RTC_SetDate(&hrtc, &date, RTC_FORMAT_BIN);
-      HAL_RTC_SetTime(&hrtc, &time, RTC_FORMAT_BIN);
+                // update date & time
+                iRegIndex = (int)(usAddress - usRegHoldingStart);
+                date.Year    = (uint8_t)(usRegHoldingBuf[iRegIndex++]);
+                date.Month   = (uint8_t)(usRegHoldingBuf[iRegIndex++]);
+                date.Date    = (uint8_t)(usRegHoldingBuf[iRegIndex++]);
+                date.WeekDay = (uint8_t)(usRegHoldingBuf[iRegIndex++]);
+                time.Hours   = (uint8_t)(usRegHoldingBuf[iRegIndex++]);
+                time.Minutes = (uint8_t)(usRegHoldingBuf[iRegIndex++]);
+                time.Seconds = (uint8_t)(usRegHoldingBuf[iRegIndex++]);
+                HAL_RTC_SetDate(&hrtc, &date, RTC_FORMAT_BIN);
+                HAL_RTC_SetTime(&hrtc, &time, RTC_FORMAT_BIN);
+        }
+    } else {
+        eStatus = MB_ENOREG;
     }
-  } else {
-    eStatus = MB_ENOREG;
-  }
 
-  return eStatus;
+    return eStatus;
 }
 
 eMBErrorCode
-eMBRegInputCB(UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs) {
-  return MB_ENOREG;
+eMBRegInputCB(UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNRegs) {
+    return MB_ENOREG;
 }
 
 eMBErrorCode
-eMBRegCoilsCB(UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNCoils, eMBRegisterMode eMode) {
-  return MB_ENOREG;
+eMBRegCoilsCB(UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNCoils, eMBRegisterMode eMode) {
+    return MB_ENOREG;
 }
 
 eMBErrorCode
-eMBRegDiscreteCB(UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNDiscrete) {
-  return MB_ENOREG;
+eMBRegDiscreteCB(UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNDiscrete) {
+    return MB_ENOREG;
 }

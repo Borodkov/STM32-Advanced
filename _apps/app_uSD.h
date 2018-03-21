@@ -1,12 +1,12 @@
 /**
   ******************************************************************************
-  * @file    app_uSD.h
-  * @author  PavelB
-  * @version V1.0
-  * @date    20-March-2017
-  * @brief   uSD card
+    @file    app_uSD.h
+    @author  PavelB
+    @version V1.0
+    @date    20-March-2017
+    @brief   uSD card
   ******************************************************************************
-  */
+*/
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __APP_USD_H
@@ -22,7 +22,7 @@ extern "C" {
 /* Exported macro ------------------------------------------------------------*/
 #define SEND_STRING_TO_uSD()  if (AP.uSDConnected) osSemaphoreRelease(xBinSem_uSDHandle);
 /* Exported functions ------------------------------------------------------- */
-void uSD_thread(void const * argument);
+void uSD_thread(void const *argument);
 
 #ifdef __cplusplus
 }

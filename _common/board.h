@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * File Name          : CRC.h
-  * Description        : This file provides code for the STM32F746-Discovery board
+    File Name          : CRC.h
+    Description        : This file provides code for the STM32F746-Discovery board
   ******************************************************************************
-  */
+*/
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __board_H

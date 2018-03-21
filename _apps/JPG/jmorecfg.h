@@ -1,59 +1,59 @@
 /*
- * jmorecfg.h
- *
- * Copyright (C) 1991-1997, Thomas G. Lane.
- * Modified 1997-2011 by Guido Vollbeding.
- * This file is part of the Independent JPEG Group's software.
- * For conditions of distribution and use, see the accompanying README file.
- *
- * This file contains additional configuration options that customize the
- * JPEG software for special applications or support machine-dependent
- * optimizations.  Most users will not need to touch this file.
- */
+    jmorecfg.h
+
+    Copyright (C) 1991-1997, Thomas G. Lane.
+    Modified 1997-2011 by Guido Vollbeding.
+    This file is part of the Independent JPEG Group's software.
+    For conditions of distribution and use, see the accompanying README file.
+
+    This file contains additional configuration options that customize the
+    JPEG software for special applications or support machine-dependent
+    optimizations.  Most users will not need to touch this file.
+*/
 
 
 /*
- * Define BITS_IN_JSAMPLE as either
- *   8   for 8-bit sample values (the usual setting)
- *   12  for 12-bit sample values
- * Only 8 and 12 are legal data precisions for lossy JPEG according to the
- * JPEG standard, and the IJG code does not support anything else!
- * We do not support run-time selection of data precision, sorry.
- */
+    Define BITS_IN_JSAMPLE as either
+     8   for 8-bit sample values (the usual setting)
+     12  for 12-bit sample values
+    Only 8 and 12 are legal data precisions for lossy JPEG according to the
+    JPEG standard, and the IJG code does not support anything else!
+    We do not support run-time selection of data precision, sorry.
+*/
 
 #define BITS_IN_JSAMPLE  8	/* use 8 or 12 */
 
 
 /*
- * Maximum number of components (color channels) allowed in JPEG image.
- * To meet the letter of the JPEG spec, set this to 255.  However, darn
- * few applications need more than 4 channels (maybe 5 for CMYK + alpha
- * mask).  We recommend 10 as a reasonable compromise; use 4 if you are
- * really short on memory.  (Each allowed component costs a hundred or so
- * bytes of storage, whether actually used in an image or not.)
- */
+    Maximum number of components (color channels) allowed in JPEG image.
+    To meet the letter of the JPEG spec, set this to 255.  However, darn
+    few applications need more than 4 channels (maybe 5 for CMYK + alpha
+    mask).  We recommend 10 as a reasonable compromise; use 4 if you are
+    really short on memory.  (Each allowed component costs a hundred or so
+    bytes of storage, whether actually used in an image or not.)
+*/
 
 #define MAX_COMPONENTS  10	/* maximum number of image components */
 
 
 /*
- * Basic data types.
- * You may need to change these if you have a machine with unusual data
- * type sizes; for example, "char" not 8 bits, "short" not 16 bits,
- * or "long" not 32 bits.  We don't care whether "int" is 16 or 32 bits,
- * but it had better be at least 16.
- */
+    Basic data types.
+    You may need to change these if you have a machine with unusual data
+    type sizes; for example, "char" not 8 bits, "short" not 16 bits,
+    or "long" not 32 bits.  We don't care whether "int" is 16 or 32 bits,
+    but it had better be at least 16.
+*/
 
-/* Representation of a single sample (pixel element value).
- * We frequently allocate large arrays of these, so it's important to keep
- * them small.  But if you have memory to burn and access to char or short
- * arrays is very slow on your hardware, you might want to change these.
- */
+/*  Representation of a single sample (pixel element value).
+    We frequently allocate large arrays of these, so it's important to keep
+    them small.  But if you have memory to burn and access to char or short
+    arrays is very slow on your hardware, you might want to change these.
+*/
 
 #if BITS_IN_JSAMPLE == 8
-/* JSAMPLE should be the smallest type that will hold the values 0..255.
- * You can use a signed char by having GETJSAMPLE mask it with 0xFF.
- */
+/*  JSAMPLE should be the smallest type that will hold the values 0..255.
+    You can use a signed char by having GETJSAMPLE mask it with 0xFF.
+*/
 
 #ifdef HAVE_UNSIGNED_CHAR
 
@@ -78,9 +78,9 @@ typedef char JSAMPLE;
 
 
 #if BITS_IN_JSAMPLE == 12
-/* JSAMPLE should be the smallest type that will hold the values 0..4095.
- * On nearly all machines "short" will do nicely.
- */
+/*  JSAMPLE should be the smallest type that will hold the values 0..4095.
+    On nearly all machines "short" will do nicely.
+*/
 
 typedef short JSAMPLE;
 #define GETJSAMPLE(value)  ((int) (value))
@@ -91,20 +91,20 @@ typedef short JSAMPLE;
 #endif /* BITS_IN_JSAMPLE == 12 */
 
 
-/* Representation of a DCT frequency coefficient.
- * This should be a signed value of at least 16 bits; "short" is usually OK.
- * Again, we allocate large arrays of these, but you can change to int
- * if you have memory to burn and "short" is really slow.
- */
+/*  Representation of a DCT frequency coefficient.
+    This should be a signed value of at least 16 bits; "short" is usually OK.
+    Again, we allocate large arrays of these, but you can change to int
+    if you have memory to burn and "short" is really slow.
+*/
 
 typedef short JCOEF;
 
 
-/* Compressed datastreams are represented as arrays of JOCTET.
- * These must be EXACTLY 8 bits wide, at least once they are written to
- * external storage.  Note that when using the stdio data source/destination
- * managers, this is also the data type passed to fread/fwrite.
- */
+/*  Compressed datastreams are represented as arrays of JOCTET.
+    These must be EXACTLY 8 bits wide, at least once they are written to
+    external storage.  Note that when using the stdio data source/destination
+    managers, this is also the data type passed to fread/fwrite.
+*/
 
 #ifdef HAVE_UNSIGNED_CHAR
 
@@ -123,12 +123,12 @@ typedef char JOCTET;
 #endif /* HAVE_UNSIGNED_CHAR */
 
 
-/* These typedefs are used for various table entries and so forth.
- * They must be at least as wide as specified; but making them too big
- * won't cost a huge amount of memory, so we don't provide special
- * extraction code like we did for JSAMPLE.  (In other words, these
- * typedefs live at a different point on the speed/space tradeoff curve.)
- */
+/*  These typedefs are used for various table entries and so forth.
+    They must be at least as wide as specified; but making them too big
+    won't cost a huge amount of memory, so we don't provide special
+    extraction code like we did for JSAMPLE.  (In other words, these
+    typedefs live at a different point on the speed/space tradeoff curve.)
+*/
 
 /* UINT8 must hold at least the values 0..255. */
 
@@ -168,24 +168,24 @@ typedef long INT32;
 #endif
 #endif
 
-/* Datatype used for image dimensions.  The JPEG standard only supports
- * images up to 64K*64K due to 16-bit fields in SOF markers.  Therefore
- * "unsigned int" is sufficient on all machines.  However, if you need to
- * handle larger images and you don't mind deviating from the spec, you
- * can change this datatype.
- */
+/*  Datatype used for image dimensions.  The JPEG standard only supports
+    images up to 64K*64K due to 16-bit fields in SOF markers.  Therefore
+    "unsigned int" is sufficient on all machines.  However, if you need to
+    handle larger images and you don't mind deviating from the spec, you
+    can change this datatype.
+*/
 
 typedef unsigned int JDIMENSION;
 
 #define JPEG_MAX_DIMENSION  65500L  /* a tad under 64K to prevent overflows */
 
 
-/* These macros are used in all function definitions and extern declarations.
- * You could modify them if you need to change function linkage conventions;
- * in particular, you'll need to do that to make the library a Windows DLL.
- * Another application is to make all functions global for use with debuggers
- * or code profilers that require it.
- */
+/*  These macros are used in all function definitions and extern declarations.
+    You could modify them if you need to change function linkage conventions;
+    in particular, you'll need to do that to make the library a Windows DLL.
+    Another application is to make all functions global for use with debuggers
+    or code profilers that require it.
+*/
 
 /* a function called through method pointers: */
 #define METHODDEF(type)		static type
@@ -197,11 +197,11 @@ typedef unsigned int JDIMENSION;
 #define EXTERN(type)		extern type
 
 
-/* This macro is used to declare a "method", that is, a function pointer.
- * We want to supply prototype parameters if the compiler can cope.
- * Note that the arglist parameter must be parenthesized!
- * Again, you can customize this if you need special linkage keywords.
- */
+/*  This macro is used to declare a "method", that is, a function pointer.
+    We want to supply prototype parameters if the compiler can cope.
+    Note that the arglist parameter must be parenthesized!
+    Again, you can customize this if you need special linkage keywords.
+*/
 
 #ifdef HAVE_PROTOTYPES
 #define JMETHOD(type,methodname,arglist)  type (*methodname) arglist
@@ -210,11 +210,11 @@ typedef unsigned int JDIMENSION;
 #endif
 
 
-/* Here is the pseudo-keyword for declaring pointers that must be "far"
- * on 80x86 machines.  Most of the specialized coding for 80x86 is handled
- * by just saying "FAR *" where such a pointer is needed.  In a few places
- * explicit coding is needed; see uses of the NEED_FAR_POINTERS symbol.
- */
+/*  Here is the pseudo-keyword for declaring pointers that must be "far"
+    on 80x86 machines.  Most of the specialized coding for 80x86 is handled
+    by just saying "FAR *" where such a pointer is needed.  In a few places
+    explicit coding is needed; see uses of the NEED_FAR_POINTERS symbol.
+*/
 
 #ifndef FAR
 #ifdef NEED_FAR_POINTERS
@@ -226,11 +226,11 @@ typedef unsigned int JDIMENSION;
 
 
 /*
- * On a few systems, type boolean and/or its values FALSE, TRUE may appear
- * in standard header files.  Or you may have conflicts with application-
- * specific header files that you want to include together with these files.
- * Defining HAVE_BOOLEAN before including jpeglib.h should make it work.
- */
+    On a few systems, type boolean and/or its values FALSE, TRUE may appear
+    in standard header files.  Or you may have conflicts with application-
+    specific header files that you want to include together with these files.
+    Defining HAVE_BOOLEAN before including jpeglib.h should make it work.
+*/
 
 #ifndef HAVE_BOOLEAN
 typedef int boolean;
@@ -244,11 +244,11 @@ typedef int boolean;
 
 
 /*
- * The remaining options affect code selection within the JPEG library,
- * but they don't need to be visible to most applications using the library.
- * To minimize application namespace pollution, the symbols won't be
- * defined unless JPEG_INTERNALS or JPEG_INTERNAL_OPTIONS has been defined.
- */
+    The remaining options affect code selection within the JPEG library,
+    but they don't need to be visible to most applications using the library.
+    To minimize application namespace pollution, the symbols won't be
+    defined unless JPEG_INTERNALS or JPEG_INTERNAL_OPTIONS has been defined.
+*/
 
 #ifdef JPEG_INTERNALS
 #define JPEG_INTERNAL_OPTIONS
@@ -258,12 +258,12 @@ typedef int boolean;
 
 
 /*
- * These defines indicate whether to include various optional functions.
- * Undefining some of these symbols will produce a smaller but less capable
- * library.  Note that you can leave certain source files out of the
- * compilation/linking process if you've #undef'd the corresponding symbols.
- * (You may HAVE to do that if your compiler doesn't like null source files.)
- */
+    These defines indicate whether to include various optional functions.
+    Undefining some of these symbols will produce a smaller but less capable
+    library.  Note that you can leave certain source files out of the
+    compilation/linking process if you've #undef'd the corresponding symbols.
+    (You may HAVE to do that if your compiler doesn't like null source files.)
+*/
 
 /* Capability options common to encoder and decoder: */
 
@@ -278,14 +278,14 @@ typedef int boolean;
 #undef  C_PROGRESSIVE_SUPPORTED	    /* Progressive JPEG? (Requires MULTISCAN)*/
 #undef  DCT_SCALING_SUPPORTED	    /* Input rescaling via DCT? (Requires DCT_ISLOW)*/
 #undef  ENTROPY_OPT_SUPPORTED	    /* Optimization of entropy coding parms? */
-/* Note: if you selected 12-bit data precision, it is dangerous to turn off
- * ENTROPY_OPT_SUPPORTED.  The standard Huffman tables are only good for 8-bit
- * precision, so jchuff.c normally uses entropy optimization to compute
- * usable tables for higher precision.  If you don't want to do optimization,
- * you'll have to supply different default Huffman tables.
- * The exact same statements apply for progressive JPEG: the default tables
- * don't work for progressive mode.  (This may get fixed, however.)
- */
+/*  Note: if you selected 12-bit data precision, it is dangerous to turn off
+    ENTROPY_OPT_SUPPORTED.  The standard Huffman tables are only good for 8-bit
+    precision, so jchuff.c normally uses entropy optimization to compute
+    usable tables for higher precision.  If you don't want to do optimization,
+    you'll have to supply different default Huffman tables.
+    The exact same statements apply for progressive JPEG: the default tables
+    don't work for progressive mode.  (This may get fixed, however.)
+*/
 #define INPUT_SMOOTHING_SUPPORTED   /* Input image smoothing option? */
 
 /* Decoder capability options: */
@@ -305,17 +305,17 @@ typedef int boolean;
 
 
 /*
- * Ordering of RGB data in scanlines passed to or from the application.
- * If your application wants to deal with data in the order B,G,R, just
- * change these macros.  You can also deal with formats such as R,G,B,X
- * (one extra byte per pixel) by changing RGB_PIXELSIZE.  Note that changing
- * the offsets will also change the order in which colormap data is organized.
- * RESTRICTIONS:
- * 1. The sample applications cjpeg,djpeg do NOT support modified RGB formats.
- * 2. The color quantizer modules will not behave desirably if RGB_PIXELSIZE
- *    is not 3 (they don't understand about dummy color components!).  So you
- *    can't use color quantization if you change that value.
- */
+    Ordering of RGB data in scanlines passed to or from the application.
+    If your application wants to deal with data in the order B,G,R, just
+    change these macros.  You can also deal with formats such as R,G,B,X
+    (one extra byte per pixel) by changing RGB_PIXELSIZE.  Note that changing
+    the offsets will also change the order in which colormap data is organized.
+    RESTRICTIONS:
+    1. The sample applications cjpeg,djpeg do NOT support modified RGB formats.
+    2. The color quantizer modules will not behave desirably if RGB_PIXELSIZE
+      is not 3 (they don't understand about dummy color components!).  So you
+      can't use color quantization if you change that value.
+*/
 
 #define RGB_RED		0	/* Offset of Red in an RGB scanline element */
 #define RGB_GREEN	1	/* Offset of Green */
@@ -326,22 +326,22 @@ typedef int boolean;
 /* Definitions for speed-related optimizations. */
 
 
-/* If your compiler supports inline functions, define INLINE
- * as the inline keyword; otherwise define it as empty.
- */
+/*  If your compiler supports inline functions, define INLINE
+    as the inline keyword; otherwise define it as empty.
+*/
 
 #ifndef INLINE
 #if   defined ( __CC_ARM )
-  #define INLINE         __inline   /*!< inline keyword for ARM Compiler       */
+#define INLINE         __inline   /*!< inline keyword for ARM Compiler       */
 
 #elif defined ( __ICCARM__ )
-  #define INLINE        inline      /*!< inline keyword for IAR Compiler. Only available in High optimization mode! */
+#define INLINE        inline      /*!< inline keyword for IAR Compiler. Only available in High optimization mode! */
 
 #elif defined ( __GNUC__ )
-  #define INLINE         inline     /*!< inline keyword for GNU Compiler       */
+#define INLINE         inline     /*!< inline keyword for GNU Compiler       */
 
 #elif defined ( __TASKING__ )
-  #define INLINE         inline     /*!< inline keyword for TASKING Compiler   */
+#define INLINE         inline     /*!< inline keyword for TASKING Compiler   */
 #endif
 #ifndef INLINE
 #define INLINE			/* default is to define it as empty */
@@ -351,23 +351,23 @@ typedef int boolean;
 
 
 
-/* On some machines (notably 68000 series) "int" is 32 bits, but multiplying
- * two 16-bit shorts is faster than multiplying two ints.  Define MULTIPLIER
- * as short on such a machine.  MULTIPLIER must be at least 16 bits wide.
- */
+/*  On some machines (notably 68000 series) "int" is 32 bits, but multiplying
+    two 16-bit shorts is faster than multiplying two ints.  Define MULTIPLIER
+    as short on such a machine.  MULTIPLIER must be at least 16 bits wide.
+*/
 
 #ifndef MULTIPLIER
 #define MULTIPLIER  int		/* type for fastest integer multiply */
 #endif
 
 
-/* FAST_FLOAT should be either float or double, whichever is done faster
- * by your compiler.  (Note that this type is only used in the floating point
- * DCT routines, so it only matters if you've defined DCT_FLOAT_SUPPORTED.)
- * Typically, float is faster in ANSI C compilers, while double is faster in
- * pre-ANSI compilers (because they insist on converting to double anyway).
- * The code below therefore chooses float if we have ANSI-style prototypes.
- */
+/*  FAST_FLOAT should be either float or double, whichever is done faster
+    by your compiler.  (Note that this type is only used in the floating point
+    DCT routines, so it only matters if you've defined DCT_FLOAT_SUPPORTED.)
+    Typically, float is faster in ANSI C compilers, while double is faster in
+    pre-ANSI compilers (because they insist on converting to double anyway).
+    The code below therefore chooses float if we have ANSI-style prototypes.
+*/
 
 #ifndef FAST_FLOAT
 #ifdef HAVE_PROTOTYPES

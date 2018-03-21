@@ -1,6 +1,6 @@
 /******************************************************************************
- *
- *
+
+
  ******************************************************************************/
 
 /* OS includes. */
@@ -40,27 +40,27 @@ extern void vStartUDPSysLogTask(const char *sServerIP);
 /*-----------------------------------------------------------*/
 
 /*
- * The function that registers the commands that are defined within this file.
- */
+    The function that registers the commands that are defined within this file.
+*/
 void vRegisterSampleCLICommands(void);
 
 /*
- * Implements the run-time-stats command.
- */
+    Implements the run-time-stats command.
+*/
 #if ((configGENERATE_RUN_TIME_STATS == 1) && (configUSE_STATS_FORMATTING_FUNCTIONS > 0))
 static BaseType_t prvRunTimeStatsCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString);
 #endif
 
 /*
- * Implements the task-stats command.
- */
+    Implements the task-stats command.
+*/
 #if ((configUSE_TRACE_FACILITY == 1) && (configUSE_STATS_FORMATTING_FUNCTIONS > 0))
 static BaseType_t prvTaskStatsCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString);
 #endif
 
 /*
- * Implements the "query heap" command.
- */
+    Implements the "query heap" command.
+*/
 #if (configINCLUDE_QUERY_HEAP_COMMAND == 1)
 static BaseType_t prvQueryHeapCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString);
 #endif
@@ -70,115 +70,115 @@ static BaseType_t prvBtnPressCommand(char *pcWriteBuffer, size_t xWriteBufferLen
 static BaseType_t prvStartTaskCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString);
 
 
-/* Structure that defines the "task-stats" command line command.  This generates
-a table that gives information on each task in the system. */
+/*  Structure that defines the "task-stats" command line command.  This generates
+    a table that gives information on each task in the system. */
 #if ((configUSE_TRACE_FACILITY == 1) && (configUSE_STATS_FORMATTING_FUNCTIONS > 0))
 static const CLI_Command_Definition_t xTaskStats = {
-  "task-stats", /* The command string to type. */
-  "\r\ntask-stats:\r\n Displays a table showing the state of each FreeRTOS task\r\n",
-  prvTaskStatsCommand, /* The function to run. */
-  0                    /* No parameters are expected. */
+    "task-stats", /* The command string to type. */
+    "\r\ntask-stats:\r\n Displays a table showing the state of each FreeRTOS task\r\n",
+    prvTaskStatsCommand, /* The function to run. */
+    0                    /* No parameters are expected. */
 };
 #endif
 
-/* Structure that defines the "run-time-stats" command line command.
-   This generates a table that shows how much run time each task has */
+/*  Structure that defines the "run-time-stats" command line command.
+    This generates a table that shows how much run time each task has */
 #if ((configGENERATE_RUN_TIME_STATS == 1) && (configUSE_STATS_FORMATTING_FUNCTIONS > 0))
 static const CLI_Command_Definition_t xRunTimeStats = {
-  "run-time-stats", /* The command string to type. */
-  "\r\nrun-time-stats:\r\n Displays a table showing how much processing time each FreeRTOS task has used\r\n",
-  prvRunTimeStatsCommand, /* The function to run. */
-  0                       /* No parameters are expected. */
+    "run-time-stats", /* The command string to type. */
+    "\r\nrun-time-stats:\r\n Displays a table showing how much processing time each FreeRTOS task has used\r\n",
+    prvRunTimeStatsCommand, /* The function to run. */
+    0                       /* No parameters are expected. */
 };
 #endif
 
 #if (configINCLUDE_QUERY_HEAP_COMMAND == 1)
 /* Structure that defines the "query_heap" command line command. */
 static const CLI_Command_Definition_t xQueryHeap = {
-  "query-heap",
-  "\r\nquery-heap:\r\n Displays the free heap space, and minimum ever free heap space.\r\n",
-  prvQueryHeapCommand, /* The function to run. */
-  0                    /* No parameters are expected. */
+    "query-heap",
+    "\r\nquery-heap:\r\n Displays the free heap space, and minimum ever free heap space.\r\n",
+    prvQueryHeapCommand, /* The function to run. */
+    0                    /* No parameters are expected. */
 };
 #endif /* configQUERY_HEAP_COMMAND */
 
 /* */
 static const CLI_Command_Definition_t xBtnPress = {
-  "btnPress",
-  "\r\nbtnPress:\r\n virtual press button\r\n",
-  prvBtnPressCommand, /* The function to run. */
-  1                   /* One parameter is expected. */
+    "btnPress",
+    "\r\nbtnPress:\r\n virtual press button\r\n",
+    prvBtnPressCommand, /* The function to run. */
+    1                   /* One parameter is expected. */
 };
 
 /* */
 static const CLI_Command_Definition_t xStartTask = {
-  "startTask",
-  "\r\nstartTask:\r\n Starts OS Task with <TASKNAME>:\r\n <HTTP>\r\n <TFTP>\r\n <SYSLOG> <server IP> (e.g. <192.168.001.101:514>)\r\n",
-  prvStartTaskCommand, /* The function to run. */
-  -1                   /* The user can enter any number of commands. */
+    "startTask",
+    "\r\nstartTask:\r\n Starts OS Task with <TASKNAME>:\r\n <HTTP>\r\n <TFTP>\r\n <SYSLOG> <server IP> (e.g. <192.168.001.101:514>)\r\n",
+    prvStartTaskCommand, /* The function to run. */
+    -1                   /* The user can enter any number of commands. */
 };
 
 /* */
 static const CLI_Command_Definition_t xSet = {
-  "set",
-  "\r\nset <...>:\r\n Set following params:\r\n <date> <current date> (e.g. <set date 2017/01/01>)\r\n <time> <current time> (e.g. <set time 10:00:00>)\r\n",
-  prvSetCommand, /* The function to run. */
-  -1             /* The user can enter any number of commands. */
+    "set",
+    "\r\nset <...>:\r\n Set following params:\r\n <date> <current date> (e.g. <set date 2017/01/01>)\r\n <time> <current time> (e.g. <set time 10:00:00>)\r\n",
+    prvSetCommand, /* The function to run. */
+    -1             /* The user can enter any number of commands. */
 };
 
 /*-----------------------------------------------------------*/
 
 void vRegisterSampleCLICommands(void) {
-  /* Register all the command line commands defined immediately above. */
-  #if ((configUSE_TRACE_FACILITY == 1) && (configUSE_STATS_FORMATTING_FUNCTIONS > 0))
-  {
-    FreeRTOS_CLIRegisterCommand(&xTaskStats);
-  }
-  #endif
-  #if ((configGENERATE_RUN_TIME_STATS == 1) && (configUSE_STATS_FORMATTING_FUNCTIONS > 0))
-  {
-    FreeRTOS_CLIRegisterCommand(&xRunTimeStats);
-  }
-  #endif
-  #if (configINCLUDE_QUERY_HEAP_COMMAND == 1)
-  {
-    FreeRTOS_CLIRegisterCommand(&xQueryHeap);
-  }
-  #endif
-  FreeRTOS_CLIRegisterCommand(&xSet);
-  FreeRTOS_CLIRegisterCommand(&xBtnPress);
-  FreeRTOS_CLIRegisterCommand(&xStartTask);
+    /* Register all the command line commands defined immediately above. */
+#if ((configUSE_TRACE_FACILITY == 1) && (configUSE_STATS_FORMATTING_FUNCTIONS > 0))
+    {
+        FreeRTOS_CLIRegisterCommand(&xTaskStats);
+    }
+#endif
+#if ((configGENERATE_RUN_TIME_STATS == 1) && (configUSE_STATS_FORMATTING_FUNCTIONS > 0))
+    {
+        FreeRTOS_CLIRegisterCommand(&xRunTimeStats);
+    }
+#endif
+#if (configINCLUDE_QUERY_HEAP_COMMAND == 1)
+    {
+        FreeRTOS_CLIRegisterCommand(&xQueryHeap);
+    }
+#endif
+    FreeRTOS_CLIRegisterCommand(&xSet);
+    FreeRTOS_CLIRegisterCommand(&xBtnPress);
+    FreeRTOS_CLIRegisterCommand(&xStartTask);
 }
 /*-----------------------------------------------------------*/
 
 #if ((configUSE_TRACE_FACILITY == 1) && (configUSE_STATS_FORMATTING_FUNCTIONS > 0))
 
 static BaseType_t prvTaskStatsCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString) {
-  const char *const pcHeader = " State\tPrior\tStack\t#\r\n************************************************\r\n";
-  BaseType_t xSpacePadding;
-  /* Remove compile time warnings about unused parameters, and check the
-     write buffer is not NULL.  NOTE - for simplicity, this example assumes the
-     write buffer length is adequate, so does not check for buffer overflows. */
-  (void)pcCommandString;
-  (void)xWriteBufferLen;
-  configASSERT(pcWriteBuffer);
-  /* Generate a table of task stats. */
-  strcpy(pcWriteBuffer, "Task");
-  pcWriteBuffer += strlen(pcWriteBuffer);
-  /* Minus three for the null terminator and half the number of characters in
-    "Task" so the column lines up with the centre of the heading. */
-  configASSERT(configMAX_TASK_NAME_LEN > 3);
+    const char *const pcHeader = " State\tPrior\tStack\t#\r\n************************************************\r\n";
+    BaseType_t xSpacePadding;
+    /*  Remove compile time warnings about unused parameters, and check the
+        write buffer is not NULL.  NOTE - for simplicity, this example assumes the
+        write buffer length is adequate, so does not check for buffer overflows. */
+    (void)pcCommandString;
+    (void)xWriteBufferLen;
+    configASSERT(pcWriteBuffer);
+    /* Generate a table of task stats. */
+    strcpy(pcWriteBuffer, "Task");
+    pcWriteBuffer += strlen(pcWriteBuffer);
+    /*  Minus three for the null terminator and half the number of characters in
+        "Task" so the column lines up with the centre of the heading. */
+    configASSERT(configMAX_TASK_NAME_LEN > 3);
 
-  for (xSpacePadding = strlen("Task"); xSpacePadding < (configMAX_TASK_NAME_LEN - 3); xSpacePadding++) {
-    /* Add a space to align columns after the task's name. */
-    *pcWriteBuffer = ' ';
-    pcWriteBuffer++;
-  }
+    for (xSpacePadding = strlen("Task"); xSpacePadding < (configMAX_TASK_NAME_LEN - 3); xSpacePadding++) {
+        /* Add a space to align columns after the task's name. */
+        *pcWriteBuffer = ' ';
+        pcWriteBuffer++;
+    }
 
-  strcpy(pcWriteBuffer, pcHeader);
-  vTaskList(pcWriteBuffer + strlen(pcHeader));
-  /* There is no more data to return after this single string, so return pdFALSE. */
-  return pdFALSE;
+    strcpy(pcWriteBuffer, pcHeader);
+    vTaskList(pcWriteBuffer + strlen(pcHeader));
+    /* There is no more data to return after this single string, so return pdFALSE. */
+    return pdFALSE;
 }
 
 #endif /* ( ( configUSE_TRACE_FACILITY == 1 ) && ( configUSE_STATS_FORMATTING_FUNCTIONS > 0 ) ) */
@@ -187,18 +187,18 @@ static BaseType_t prvTaskStatsCommand(char *pcWriteBuffer, size_t xWriteBufferLe
 #if ((configGENERATE_RUN_TIME_STATS == 1) && (configUSE_STATS_FORMATTING_FUNCTIONS > 0))
 
 static BaseType_t prvRunTimeStatsCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString) {
-  const char *const pcHeader = "Task\t\tAbs Time[us]\t% Time\r\n****************************************\r\n";
-  /* Remove compile time warnings about unused parameters, and check the
-     write buffer is not NULL.  NOTE - for simplicity, this example assumes the
-     write buffer length is adequate, so does not check for buffer overflows. */
-  (void)pcCommandString;
-  (void)xWriteBufferLen;
-  configASSERT(pcWriteBuffer);
-  /* Generate a table of task stats. */
-  strcpy(pcWriteBuffer, pcHeader);
-  vTaskGetRunTimeStats(pcWriteBuffer + strlen(pcHeader));
-  /* There is no more data to return after this single string, so return pdFALSE. */
-  return pdFALSE;
+    const char *const pcHeader = "Task\t\tAbs Time[us]\t% Time\r\n****************************************\r\n";
+    /*  Remove compile time warnings about unused parameters, and check the
+        write buffer is not NULL.  NOTE - for simplicity, this example assumes the
+        write buffer length is adequate, so does not check for buffer overflows. */
+    (void)pcCommandString;
+    (void)xWriteBufferLen;
+    configASSERT(pcWriteBuffer);
+    /* Generate a table of task stats. */
+    strcpy(pcWriteBuffer, pcHeader);
+    vTaskGetRunTimeStats(pcWriteBuffer + strlen(pcHeader));
+    /* There is no more data to return after this single string, so return pdFALSE. */
+    return pdFALSE;
 }
 
 #endif /* configGENERATE_RUN_TIME_STATS */
@@ -207,15 +207,15 @@ static BaseType_t prvRunTimeStatsCommand(char *pcWriteBuffer, size_t xWriteBuffe
 #if (configINCLUDE_QUERY_HEAP_COMMAND == 1)
 
 static BaseType_t prvQueryHeapCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString) {
-  /* Remove compile time warnings about unused parameters, and check the
-     write buffer is not NULL.  NOTE - for simplicity, this example assumes the
-     write buffer length is adequate, so does not check for buffer overflows. */
-  (void)pcCommandString;
-  (void)xWriteBufferLen;
-  configASSERT(pcWriteBuffer);
-  sprintf(pcWriteBuffer, "Current free heap %d bytes, minimum ever free heap %d bytes\r\n", (int)xPortGetFreeHeapSize(), (int)xPortGetMinimumEverFreeHeapSize());
-  /* There is no more data to return after this single string, so return pdFALSE. */
-  return pdFALSE;
+    /*  Remove compile time warnings about unused parameters, and check the
+        write buffer is not NULL.  NOTE - for simplicity, this example assumes the
+        write buffer length is adequate, so does not check for buffer overflows. */
+    (void)pcCommandString;
+    (void)xWriteBufferLen;
+    configASSERT(pcWriteBuffer);
+    sprintf(pcWriteBuffer, "Current free heap %d bytes, minimum ever free heap %d bytes\r\n", (int)xPortGetFreeHeapSize(), (int)xPortGetMinimumEverFreeHeapSize());
+    /* There is no more data to return after this single string, so return pdFALSE. */
+    return pdFALSE;
 }
 
 #endif /* configINCLUDE_QUERY_HEAP */
@@ -302,8 +302,8 @@ static BaseType_t prvSetCommand(char *pcWriteBuffer, size_t xWriteBufferLen, con
 //  {
 //    sprintf(pcWriteBuffer, "Valid parameters are:\r\n <date> <current date> (e.g. <set date 2017/01/01>)\r\n <time> <current time> (e.g. <set time 10:00:00>)\r\n");
 //  }
-  /* There is no more data to return after this single string, so return pdFALSE. */
-  return pdFALSE;
+    /* There is no more data to return after this single string, so return pdFALSE. */
+    return pdFALSE;
 }
 /*-----------------------------------------------------------*/
 
@@ -351,8 +351,8 @@ static BaseType_t prvBtnPressCommand(char *pcWriteBuffer, size_t xWriteBufferLen
 //  {
 //    sprintf(pcWriteBuffer, "Valid parameters are:\r\n <ok> or <up> or <down>\r\n");
 //  }
-  /* There is no more data to return after this single string, so return pdFALSE. */
-  return pdFALSE;
+    /* There is no more data to return after this single string, so return pdFALSE. */
+    return pdFALSE;
 }
 /*-----------------------------------------------------------*/
 
@@ -426,7 +426,7 @@ static BaseType_t prvStartTaskCommand(char *pcWriteBuffer, size_t xWriteBufferLe
 //  {
 //    sprintf(pcWriteBuffer, "Valid parameters are:\r\n<HTTP>\r\n<SYSLOG> + server IP <192.168.001.101:514>\r\n");
 //  }
-  /* There is no more data to return after this single string, so return pdFALSE. */
-  return pdFALSE;
+    /* There is no more data to return after this single string, so return pdFALSE. */
+    return pdFALSE;
 }
 /*-----------------------------------------------------------*/

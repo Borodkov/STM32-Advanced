@@ -1,12 +1,12 @@
 /**
   ******************************************************************************
-  * @file
-  * @author  PavelB
-  * @version V1.0
-  * @date    03-April-2017
-  * @brief
+    @file
+    @author  PavelB
+    @version V1.0
+    @date    03-April-2017
+    @brief
   ******************************************************************************
-  */
+*/
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -56,16 +56,16 @@ void MX_ADC3_Init(void);
 void MX_TIM2_Init(void);
 
 /**
-  * @brief
-  * @param
-  * @retval None
-  */
+    @brief
+    @param
+    @retval None
+*/
 static void task(void const *pvParameters) {
     //osThreadSuspend(NULL);
     /***************************************************************************
-    Toggle LED3 every ADC conversion, and LED4 - when DMA complete (ADC_WINDOW conversions)
+        Toggle LED3 every ADC conversion, and LED4 - when DMA complete (ADC_WINDOW conversions)
     ***************************************************************************/
-    HAL_ADC_Start_DMA(&hadc3, (uint32_t*)adcBuf, 6 * ADC_WINDOW);
+    HAL_ADC_Start_DMA(&hadc3, (uint32_t *)adcBuf, 6 * ADC_WINDOW);
     __HAL_RCC_DAC_CLK_ENABLE(); // errata of stm32f7 chip
     HAL_TIM_Base_Start(&htim2);
 
@@ -74,7 +74,7 @@ static void task(void const *pvParameters) {
         osSemaphoreWait(xBinSem_ADCdoneHandle, osWaitForever); // w8 semaphore forever
 
         /***************************************************************************
-        Computation of ADC conversions raw data to physical values
+            Computation of ADC conversions raw data to physical values
         ***************************************************************************/
         for (uint32_t n = 0; n < 6; ++n) {
             adcBufMean[n] = 0;
@@ -85,7 +85,7 @@ static void task(void const *pvParameters) {
         }
 
         /***************************************************************************
-        Display the Temperature Value on the LCD
+            Display the Temperature Value on the LCD
         ***************************************************************************/
         sprintf(s, "%04u | %04u | %04u | %04u | %04u | %04u |\n",
                 adcBufMean[0], adcBufMean[1], adcBufMean[2],
@@ -145,8 +145,8 @@ void vStartADCTask() {
 /* ADC3 init function */
 void MX_ADC3_Init(void) {
     ADC_ChannelConfTypeDef sConfig;
-    /* Configure the global features of the ADC
-      (Clock, Resolution, Data Alignment and number of conversion) */
+    /*  Configure the global features of the ADC
+        (Clock, Resolution, Data Alignment and number of conversion) */
     hadc3.Instance = ADC3;
     hadc3.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
     hadc3.Init.Resolution = ADC_RESOLUTION_12B;
@@ -164,8 +164,8 @@ void MX_ADC3_Init(void) {
         _Error_Handler(__FILE__, __LINE__);
     }
 
-    /* Configure for the selected ADC regular channel its corresponding rank
-       in the sequencer and its sample time. */
+    /*  Configure for the selected ADC regular channel its corresponding rank
+        in the sequencer and its sample time. */
     sConfig.Channel = ADC_CHANNEL_0;
     sConfig.Rank = 1;
     sConfig.SamplingTime = ADC_SAMPLETIME_144CYCLES;
@@ -209,7 +209,7 @@ void MX_ADC3_Init(void) {
         _Error_Handler(__FILE__, __LINE__);
     }
 }
-void HAL_ADC_MspInit(ADC_HandleTypeDef* adcHandle) {
+void HAL_ADC_MspInit(ADC_HandleTypeDef *adcHandle) {
     GPIO_InitTypeDef GPIO_InitStruct;
 
     if (adcHandle->Instance == ADC1) {
@@ -219,13 +219,13 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* adcHandle) {
 
     if (adcHandle->Instance == ADC3) {
         __HAL_RCC_ADC3_CLK_ENABLE();
-        /**ADC3 GPIO Configuration
-        PF7      ------> ADC3_IN5
-        PF6      ------> ADC3_IN4
-        PF10     ------> ADC3_IN8
-        PF9      ------> ADC3_IN7
-        PF8      ------> ADC3_IN6
-        PA0/WKUP ------> ADC3_IN0 */
+        /** ADC3 GPIO Configuration
+            PF7      ------> ADC3_IN5
+            PF6      ------> ADC3_IN4
+            PF10     ------> ADC3_IN8
+            PF9      ------> ADC3_IN7
+            PF8      ------> ADC3_IN6
+            PA0/WKUP ------> ADC3_IN0 */
         GPIO_InitStruct.Pin = ARDUINO_A4_Pin | ARDUINO_A5_Pin | ARDUINO_A1_Pin | ARDUINO_A2_Pin | ARDUINO_A3_Pin;
         GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
         GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -254,20 +254,20 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* adcHandle) {
     }
 }
 
-void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle) {
+void HAL_ADC_MspDeInit(ADC_HandleTypeDef *adcHandle) {
     if (adcHandle->Instance == ADC1) {
         __HAL_RCC_ADC1_CLK_DISABLE();
     }
 
     if (adcHandle->Instance == ADC3) {
         __HAL_RCC_ADC3_CLK_DISABLE();
-        /**ADC3 GPIO Configuration
-        PF7      ------> ADC3_IN5
-        PF6      ------> ADC3_IN4
-        PF10     ------> ADC3_IN8
-        PF9      ------> ADC3_IN7
-        PF8      ------> ADC3_IN6
-        PA0/WKUP ------> ADC3_IN0 */
+        /** ADC3 GPIO Configuration
+            PF7      ------> ADC3_IN5
+            PF6      ------> ADC3_IN4
+            PF10     ------> ADC3_IN8
+            PF9      ------> ADC3_IN7
+            PF8      ------> ADC3_IN6
+            PA0/WKUP ------> ADC3_IN0 */
         HAL_GPIO_DeInit(GPIOF, ARDUINO_A4_Pin | ARDUINO_A5_Pin | ARDUINO_A1_Pin | ARDUINO_A2_Pin | ARDUINO_A3_Pin);
         HAL_GPIO_DeInit(ARDUINO_A0_GPIO_Port, ARDUINO_A0_Pin);
         /* ADC3 DMA DeInit */
@@ -314,12 +314,12 @@ void DMA2_Stream1_IRQHandler(void) {
 }
 
 /**
-  * @brief  Conversion complete callback in non blocking mode
-  * @param  AdcHandle : AdcHandle handle
-  * @note   This example shows a simple way to report end of conversion, and
-  *         you can add your own implementation.
-  * @retval None
-  */
+    @brief  Conversion complete callback in non blocking mode
+    @param  AdcHandle : AdcHandle handle
+    @note   This example shows a simple way to report end of conversion, and
+            you can add your own implementation.
+    @retval None
+*/
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *AdcHandle) {
     BSP_LED_Toggle(LED1);
     osSemaphoreRelease(xBinSem_ADCdoneHandle);

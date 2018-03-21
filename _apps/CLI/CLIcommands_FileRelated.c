@@ -1,6 +1,6 @@
 /******************************************************************************
- *
- *
+
+
  ******************************************************************************/
 
 /* FreeRTOS includes. */
@@ -22,18 +22,18 @@ extern FILELIST_FileTypeDef FileList;
 #define cliNEW_LINE "\r\n"
 
 /*******************************************************************************
- * See the URL in the comments within main.c for the location of the online
- * documentation.
+    See the URL in the comments within main.c for the location of the online
+    documentation.
  ******************************************************************************/
 
 /*
- * Print out information on a single file.
- */
+    Print out information on a single file.
+*/
 //static void prvCreateFileInfoString(char *pcBuffer, FF_FindData_t *pxFindStruct);
 
 /*
- * Copies an existing file into a newly created file.
- */
+    Copies an existing file into a newly created file.
+*/
 static BaseType_t prvPerformCopy(const char *pcSourceFile,
                                  int32_t lSourceFileLength,
                                  const char *pcDestinationFile,
@@ -41,115 +41,115 @@ static BaseType_t prvPerformCopy(const char *pcSourceFile,
                                  size_t xWriteBufferLen);
 
 /*
- * Implements the DIR command.
- */
+    Implements the DIR command.
+*/
 static BaseType_t prvDIRCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString);
 
 /*
- * Implements the CD command.
- */
+    Implements the CD command.
+*/
 static BaseType_t prvCDCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString);
 
 /*
- * Implements the DEL command.
- */
+    Implements the DEL command.
+*/
 static BaseType_t prvDELCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString);
 
 /*
- * Implements the DEL command.
- */
+    Implements the DEL command.
+*/
 static BaseType_t prvRMDIRCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString);
 
 /*
- * Implements the TYPE command.
- */
+    Implements the TYPE command.
+*/
 static BaseType_t prvTYPECommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString);
 
 /*
- * Implements the COPY command.
- */
+    Implements the COPY command.
+*/
 static BaseType_t prvCOPYCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString);
 
 /*
- * Implements the PWD (print working directory) command.
- */
+    Implements the PWD (print working directory) command.
+*/
 static BaseType_t prvPWDCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString);
 
-/* Structure that defines the DIR command line command, which lists all the
-files in the current directory. */
+/*  Structure that defines the DIR command line command, which lists all the
+    files in the current directory. */
 static const CLI_Command_Definition_t xDIR = {
-  "dir", /* The command string to type. */
-  "\r\ndir:\r\n Lists the files in the current directory\r\n",
-  prvDIRCommand, /* The function to run. */
-  0              /* No parameters are expected. */
+    "dir", /* The command string to type. */
+    "\r\ndir:\r\n Lists the files in the current directory\r\n",
+    prvDIRCommand, /* The function to run. */
+    0              /* No parameters are expected. */
 };
 
-/* Structure that defines the CD command line command, which changes the
-working directory. */
+/*  Structure that defines the CD command line command, which changes the
+    working directory. */
 static const CLI_Command_Definition_t xCD = {
-  "cd", /* The command string to type. */
-  "\r\ncd <dir name>:\r\n Changes the working directory\r\n",
-  prvCDCommand, /* The function to run. */
-  1             /* One parameter is expected. */
+    "cd", /* The command string to type. */
+    "\r\ncd <dir name>:\r\n Changes the working directory\r\n",
+    prvCDCommand, /* The function to run. */
+    1             /* One parameter is expected. */
 };
 
-/* Structure that defines the TYPE command line command, which prints the
-contents of a file to the console. */
+/*  Structure that defines the TYPE command line command, which prints the
+    contents of a file to the console. */
 static const CLI_Command_Definition_t xTYPE = {
-  "type", /* The command string to type. */
-  "\r\ntype <filename>:\r\n Prints file contents to the terminal\r\n",
-  prvTYPECommand, /* The function to run. */
-  1               /* One parameter is expected. */
+    "type", /* The command string to type. */
+    "\r\ntype <filename>:\r\n Prints file contents to the terminal\r\n",
+    prvTYPECommand, /* The function to run. */
+    1               /* One parameter is expected. */
 };
 
 /* Structure that defines the DEL command line command, which deletes a file. */
 static const CLI_Command_Definition_t xDEL = {
-  "del", /* The command string to type. */
-  "\r\ndel <filename>:\r\n deletes a file (use rmdir to delete a directory)\r\n",
-  prvDELCommand, /* The function to run. */
-  1              /* One parameter is expected. */
+    "del", /* The command string to type. */
+    "\r\ndel <filename>:\r\n deletes a file (use rmdir to delete a directory)\r\n",
+    prvDELCommand, /* The function to run. */
+    1              /* One parameter is expected. */
 };
 
 /* Structure that defines the RMDIR command line command, which deletes a directory. */
 static const CLI_Command_Definition_t xRMDIR = {
-  "rmdir", /* The command string to type. */
-  "\r\nrmdir <directory name>:\r\n deletes a directory\r\n",
-  prvRMDIRCommand, /* The function to run. */
-  1                /* One parameter is expected. */
+    "rmdir", /* The command string to type. */
+    "\r\nrmdir <directory name>:\r\n deletes a directory\r\n",
+    prvRMDIRCommand, /* The function to run. */
+    1                /* One parameter is expected. */
 };
 
 /* Structure that defines the COPY command line command, which deletes a file. */
 static const CLI_Command_Definition_t xCOPY = {
-  "copy", /* The command string to type. */
-  "\r\ncopy <source file> <dest file>:\r\n Copies <source file> to <dest file>\r\n",
-  prvCOPYCommand, /* The function to run. */
-  2               /* Two parameters are expected. */
+    "copy", /* The command string to type. */
+    "\r\ncopy <source file> <dest file>:\r\n Copies <source file> to <dest file>\r\n",
+    prvCOPYCommand, /* The function to run. */
+    2               /* Two parameters are expected. */
 };
 
 /* Structure that defines the pwd command line command, which prints the current working directory. */
 static const CLI_Command_Definition_t xPWD = {
-  "pwd", /* The command string to type. */
-  "\r\npwd:\r\n Print Working Directory\r\n",
-  prvPWDCommand, /* The function to run. */
-  0              /* No parameters are expected. */
+    "pwd", /* The command string to type. */
+    "\r\npwd:\r\n Print Working Directory\r\n",
+    prvPWDCommand, /* The function to run. */
+    0              /* No parameters are expected. */
 };
 
 /*-----------------------------------------------------------*/
 
 void vRegisterFileSystemCLICommands(void) {
-  /* Register all the command line commands defined immediately above. */
-  FreeRTOS_CLIRegisterCommand(&xDIR);
-  FreeRTOS_CLIRegisterCommand(&xCD);
-  FreeRTOS_CLIRegisterCommand(&xTYPE);
-  FreeRTOS_CLIRegisterCommand(&xDEL);
-  FreeRTOS_CLIRegisterCommand(&xRMDIR);
-  FreeRTOS_CLIRegisterCommand(&xCOPY);
-  FreeRTOS_CLIRegisterCommand(&xPWD);
+    /* Register all the command line commands defined immediately above. */
+    FreeRTOS_CLIRegisterCommand(&xDIR);
+    FreeRTOS_CLIRegisterCommand(&xCD);
+    FreeRTOS_CLIRegisterCommand(&xTYPE);
+    FreeRTOS_CLIRegisterCommand(&xDEL);
+    FreeRTOS_CLIRegisterCommand(&xRMDIR);
+    FreeRTOS_CLIRegisterCommand(&xCOPY);
+    FreeRTOS_CLIRegisterCommand(&xPWD);
 }
 /*-----------------------------------------------------------*/
 
 static BaseType_t prvTYPECommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString) {
-  BaseType_t xParameterStringLength, xReturn = pdTRUE;
+    BaseType_t xParameterStringLength, xReturn = pdTRUE;
 //  const char *pcParameter;
 //  static FF_FILE *pxFile = NULL;
 //  int iChar;
@@ -213,8 +213,8 @@ static BaseType_t prvTYPECommand(char *pcWriteBuffer, size_t xWriteBufferLen, co
 //    been returned and the file is now closed. */
 //    xReturn = pdFALSE;
 //  }
-  strcat(pcWriteBuffer, cliNEW_LINE);
-  return xReturn;
+    strcat(pcWriteBuffer, cliNEW_LINE);
+    return xReturn;
 }
 /*-----------------------------------------------------------*/
 
@@ -247,29 +247,29 @@ static BaseType_t prvCDCommand(char *pcWriteBuffer, size_t xWriteBufferLen, cons
 //  {
 //    sprintf(pcWriteBuffer, "Error");
 //  }
-  strcat(pcWriteBuffer, cliNEW_LINE);
-  return pdFALSE;
+    strcat(pcWriteBuffer, cliNEW_LINE);
+    return pdFALSE;
 }
 /*-----------------------------------------------------------*/
 
 static BaseType_t prvDIRCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString) {
-  BaseType_t xReturn = pdFALSE;
-  static uint16_t currPtrInFileList = 0;
+    BaseType_t xReturn = pdFALSE;
+    static uint16_t currPtrInFileList = 0;
 
-  if (FileList.ptr > 0) {
-    /* Create a string that includes the file name, the file size and the
-          attributes string. */
-    if (currPtrInFileList < FileList.ptr) {
-      sprintf(pcWriteBuffer, "%s ", FileList.file[currPtrInFileList++].name);
-      xReturn = pdPASS;
-    } else {
-      // next time 'dir' start from the [0]
-      currPtrInFileList = 0;
+    if (FileList.ptr > 0) {
+        /*  Create a string that includes the file name, the file size and the
+              attributes string. */
+        if (currPtrInFileList < FileList.ptr) {
+            sprintf(pcWriteBuffer, "%s ", FileList.file[currPtrInFileList++].name);
+            xReturn = pdPASS;
+        } else {
+            // next time 'dir' start from the [0]
+            currPtrInFileList = 0;
+        }
     }
-  }
 
-  strcat(pcWriteBuffer, cliNEW_LINE);
-  return xReturn;
+    strcat(pcWriteBuffer, cliNEW_LINE);
+    return xReturn;
 }
 /*-----------------------------------------------------------*/
 
@@ -304,120 +304,120 @@ static BaseType_t prvRMDIRCommand(char *pcWriteBuffer, size_t xWriteBufferLen, c
 //  }
 //
 //  strcat(pcWriteBuffer, cliNEW_LINE);
-  return pdFALSE;
+    return pdFALSE;
 }
 /*-----------------------------------------------------------*/
 
 static BaseType_t prvDELCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString) {
-  const char *pcParameter;
-  BaseType_t xParameterStringLength;
-  FRESULT res = FR_OK;
-  /* This function assumes xWriteBufferLen is large enough! */
-  (void)xWriteBufferLen;
-  /* Obtain the parameter string. */
-  pcParameter = FreeRTOS_CLIGetParameter(
-                  pcCommandString,        /* The command string itself. */
-                  1,                      /* Return the first parameter. */
-                  &xParameterStringLength /* Store the parameter string length. */
-                );
-  /* Sanity check something was returned. */
-  configASSERT(pcParameter);
-  /* Attempt to delete the file. */
-  res = f_unlink(pcParameter);
+    const char *pcParameter;
+    BaseType_t xParameterStringLength;
+    FRESULT res = FR_OK;
+    /* This function assumes xWriteBufferLen is large enough! */
+    (void)xWriteBufferLen;
+    /* Obtain the parameter string. */
+    pcParameter = FreeRTOS_CLIGetParameter(
+                      pcCommandString,        /* The command string itself. */
+                      1,                      /* Return the first parameter. */
+                      &xParameterStringLength /* Store the parameter string length. */
+                  );
+    /* Sanity check something was returned. */
+    configASSERT(pcParameter);
+    /* Attempt to delete the file. */
+    res = f_unlink(pcParameter);
 
-  if (res == FR_OK) {
-    sprintf(pcWriteBuffer, "%s was deleted", pcParameter);
-  } else {
-    sprintf(pcWriteBuffer, "Error. %s was not deleted", pcParameter);
-  }
+    if (res == FR_OK) {
+        sprintf(pcWriteBuffer, "%s was deleted", pcParameter);
+    } else {
+        sprintf(pcWriteBuffer, "Error. %s was not deleted", pcParameter);
+    }
 
-  strcat(pcWriteBuffer, cliNEW_LINE);
-  return pdFALSE;
+    strcat(pcWriteBuffer, cliNEW_LINE);
+    return pdFALSE;
 }
 /*-----------------------------------------------------------*/
 
 static BaseType_t prvCOPYCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString) {
-  char *pcSourceFile;
-  const char *pcDestinationFile;
-  BaseType_t xParameterStringLength;
-  long lSourceLength, lDestinationLength = 0;
-  FILINFO fno;
-  #if _USE_LFN
-  static char lfn[_MAX_LFN];
-  fno.lfname = lfn;
-  fno.lfsize = sizeof(lfn);
-  #endif
-  /* Obtain the name of the destination file. */
-  pcDestinationFile = FreeRTOS_CLIGetParameter(
-                        pcCommandString,        /* The command string itself. */
-                        2,                      /* Return the second parameter. */
-                        &xParameterStringLength /* Store the parameter string length. */
-                      );
-  /* Sanity check something was returned. */
-  configASSERT(pcDestinationFile);
-  /* Obtain the name of the source file. */
-  pcSourceFile = (char *)FreeRTOS_CLIGetParameter(
-                   pcCommandString,        /* The command string itself. */
-                   1,                      /* Return the first parameter. */
-                   &xParameterStringLength /* Store the parameter string length. */
-                 );
-  /* Sanity check something was returned. */
-  configASSERT(pcSourceFile);
-  /* Terminate the string. */
-  pcSourceFile[xParameterStringLength] = 0x00;
+    char *pcSourceFile;
+    const char *pcDestinationFile;
+    BaseType_t xParameterStringLength;
+    long lSourceLength, lDestinationLength = 0;
+    FILINFO fno;
+#if _USE_LFN
+    static char lfn[_MAX_LFN];
+    fno.lfname = lfn;
+    fno.lfsize = sizeof(lfn);
+#endif
+    /* Obtain the name of the destination file. */
+    pcDestinationFile = FreeRTOS_CLIGetParameter(
+                            pcCommandString,        /* The command string itself. */
+                            2,                      /* Return the second parameter. */
+                            &xParameterStringLength /* Store the parameter string length. */
+                        );
+    /* Sanity check something was returned. */
+    configASSERT(pcDestinationFile);
+    /* Obtain the name of the source file. */
+    pcSourceFile = (char *)FreeRTOS_CLIGetParameter(
+                       pcCommandString,        /* The command string itself. */
+                       1,                      /* Return the first parameter. */
+                       &xParameterStringLength /* Store the parameter string length. */
+                   );
+    /* Sanity check something was returned. */
+    configASSERT(pcSourceFile);
+    /* Terminate the string. */
+    pcSourceFile[xParameterStringLength] = 0x00;
 
-  /* See if the source file exists, obtain its length if it does. */
-  if (f_stat(pcSourceFile, &fno) == FR_OK) {
-    lSourceLength = fno.fsize;
-  } else {
-    lSourceLength = 0;
-  }
-
-  if (lSourceLength == 0) {
-    sprintf(pcWriteBuffer, "Source file does not exist");
-  } else {
-    /* See if the destination file exists. */
-    if (f_stat(pcDestinationFile, &fno) == FR_OK) {
-      lDestinationLength = fno.fsize;
+    /* See if the source file exists, obtain its length if it does. */
+    if (f_stat(pcSourceFile, &fno) == FR_OK) {
+        lSourceLength = fno.fsize;
     } else {
-      lDestinationLength = 0;
+        lSourceLength = 0;
     }
 
-    if (fno.fattrib == AM_DIR) {
-      sprintf(pcWriteBuffer, "Error: Destination is a directory not a file");
-      /* Set lDestinationLength to a non-zero value just to prevent an
-      attempt to copy the file. */
-      lDestinationLength = 1;
-    } else if (lDestinationLength != 0) {
-      sprintf(pcWriteBuffer, "Error: Destination file already exists");
-    }
-  }
-
-  /* Continue only if the source file exists and the destination file does
-  not exist. */
-  if ((lSourceLength != 0) && (lDestinationLength == 0)) {
-    if (prvPerformCopy(pcSourceFile, lSourceLength, pcDestinationFile, pcWriteBuffer, xWriteBufferLen) == pdPASS) {
-      sprintf(pcWriteBuffer, "Copy made");
+    if (lSourceLength == 0) {
+        sprintf(pcWriteBuffer, "Source file does not exist");
     } else {
-      sprintf(pcWriteBuffer, "Error during copy");
-    }
-  }
+        /* See if the destination file exists. */
+        if (f_stat(pcDestinationFile, &fno) == FR_OK) {
+            lDestinationLength = fno.fsize;
+        } else {
+            lDestinationLength = 0;
+        }
 
-  strcat(pcWriteBuffer, cliNEW_LINE);
-  return pdFALSE;
+        if (fno.fattrib == AM_DIR) {
+            sprintf(pcWriteBuffer, "Error: Destination is a directory not a file");
+            /*  Set lDestinationLength to a non-zero value just to prevent an
+                attempt to copy the file. */
+            lDestinationLength = 1;
+        } else if (lDestinationLength != 0) {
+            sprintf(pcWriteBuffer, "Error: Destination file already exists");
+        }
+    }
+
+    /*  Continue only if the source file exists and the destination file does
+        not exist. */
+    if ((lSourceLength != 0) && (lDestinationLength == 0)) {
+        if (prvPerformCopy(pcSourceFile, lSourceLength, pcDestinationFile, pcWriteBuffer, xWriteBufferLen) == pdPASS) {
+            sprintf(pcWriteBuffer, "Copy made");
+        } else {
+            sprintf(pcWriteBuffer, "Error during copy");
+        }
+    }
+
+    strcat(pcWriteBuffer, cliNEW_LINE);
+    return pdFALSE;
 }
 /*-----------------------------------------------------------*/
 
 static BaseType_t prvPWDCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString) {
-  DIR dir;
-  char path[20];
-  (void)xWriteBufferLen;
-  (void)pcCommandString;
-  /* Copy the current working directory into the output buffer. */
-  f_opendir(&dir, "/html");
-  f_getcwd(path, 20);
-  sprintf(pcWriteBuffer, "%s", path);
-  return pdFALSE;
+    DIR dir;
+    char path[20];
+    (void)xWriteBufferLen;
+    (void)pcCommandString;
+    /* Copy the current working directory into the output buffer. */
+    f_opendir(&dir, "/html");
+    f_getcwd(path, 20);
+    sprintf(pcWriteBuffer, "%s", path);
+    return pdFALSE;
 }
 /*-----------------------------------------------------------*/
 
@@ -426,43 +426,43 @@ static BaseType_t prvPerformCopy(const char *pcSourceFile,
                                  const char *pcDestinationFile,
                                  char *pxWriteBuffer,
                                  size_t xWriteBufferLen) {
-  BaseType_t xReturn = pdPASS;
-  int32_t lBytesRead = 0, lBytesToRead, lBytesRemaining;
-  UINT br, bw; //bytes var
-  FIL srcFile, dstFile;
+    BaseType_t xReturn = pdPASS;
+    int32_t lBytesRead = 0, lBytesToRead, lBytesRemaining;
+    UINT br, bw; //bytes var
+    FIL srcFile, dstFile;
 
-  /* NOTE:  Error handling has been omitted for clarity. */
+    /* NOTE:  Error handling has been omitted for clarity. */
 
-  if ((FR_OK == f_open(&srcFile, pcSourceFile, FA_READ)) &&
-      (FR_OK == f_open(&dstFile, pcDestinationFile, FA_CREATE_NEW))) {
-    while (lBytesRead < lSourceFileLength) {
-      /* How many bytes are left? */
-      lBytesRemaining = lSourceFileLength - lBytesRead;
+    if ((FR_OK == f_open(&srcFile, pcSourceFile, FA_READ)) &&
+            (FR_OK == f_open(&dstFile, pcDestinationFile, FA_CREATE_NEW))) {
+        while (lBytesRead < lSourceFileLength) {
+            /* How many bytes are left? */
+            lBytesRemaining = lSourceFileLength - lBytesRead;
 
-      /* How many bytes should be read this time around the loop.  Can't
-      read more bytes than will fit into the buffer. */
-      if (lBytesRemaining > (long)xWriteBufferLen) {
-        lBytesToRead = (long)xWriteBufferLen;
-      } else {
-        lBytesToRead = lBytesRemaining;
-      }
+            /*  How many bytes should be read this time around the loop.  Can't
+                read more bytes than will fit into the buffer. */
+            if (lBytesRemaining > (long)xWriteBufferLen) {
+                lBytesToRead = (long)xWriteBufferLen;
+            } else {
+                lBytesToRead = lBytesRemaining;
+            }
 
-      f_read(&srcFile, pxWriteBuffer, lBytesToRead, (void *)&br);
-      f_write(&dstFile, pxWriteBuffer, lBytesToRead, (void *)&bw);
-      lBytesRead += lBytesToRead;
+            f_read(&srcFile, pxWriteBuffer, lBytesToRead, (void *)&br);
+            f_write(&dstFile, pxWriteBuffer, lBytesToRead, (void *)&bw);
+            lBytesRead += lBytesToRead;
+        }
     }
-  }
 
-  f_close(&srcFile);
-  f_close(&dstFile);
+    f_close(&srcFile);
+    f_close(&dstFile);
 
-  if (lBytesRead == lSourceFileLength) {
-    xReturn = pdPASS;
-  } else {
-    xReturn = pdFAIL;
-  }
+    if (lBytesRead == lSourceFileLength) {
+        xReturn = pdPASS;
+    } else {
+        xReturn = pdFAIL;
+    }
 
-  return xReturn;
+    return xReturn;
 }
 /*-----------------------------------------------------------*/
 

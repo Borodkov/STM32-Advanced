@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    sd_diskio.h
-  * @author  MCD Application Team
-  * @brief   Header for sd_diskio.c module.This file needs to be
+    @file    sd_diskio.h
+    @author  MCD Application Team
+    @brief   Header for sd_diskio.c module.This file needs to be
              customized then copied under the application project
   ******************************************************************************
-  */
+*/
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __SD_DISKIO_H

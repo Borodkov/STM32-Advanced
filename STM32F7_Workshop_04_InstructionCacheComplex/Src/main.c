@@ -32,7 +32,6 @@ static void CPU_CACHE_Enable(void);
 static void printConfig(void);
 static void PLL_M_Config(void);
 uint32_t fce(void);
-// volatile uint8_t dummy;
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -43,7 +42,6 @@ uint32_t fce(void);
   */
 int main(void) {
   uint32_t n;
-
   HAL_InitTick(TICK_INT_PRIORITY);
 
   // initialize the array with some values
@@ -53,31 +51,24 @@ int main(void) {
   }
 
   result = 0;
-
   MPU_Config(); // configure the memory region
   printConfig();
   printf(" CPU cycles spent for sum of %d values \n", NUM_SAMPLES);
   HAL_SYSTICK_Config(0xFFFFFF);
-
   // jump to 200MHz
   SystemClock_Config();
-
   // now enable the caches
   SCB_EnableICache();
   __HAL_FLASH_ART_ENABLE();
-
   TIM_MEASURE_START;
   result = fce();
   TIM_MEASURE_END;
-
   printf("WS: %2d, ART: %s, D_cache: %s, I_cache: %s\n", FLASH->ACR & 0xF, (FLASH->ACR & 0x200) ? "ON " : "OFF", ((SCB->CCR & 0x10000) ? "ON " : "OFF"), ((SCB->CCR & 0x20000) ? "ON " : "OFF"));
   printf(" System Clock: %9d, cycles: %d\n", HAL_RCC_GetSysClockFreq(), time_diff);
   printf(" result of computation  : %d\n", result);
-
   BSP_LCD_DisplayOn();
 
   while (1);
-
 }
 
 uint32_t fce(void) {
@@ -100,10 +91,8 @@ uint32_t fce(void) {
   */
 static void MPU_Config(void) {
   MPU_Region_InitTypeDef MPU_InitStruct;
-
   /* Disable the MPU */
   HAL_MPU_Disable();
-
   /* Configure the MPU attributes as WT for SRAM */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0xC0000000;
@@ -113,9 +102,7 @@ static void MPU_Config(void) {
   MPU_InitStruct.Number = MPU_REGION_NUMBER0;
   MPU_InitStruct.SubRegionDisable = 0x00;
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
-
 //#define DCACHE_WBWA
-
 #ifdef  DCACHE_WBWA
   // these 3 parameters configure Cache properties for this region - write back, write allocate
   MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
@@ -128,7 +115,6 @@ static void MPU_Config(void) {
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
 #endif
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
-
   /* Enable the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
@@ -156,7 +142,6 @@ static void MPU_Config(void) {
 static void SystemClock_Config(void) {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
-
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -195,7 +180,6 @@ static void SystemClock_Config(void) {
 
 void printConfig(void) {
   TPI->ACPR = (HAL_RCC_GetSysClockFreq() / 2000000) - 1; // make the SWO working whatever settings in the system frequency - output is always 2MHz
-
   // LCD initialization
   BSP_LCD_Init();
   BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
@@ -229,7 +213,6 @@ static void Error_Handler(void) {
 static void CPU_CACHE_Enable(void) {
   /* Enable I-Cache */
   SCB_EnableICache();
-
   /* Enable D-Cache */
   SCB_EnableDCache();
 }
@@ -243,7 +226,7 @@ static void CPU_CACHE_Enable(void) {
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t* file, uint32_t line) {
+void assert_failed(uint8_t *file, uint32_t line) {
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

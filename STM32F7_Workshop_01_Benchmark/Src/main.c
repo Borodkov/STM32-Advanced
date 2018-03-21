@@ -36,7 +36,6 @@ static void printConfig(void);
 int main(void) {
   uint32_t n;
   uint32_t acc = 0;
-
   HAL_InitTick(TICK_INT_PRIORITY);
   HAL_Init();
   printConfig();
@@ -47,7 +46,6 @@ int main(void) {
   }
 
   HAL_SYSTICK_Config(0xFFFFFF);
-
   // now measure the timeto make sum of array1
   TIM_MEASURE_START;
 
@@ -56,7 +54,6 @@ int main(void) {
   }
 
   TIM_MEASURE_END;
-
   printf("->CPU cycles spent for sum of %d values : %d cycles\n\r", NUM_SAMPLES, time_diff);
   result = acc;
 #ifdef ARM_MATH_CM7
@@ -66,7 +63,6 @@ int main(void) {
   SysTick->CTRL = 0;
 
   while (1);
-
 }
 
 /**
@@ -92,7 +88,6 @@ int main(void) {
 static void SystemClock_Config(void) {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
-
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -129,7 +124,6 @@ static void SystemClock_Config(void) {
 
 void printConfig(void) {
   TPI->ACPR = (HAL_RCC_GetSysClockFreq() / 2000000) - 1; // make the SWO working whatever settings in the system frequency - output is always 2MHz
-
 #ifdef ARM_MATH_CM7
   // LCD initialization
   BSP_LCD_Init();
@@ -143,7 +137,6 @@ void printConfig(void) {
   printf("System Clock: %9d, cycles: %d\n", HAL_RCC_GetSysClockFreq(), time_diff);
   printf("Running from address:   0x%08X \n", (uint32_t)main);
   printf("Data array1 at address: 0x%08X \n", (uint32_t)&array1);
-
   printf("Compiler IAR, ver: %d\n\r", __VER__);
   printf("and Core is M7 | \n\r");
 }
@@ -169,10 +162,8 @@ static void Error_Handler(void) {
 #ifdef ARM_MATH_CM7
 static void MPU_Config(void) {
   MPU_Region_InitTypeDef MPU_InitStruct;
-
   /* Disable the MPU */
   HAL_MPU_Disable();
-
   /* Configure the MPU attributes as WT for SRAM */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x20010000;
@@ -185,9 +176,7 @@ static void MPU_Config(void) {
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
   MPU_InitStruct.SubRegionDisable = 0x00;
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
-
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
-
   /* Enable the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
@@ -200,7 +189,6 @@ static void MPU_Config(void) {
 static void CPU_CACHE_Enable(void) {
   /* Enable I-Cache */
   SCB_EnableICache();
-
   /* Enable D-Cache */
   SCB_EnableDCache();
 }
@@ -214,7 +202,7 @@ static void CPU_CACHE_Enable(void) {
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t* file, uint32_t line) {
+void assert_failed(uint8_t *file, uint32_t line) {
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

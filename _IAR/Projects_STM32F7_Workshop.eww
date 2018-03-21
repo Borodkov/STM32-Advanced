@@ -12,5 +12,29 @@
     <project>
         <path>$WS_DIR$\..\STM32F7_Workshop_04_InstructionCacheComplex\EWARM\04_InstructionCacheComplex.ewp</path>
     </project>
+    <project>
+        <path>$WS_DIR$\..\STM32F7_Workshop_05_Coremark\EWARM\05_Coremark.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\STM32F7_Workshop_06_DSPaudio\EWARM\06_DSPaudio.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\STM32F7_Workshop_07_Scope\EWARM\07_Scope.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\STM32F7_Workshop_08_QSPI_DMA2D_LTDC\EWARM\08_QSPI_DMA2D_LTDC.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\STM32F7_Workshop_09_QSPI_DMA2D_LTDC_icons\EWARM\09_QSPI_DMA2D_LTDC_icons.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\STM32F7_Workshop_10_GraphicDemos\EWARM\10_GraphicDemos.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\STM32F7_Workshop_10_GraphicDemos\EWARM\10_GraphicDemos2.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\STM32F7_Workshop_10_GraphicDemos\EWARM\10_GraphicDemos3.ewp</path>
+    </project>
     <batchBuild />
 </workspace>

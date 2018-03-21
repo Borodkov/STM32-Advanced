@@ -2,7 +2,7 @@
 <project>
     <fileVersion>3</fileVersion>
     <configuration>
-        <name>STM32F7(AXI)</name>
+        <name>STM32F746-Disco(AXI)</name>
         <toolchain>
             <name>ARM</name>
         </toolchain>
@@ -1158,7 +1158,7 @@
         </settings>
     </configuration>
     <configuration>
-        <name>STM32F7(TCM)</name>
+        <name>STM32F746-Disco(TCM)</name>
         <toolchain>
             <name>ARM</name>
         </toolchain>
@@ -2314,7 +2314,7 @@
         </settings>
     </configuration>
     <configuration>
-        <name>STM32F7(TCMRAM)</name>
+        <name>STM32F746-Disco(TCMRAM)</name>
         <toolchain>
             <name>ARM</name>
         </toolchain>
@@ -3476,17 +3476,17 @@
             <file>
                 <name>$PROJ_DIR$\..\Src\main.c</name>
                 <configuration>
-                    <name>STM32F7(AXI)</name>
+                    <name>STM32F746-Disco(AXI)</name>
                 </configuration>
                 <configuration>
-                    <name>STM32F7(TCM)</name>
+                    <name>STM32F746-Disco(TCM)</name>
                 </configuration>
                 <configuration>
-                    <name>STM32F7(TCMRAM)</name>
+                    <name>STM32F746-Disco(TCMRAM)</name>
                 </configuration>
             </file>
             <file>
-                <name>$PROJ_DIR$\startup_stm32f756xx.s</name>
+                <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Src\stm32f7xx_it.c</name>
@@ -3501,83 +3501,65 @@
                 <name>Components</name>
             </group>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_lcd.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_lcd.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_sdram.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_sdram.c</name>
             </file>
         </group>
         <group>
             <name>STM32F7xx_HAL_Driver</name>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_cortex.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_cortex.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_dma.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_dma.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_dma2d.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_dma2d.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_dma_ex.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_flash.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_flash.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_gpio.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_flash_ex.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_ltdc.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_gpio.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_pwr.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_ltdc.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_pwr_ex.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_nor.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_rcc.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_pwr.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_rcc_ex.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_pwr_ex.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_sdram.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_rcc.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_rcc_ex.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_sdram.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_sram.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_uart.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_usart.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_ll_fmc.c</name>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_ll_fmc.c</name>
             </file>
         </group>
         <file>
-            <name>$PROJ_DIR$\..\Src\system_stm32f7xx.c</name>
+            <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
         </file>
     </group>
     <group>
         <name>Utilities</name>
         <file>
-            <name>$PROJ_DIR$\..\..\..\..\Utilities\Log\lcd_log.c</name>
+            <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Log\lcd_log.c</name>
         </file>
     </group>
 </project>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspace>
+    <project>
+        <path>$WS_DIR$\..\CPP_AUDIO_demo\EWARM\AUDIO_demo.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\CPP_EEPROM_demo\EWARM\EEPROM_demo.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\CPP_LCD_demo\EWARM\LCD_demo.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\CPP_LCDTS_demo\EWARM\LCDTS_demo.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\CPP_QSPI_demo\EWARM\QSPI_demo.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\CPP_SD_demo\EWARM\SD_demo.ewp</path>
+    </project>
+    <batchBuild />
+</workspace>

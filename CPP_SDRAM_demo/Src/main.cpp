@@ -58,7 +58,7 @@ int main() {
             // pc.printf("Write/Read buffers are identical\n");
         }
 
-        wait(1);
+        // wait(1);
     }
 }
 

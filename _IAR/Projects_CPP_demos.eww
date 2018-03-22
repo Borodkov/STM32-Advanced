@@ -18,5 +18,8 @@
     <project>
         <path>$WS_DIR$\..\CPP_SD_demo\EWARM\SD_demo.ewp</path>
     </project>
+    <project>
+        <path>$WS_DIR$\..\CPP_SDRAM_demo\EWARM\SDRAM_demo.ewp</path>
+    </project>
     <batchBuild />
 </workspace>

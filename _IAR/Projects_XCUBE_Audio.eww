@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspace>
+    <project>
+        <path>$WS_DIR$\..\Audio_BAM\EWARM\BAM.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\Audio_BIQ\EWARM\BIQ.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\Audio_CDC\EWARM\CDC.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\Audio_GAM\EWARM\GAM.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\Audio_GrEq\EWARM\GrEq.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\Audio_HPV\EWARM\HPV.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\Audio_OMNI2\EWARM\OMNI2.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\Audio_SDR\EWARM\SDR.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\Audio_SMR\EWARM\SMR.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\Audio_SRC\EWARM\SRC.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\Audio_SVC\EWARM\SVC.ewp</path>
+    </project>
+    <batchBuild />
+</workspace>

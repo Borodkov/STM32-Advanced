@@ -57,14 +57,14 @@ DRESULT disk_read(BYTE pdrv, BYTE *buff, DWORD sector, UINT count) {
     DRESULT res = RES_ERROR;
     MSC_LUNTypeDef info;
     USBH_StatusTypeDef  status = USBH_OK;
-    DWORD scratch [_MAX_SS / 4];
+    DWORD scratch [FF_MAX_SS / 4];
 
     if ((DWORD)buff & 3) { /* DMA Alignment issue, do single up to aligned buffer */
         while ((count--) && (status == USBH_OK)) {
             status = USBH_MSC_Read(&hUSBHost, pdrv, sector + count, (uint8_t *)scratch, 1);
 
             if (status == USBH_OK) {
-                memcpy(&buff[count * _MAX_SS], scratch, _MAX_SS);
+                memcpy(&buff[count * FF_MAX_SS], scratch, FF_MAX_SS);
             } else {
                 break;
             }
@@ -108,11 +108,11 @@ DRESULT disk_write(BYTE pdrv, const BYTE *buff, DWORD sector, UINT count) {
     DRESULT res = RES_ERROR;
     MSC_LUNTypeDef info;
     USBH_StatusTypeDef  status = USBH_OK;
-    DWORD scratch [_MAX_SS / 4];
+    DWORD scratch [FF_MAX_SS / 4];
 
     if ((DWORD)buff & 3) { /* DMA Alignment issue, do single up to aligned buffer */
         while (count--) {
-            memcpy(scratch, &buff[count * _MAX_SS], _MAX_SS);
+            memcpy(scratch, &buff[count * FF_MAX_SS], FF_MAX_SS);
             status = USBH_MSC_Write(&hUSBHost, pdrv, sector + count, (BYTE *)scratch, 1);
 
             if (status == USBH_FAIL) {

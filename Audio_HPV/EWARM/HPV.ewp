@@ -350,6 +350,8 @@
                     <state>$PROJ_DIR$\..\..\_common\Audio</state>
                     <state>$PROJ_DIR$\..\..\_libs\STM32_Audio\Addons\HPV\Inc</state>
                     <state>$PROJ_DIR$\..\..\_libs\STM32_Audio\Addons\Common\Inc</state>
+                    <state>$PROJ_DIR$\..\..\_libs\FatFs\</state>
+                    <state>$PROJ_DIR$\..\..\_libs\FatFs\ff13b\source</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
@@ -357,8 +359,6 @@
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\ST\STM32_USB_Device_Library\Core\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\Third_Party\FatFs\src</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\Third_Party\FatFs\src\drivers</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Log</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\CPU</state>
@@ -1197,7 +1197,7 @@
         <group>
             <name>FatFs</name>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\Third_Party\FatFs\src\ff.c</name>
+                <name>$PROJ_DIR$\..\..\_libs\FatFs\source\ff.c</name>
             </file>
         </group>
         <group>

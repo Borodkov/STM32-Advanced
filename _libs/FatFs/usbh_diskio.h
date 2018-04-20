@@ -1,10 +1,9 @@
 /**
   ******************************************************************************
-  * @file    ff_gen_drv.h
+  * @file    usbh_diskio.h
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    10-November-2017
-  * @brief   Header for ff_gen_drv.c module.
+  * @brief   Header for usbh_diskio_template.c module. This file needs to be
+             customized and copied under the application project tree.
   ******************************************************************************
   * @attention
   *
@@ -46,64 +45,18 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __FF_GEN_DRV_H
-#define __FF_GEN_DRV_H
-
-#ifdef __cplusplus
- extern "C" {
-#endif
+#ifndef __USBH_DISKIO_H
+#define __USBH_DISKIO_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "diskio.h"
-#include "ff.h"
-#include "stdint.h"
-
-
+#include "usbh_core.h"
+#include "usbh_msc.h"
 /* Exported types ------------------------------------------------------------*/
-
-/**
-  * @brief  Disk IO Driver structure definition
-  */
-typedef struct
-{
-  DSTATUS (*disk_initialize) (BYTE);                     /*!< Initialize Disk Drive                     */
-  DSTATUS (*disk_status)     (BYTE);                     /*!< Get Disk Status                           */
-  DRESULT (*disk_read)       (BYTE, BYTE*, DWORD, UINT);       /*!< Read Sector(s)                            */
-#if _USE_WRITE == 1
-  DRESULT (*disk_write)      (BYTE, const BYTE*, DWORD, UINT); /*!< Write Sector(s) when _USE_WRITE = 0       */
-#endif /* _USE_WRITE == 1 */
-#if _USE_IOCTL == 1
-  DRESULT (*disk_ioctl)      (BYTE, BYTE, void*);              /*!< I/O control operation when _USE_IOCTL = 1 */
-#endif /* _USE_IOCTL == 1 */
-
-}Diskio_drvTypeDef;
-
-/**
-  * @brief  Global Disk IO Drivers structure definition
-  */
-typedef struct
-{
-  uint8_t                 is_initialized[FF_VOLUMES];
-  const Diskio_drvTypeDef *drv[FF_VOLUMES];
-  uint8_t                 lun[FF_VOLUMES];
-  volatile uint8_t        nbr;
-
-}Disk_drvTypeDef;
-
 /* Exported constants --------------------------------------------------------*/
-/* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-uint8_t FATFS_LinkDriver(const Diskio_drvTypeDef *drv, char *path);
-uint8_t FATFS_UnLinkDriver(char *path);
-uint8_t FATFS_LinkDriverEx(const Diskio_drvTypeDef *drv, char *path, BYTE lun);
-uint8_t FATFS_UnLinkDriverEx(char *path, BYTE lun);
-uint8_t FATFS_GetAttachedDriversNbr(void);
+extern const Diskio_drvTypeDef  USBH_Driver;
 
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __FF_GEN_DRV_H */
+#endif /* __USBH_DISKIO_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

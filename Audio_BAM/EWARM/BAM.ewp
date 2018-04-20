@@ -1050,6 +1050,9 @@
                 <name>$PROJ_DIR$\..\..\_common\Audio\explorer.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\Src\main.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\..\_common\Audio\menu.c</name>
             </file>
             <file>
@@ -1057,12 +1060,6 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\_common\Audio\usbh_conf.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_common\Audio\usbh_diskio.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\main.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Src\waveplayer.c</name>
@@ -1203,7 +1200,16 @@
         <group>
             <name>FatFs</name>
             <file>
+                <name>$PROJ_DIR$\..\..\_libs\FatFs\diskio.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\..\_libs\FatFs\ff13b\source\ff.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\_libs\FatFs\ff_gen_drv.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\_libs\FatFs\usbh_diskio.c</name>
             </file>
         </group>
         <group>

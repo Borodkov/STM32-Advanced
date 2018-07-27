@@ -2058,9 +2058,6 @@
                 <name>$PROJ_DIR$\..\Src\main.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
-            </file>
-            <file>
                 <name>$PROJ_DIR$\..\Src\stm32f7xx_hal_msp.c</name>
             </file>
             <file>
@@ -2075,6 +2072,9 @@
         <name>Drivers</name>
         <file>
             <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
         </file>
         <group>
             <name>BSP</name>

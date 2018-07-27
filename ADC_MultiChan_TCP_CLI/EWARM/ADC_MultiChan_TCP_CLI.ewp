@@ -1043,83 +1043,83 @@
     <group>
         <name>Application</name>
         <group>
-            <name>User</name>
-            <group>
-                <name>CLI</name>
-                <file>
-                    <name>$PROJ_DIR$\..\..\_apps\CLI\CLIcommands_Sample.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\..\_apps\CLI\CLIconsole_TCP.c</name>
-                </file>
-            </group>
+            <name>CLI</name>
             <file>
-                <name>$PROJ_DIR$\..\..\_apps\app_adc.c</name>
+                <name>$PROJ_DIR$\..\..\_apps\CLI\CLIcommands_Sample.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\_apps\app_btn.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\ETH\app_dhcp.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\app_encoder.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\app_fractal.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\JPG\app_jpeg.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\app_mandelbrot.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\app_modbus.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\app_rtc.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\app_slideshow.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\app_uart.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\ETH\app_udpsyslog.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\app_viewString.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\ETH\ethernetif.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\hr_gettime.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\freertos.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\main.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\stm32f7xx_hal_msp.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\stm32f7xx_it.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\stm32f7xx_hal_timebase_TIM.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\startup_stm32f746xx.s</name>
+                <name>$PROJ_DIR$\..\..\_apps\CLI\CLIconsole_TCP.c</name>
             </file>
         </group>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\app_adc.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\app_btn.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\ETH\app_dhcp.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\app_encoder.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\app_fractal.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\JPG\app_jpeg.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\app_mandelbrot.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\app_modbus.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\app_rtc.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\app_slideshow.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\app_uart.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\ETH\app_udpsyslog.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\app_viewString.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\ETH\ethernetif.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\hr_gettime.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\freertos.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\main.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\stm32f7xx_hal_msp.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\stm32f7xx_it.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\stm32f7xx_hal_timebase_TIM.c</name>
+        </file>
     </group>
     <group>
         <name>Drivers</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
+        </file>
         <group>
             <name>BSP</name>
             <group>
@@ -1196,12 +1196,6 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_ts.h</name>
-            </file>
-        </group>
-        <group>
-            <name>CMSIS</name>
-            <file>
-                <name>$PROJ_DIR$\..\Src\system_stm32f7xx.c</name>
             </file>
         </group>
         <group>

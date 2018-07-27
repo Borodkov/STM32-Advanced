@@ -1039,14 +1039,6 @@
     </configuration>
     <group>
         <name>Application</name>
-        <group>
-            <name>EWARM</name>
-            <file>
-                <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
-            </file>
-        </group>
-        <group>
-            <name>User</name>
             <file>
                 <name>$PROJ_DIR$\..\..\_common\Audio\explorer.c</name>
             </file>
@@ -1065,7 +1057,6 @@
             <file>
                 <name>$PROJ_DIR$\..\Src\waveplayer.c</name>
             </file>
-        </group>
     </group>
     <group>
         <name>Doc</name>
@@ -1075,6 +1066,12 @@
     </group>
     <group>
         <name>Drivers</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
+        </file>
         <group>
             <name>BSP</name>
             <group>
@@ -1104,12 +1101,6 @@
                     <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_ts.c</name>
                 </file>
             </group>
-        </group>
-        <group>
-            <name>CMSIS</name>
-            <file>
-                <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
-            </file>
         </group>
         <group>
             <name>STM32F7xx_HAL_Driver</name>

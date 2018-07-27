@@ -8,10 +8,6 @@
 #include "TCPSocket.h"
 #include "Rtc_Ds1307.h"
 
-
-
-
-
 //NUCLEO: D1->UART6_TX , D0->UART6_RX
 SpwfSAInterface wifi(D1, D0, false);
 TCPSocket socket, socket2;
@@ -26,8 +22,6 @@ Serial pc(USBTX, USBRX); // tx, rx
 DigitalIn button(USER_BUTTON);
 //timer
 Rtc_Ds1307 rtc(PB_9, PB_8);
-
-
 
 //uint8_t tabellachip[3];
 uint8_t stop = 0;
@@ -44,7 +38,6 @@ char USER[15];
 char PASSWORD[12];
 int controllo = 0;
 
-
 /////////Variabili Gestione File///////////
 char filename1[100];
 char filename2[100];
@@ -58,7 +51,6 @@ const char *mac;
 const char *ip;
 char str[4096];
 
-
 ///////Variabili Touch screen////////
 uint16_t x, y;
 uint8_t text[30];
@@ -66,7 +58,6 @@ uint8_t status_ts;
 uint8_t idx = 0;
 uint8_t cleared = 0;
 uint8_t prev_nb_touches = 0;
-
 
 ////////Variabili Timer///////
 int year;
@@ -76,13 +67,11 @@ int hour;
 int min;
 int sec;
 
-
 //FILE *fp = fopen("/sd/sdtest.txt", "w");
 FILE *fp1;
 FILE *fp2;
 FILE *fp3;
 //FILE *foto;
-
 
 ////////////////INTERFACCIA GRAFICA///////////////
 //////////////////////////////////////////////////
@@ -136,10 +125,6 @@ void server_connession_page() {
     lcd.SetTextColor(LCD_COLOR_WHITE);
     lcd.DisplayStringAt(0, LINE(10), (uint8_t *)"Uploading...Don't remove SD Card", CENTER_MODE);
 }
-
-
-
-
 
 void write_sd(char c) {
     if (logrun) {
@@ -337,9 +322,6 @@ int send_data_to_server(char *path) {
     return 1;
 }
 
-
-
-
 void connect_to_server() {
     int failed;
     static char rxbuffer[256];
@@ -388,23 +370,17 @@ void connect_to_server() {
     socket.close();
 }
 
-
-
-
-
 void init_wifi() {
     mac = wifi.get_mac_address();
     //connected=wifi.connect(ssid, seckey, NSAPI_SECURITY_WPA2);
     //ip = wifi.get_ip_address();
 }
 
-
 void init_ts() {
     ////////Touch Screen////////
     //TS_StateTypeDef TS_State;
     status_ts = ts.Init(lcd.GetXSize(), lcd.GetYSize());
 }
-
 
 void init_time() {
     //INIT TIME
@@ -420,9 +396,6 @@ void init_time() {
     rtc.getTime(tm);
     pc.printf("%02d-%02d-%04d_%02d.%02d.%02d", tm.date, tm.mon, tm.year, tm.hour, tm.min, tm.sec);
 }
-
-
-
 
 void boot() {
     init_time();

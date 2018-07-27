@@ -1,10 +1,7 @@
-/**
-  ******************************************************************************
-    File Name          : CRC.h
-    Description        : This file provides code for the configuration
-                         of the CRC instances.
-  ******************************************************************************
-*/
+/*******************************************************************************
+    Description: This file provides code for the configuration of the CRC instances.
+*******************************************************************************/
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __crc_H
 #define __crc_H

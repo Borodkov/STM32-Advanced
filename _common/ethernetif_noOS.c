@@ -6,18 +6,12 @@
 #include "stm32f7xx_hal.h"
 #include "lwip/opt.h"
 #include "lwip/timeouts.h"
-#include "netif/ethernet.h"
 #include "netif/etharp.h"
-#include "ethernetif.h"
+#include "ethernetif_noOS.h"
 #include <string.h>
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-/* The time to block waiting for input. */
-#define TIME_WAITING_FOR_INPUT                 ( osWaitForever )
-/* Stack size of the interface thread */
-#define INTERFACE_THREAD_STACK_SIZE            ( 350 )
-
 /* Define those to better describe your network interface. */
 #define IFNAME0 's'
 #define IFNAME1 't'
@@ -47,14 +41,12 @@ __no_init uint8_t Rx_Buff[ETH_RXBUFNB][ETH_RX_BUF_SIZE]; /* Ethernet Receive Buf
 #pragma location=0x2004D7D0
 __no_init uint8_t Tx_Buff[ETH_TXBUFNB][ETH_TX_BUF_SIZE]; /* Ethernet Transmit Buffer */
 
-/* Semaphore to signal incoming packets */
-osSemaphoreId s_xSemaphore = NULL;
-
 /* Global Ethernet handle*/
 ETH_HandleTypeDef heth;
 
+u32_t sys_now(void);
+
 /* Private function prototypes -----------------------------------------------*/
-static void ethernetif_input(void const *argument);
 
 /* Private functions ---------------------------------------------------------*/
 /*******************************************************************************
@@ -97,20 +89,8 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth) {
     /* Configure PG2, PG11, PG13 and PG14 */
     GPIO_InitStructure.Pin =  GPIO_PIN_2 | GPIO_PIN_11 | GPIO_PIN_13 | GPIO_PIN_14;
     HAL_GPIO_Init(GPIOG, &GPIO_InitStructure);
-    /* Enable the Ethernet global Interrupt */
-    HAL_NVIC_SetPriority(ETH_IRQn, 0x7, 0);
-    HAL_NVIC_EnableIRQ(ETH_IRQn);
     /* Enable ETHERNET clock  */
     __HAL_RCC_ETH_CLK_ENABLE();
-}
-
-/**
-    @brief  Ethernet Rx Transfer completed callback
-    @param  heth: ETH handle
-    @retval None
-*/
-void HAL_ETH_RxCpltCallback(ETH_HandleTypeDef *heth) {
-    osSemaphoreRelease(s_xSemaphore);
 }
 
 /*******************************************************************************
@@ -131,7 +111,7 @@ static void low_level_init(struct netif *netif) {
     heth.Init.Speed = ETH_SPEED_100M;
     heth.Init.DuplexMode = ETH_MODE_FULLDUPLEX;
     heth.Init.MediaInterface = ETH_MEDIA_INTERFACE_RMII;
-    heth.Init.RxMode = ETH_RXINTERRUPT_MODE;
+    heth.Init.RxMode = ETH_RXPOLLING_MODE;
     heth.Init.ChecksumMode = ETH_CHECKSUM_BY_HARDWARE;
     heth.Init.PhyAddress = LAN8742A_PHY_ADDRESS;
 
@@ -158,12 +138,6 @@ static void low_level_init(struct netif *netif) {
     netif->mtu = 1500;
     /* Accept broadcast address and ARP traffic */
     netif->flags |= NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP;
-    /* create a binary semaphore used for informing ethernetif of frame reception */
-    osSemaphoreDef(SEM);
-    s_xSemaphore = osSemaphoreCreate(osSemaphore(SEM) , 1);
-    /* create the task that handles the ETH_MAC */
-    osThreadDef(EthIf, ethernetif_input, osPriorityRealtime, 0, INTERFACE_THREAD_STACK_SIZE);
-    osThreadCreate(osThread(EthIf), netif);
     /* Enable MAC and DMA transmission and reception */
     HAL_ETH_Start(&heth);
 }
@@ -345,22 +319,22 @@ static struct pbuf *low_level_input(struct netif *netif) {
 
     @param netif the lwip network interface structure for this ethernetif
 */
-void ethernetif_input(void const *argument) {
+void ethernetif_input(struct netif *netif) {
+    err_t err;
     struct pbuf *p;
-    struct netif *netif = (struct netif *) argument;
+    /* move received packet into a new pbuf */
+    p = low_level_input(netif);
 
-    for (;;) {
-        if (osSemaphoreWait(s_xSemaphore, TIME_WAITING_FOR_INPUT) == osOK) {
-            do {
-                p = low_level_input(netif);
+    /* no packet could be read, silently ignore this */
+    if (p == NULL) { return; }
 
-                if (p != NULL) {
-                    if (netif->input(p, netif) != ERR_OK) {
-                        pbuf_free(p);
-                    }
-                }
-            } while (p != NULL);
-        }
+    /* entry point to the LwIP stack */
+    err = netif->input(p, netif);
+
+    if (err != ERR_OK) {
+        LWIP_DEBUGF(NETIF_DEBUG, ("ethernetif_input: IP input error\n"));
+        pbuf_free(p);
+        p = NULL;
     }
 }
 
@@ -393,6 +367,17 @@ err_t ethernetif_init(struct netif *netif) {
     /* initialize the hardware */
     low_level_init(netif);
     return ERR_OK;
+}
+
+/**
+    @brief  This function notify user about link status changement.
+    @param  netif: the network interface
+    @retval None
+*/
+__weak void ethernetif_notify_conn_changed(struct netif *netif) {
+    /*  NOTE : This is function clould be implemented in user file
+              when the callback is needed,
+    */
 }
 
 /**

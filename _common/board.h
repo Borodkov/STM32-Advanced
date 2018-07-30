@@ -6,8 +6,6 @@
 #ifndef __board_H
 #define __board_H
 
-#include "lcd_log.h"
-
 #include "stm32746g_discovery.h"
 #include "stm32746g_discovery_ts.h"
 #include "stm32746g_discovery_lcd.h"

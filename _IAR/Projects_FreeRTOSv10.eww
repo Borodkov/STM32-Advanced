@@ -3,5 +3,17 @@
     <project>
         <path>$WS_DIR$\..\FreeRTOS_v10_FatFs13b_SD\EWARM\FatFs13b_SD.ewp</path>
     </project>
+    <project>
+        <path>$WS_DIR$\..\FreeRTOS_v10_Demo\EWARM\FreeRTOS_V10_Demo.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\FreeRTOS_v10_FreeRTOS-CLI-FAT-TCP\EWARM\FreeRTOS_V10_FreeRTOS-CLI-FAT-TCP.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\FreeRTOS_v10_FreeRTOS-TCP\EWARM\FreeRTOS_V10_FreeRTOS-TCP.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\FreeRTOS_v10_TCP_CLI_ADC6ch\EWARM\FreeRTOS_v10_lwIP.ewp</path>
+    </project>
     <batchBuild />
 </workspace>

@@ -14,7 +14,6 @@
 #include <stdio.h>
 
 #include "board.h"
-#include "cmsis_os.h"
 
 void _Error_Handler(char *, int);
 

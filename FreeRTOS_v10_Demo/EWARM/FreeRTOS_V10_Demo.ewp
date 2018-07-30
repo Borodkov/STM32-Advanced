@@ -345,12 +345,12 @@
                     <state>$PROJ_DIR$\..\..\_apps</state>
                     <state>$PROJ_DIR$\..\..\_apps\CLI</state>
                     <state>$PROJ_DIR$\..\..\_apps\JPG</state>
+                    <state>$PROJ_DIR$\..\..\_bsp</state>
                     <state>$PROJ_DIR$\..\..\_common</state>
                     <state>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS-Plus\Source\FreeRTOS-Plus-CLI</state>
                     <state>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS\Source\include</state>
                     <state>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS\Source\portable\IAR\ARM_CM7\r0p1</state>
                     <state>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS\Source\CMSIS_RTOS</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy</state>
@@ -2081,77 +2081,77 @@
             <group>
                 <name>Components</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\ft5336\ft5336.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\ft5336.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\ft5336\ft5336.h</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\ft5336.h</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\ov9655\ov9655.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\ov9655.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\ov9655\ov9655.h</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\ov9655.h</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\wm8994\wm8994.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\wm8994.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\wm8994\wm8994.h</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\wm8994.h</name>
                 </file>
             </group>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery.h</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_audio.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_audio.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_audio.h</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_audio.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_camera.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_camera.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_camera.h</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_camera.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_eeprom.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_eeprom.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_eeprom.h</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_eeprom.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_lcd.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_lcd.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_lcd.h</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_lcd.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_qspi.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_qspi.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_qspi.h</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_qspi.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_sd.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_sd.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_sd.h</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_sd.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_sdram.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_sdram.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_sdram.h</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_sdram.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_ts.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_ts.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_ts.h</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_ts.h</name>
             </file>
         </group>
         <group>

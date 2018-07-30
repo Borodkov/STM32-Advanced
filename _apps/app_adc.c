@@ -10,6 +10,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "cmsis_os.h"
+#include "lcd_log.h"
 
 /* Extern function prototypes ------------------------------------------------*/
 extern void stringCatAndView(char *str);

@@ -10,6 +10,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "cmsis_os.h"
+#include "lcd_log.h"
 #include "cpu_utils.h"
 
 /* Private define ------------------------------------------------------------*/

@@ -7,6 +7,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "lcd_log.h"
 
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart1;

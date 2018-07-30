@@ -12,11 +12,6 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "lcd_log.h"
-
-#include "stm32746g_discovery.h"
-#include "stm32746g_discovery_ts.h"
-#include "stm32746g_discovery_lcd.h"
-
 #include <math.h>
 
 /* Private define ------------------------------------------------------------*/

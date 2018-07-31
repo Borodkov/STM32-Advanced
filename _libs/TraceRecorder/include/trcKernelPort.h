@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Trace Recorder Library for Tracealyzer v3.3.0
+ * Trace Recorder Library for Tracealyzer v3.3.1
  * Percepio AB, www.percepio.com
  *
  * Terms of Use
@@ -97,18 +97,6 @@ extern "C" {
  ******************************************************************************/
 #undef INCLUDE_xTaskGetCurrentTaskHandle
 #define INCLUDE_xTaskGetCurrentTaskHandle 1
-
-#ifndef TRC_CFG_INCLUDE_EVENT_GROUP_EVENTS
-#define TRC_CFG_INCLUDE_EVENT_GROUP_EVENTS 0
-#endif
-
-#ifndef TRC_CFG_INCLUDE_PEND_FUNC_CALL_EVENTS
-#define TRC_CFG_INCLUDE_PEND_FUNC_CALL_EVENTS 0
-#endif
-
-#ifndef TRC_CFG_INCLUDE_TIMER_EVENTS
-#define TRC_CFG_INCLUDE_TIMER_EVENTS 0
-#endif
 
 /*******************************************************************************
  * vTraceSetQueueName(void* object, const char* name)

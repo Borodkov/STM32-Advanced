@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Trace Recorder Library for Tracealyzer v3.3.0
+ * Trace Recorder Library for Tracealyzer v3.3.1
  * Percepio AB, www.percepio.com
  *
  * trcKernelPort.c
@@ -50,6 +50,26 @@
 
 #if (defined(TRC_USE_TRACEALYZER_RECORDER) && TRC_USE_TRACEALYZER_RECORDER == 1)
 
+#ifndef TRC_CFG_INCLUDE_EVENT_GROUP_EVENTS
+ /* TRC_CFG_INCLUDE_EVENT_GROUP_EVENTS is missing in trcConfig.h. */
+#error "TRC_CFG_INCLUDE_EVENT_GROUP_EVENTS must be defined in trcConfig.h."
+#endif
+
+#ifndef TRC_CFG_INCLUDE_TIMER_EVENTS
+ /* TRC_CFG_INCLUDE_TIMER_EVENTS is missing in trcConfig.h. */
+#error "TRC_CFG_INCLUDE_TIMER_EVENTS must be defined in trcConfig.h."
+#endif
+
+#ifndef TRC_CFG_INCLUDE_PEND_FUNC_CALL_EVENTS
+ /* TRC_CFG_INCLUDE_PEND_FUNC_CALL_EVENTS is missing in trcConfig.h. */
+#error "TRC_CFG_INCLUDE_PEND_FUNC_CALL_EVENTS must be defined in trcConfig.h."
+#endif
+
+#ifndef TRC_CFG_INCLUDE_STREAM_BUFFER_EVENTS
+ /* TRC_CFG_INCLUDE_STREAM_BUFFER_EVENTS is missing in trcConfig.h. */
+#error "TRC_CFG_INCLUDE_STREAM_BUFFER_EVENTS must be defined in trcConfig.h."
+#endif
+
 #if (configUSE_TICKLESS_IDLE != 0 && (TRC_HWTC_TYPE == TRC_OS_TIMER_INCR || TRC_HWTC_TYPE == TRC_OS_TIMER_DECR))
 	/* 	
 		The below error message is to alert you on the following issue:
@@ -92,9 +112,10 @@
 #include "event_groups.h"
 #endif /* (TRC_CFG_INCLUDE_EVENT_GROUP_EVENTS == 1 && TRC_CFG_FREERTOS_VERSION >= TRC_FREERTOS_VERSION_8_X) */
 
-#if (TRC_CFG_FREERTOS_VERSION >= TRC_FREERTOS_VERSION_10_0_0)
+#if (TRC_CFG_INCLUDE_STREAM_BUFFER_EVENTS == 1 && TRC_CFG_FREERTOS_VERSION >= TRC_FREERTOS_VERSION_10_0_0)
+/* If the project does not include the FreeRTOS stream buffers, TRC_CFG_INCLUDE_STREAM_BUFFER_EVENTS must be set to 0 */
 #include "stream_buffer.h"
-#endif /* (TRC_CFG_FREERTOS_VERSION >= TRC_FREERTOS_VERSION_10_0_0) */
+#endif /* (TRC_CFG_INCLUDE_STREAM_BUFFER_EVENTS == 1 && TRC_CFG_FREERTOS_VERSION >= TRC_FREERTOS_VERSION_10_0_0) */
 
 uint32_t prvTraceGetQueueNumber(void* handle);
 
@@ -208,7 +229,7 @@ void prvTraceSetEventGroupNumberHigh16(void* handle, uint16_t value)
 }
 #endif /* (TRC_CFG_INCLUDE_EVENT_GROUP_EVENTS == 1 && TRC_CFG_FREERTOS_VERSION >= TRC_FREERTOS_VERSION_10_0_0) */
 
-#if (TRC_CFG_FREERTOS_VERSION >= TRC_FREERTOS_VERSION_10_0_0)
+#if (TRC_CFG_INCLUDE_STREAM_BUFFER_EVENTS == 1 && TRC_CFG_FREERTOS_VERSION >= TRC_FREERTOS_VERSION_10_0_0)
 
 uint16_t prvTraceGetStreamBufferNumberLow16(void* handle)
 {
@@ -229,7 +250,7 @@ void prvTraceSetStreamBufferNumberHigh16(void* handle, uint16_t value)
 {
 	vStreamBufferSetStreamBufferNumber(handle, TRACE_SET_HIGH16(uxStreamBufferGetStreamBufferNumber(handle), value));
 }
-#endif /* (TRC_CFG_FREERTOS_VERSION >= TRC_FREERTOS_VERSION_10_0_0) */
+#endif /* (TRC_CFG_INCLUDE_STREAM_BUFFER_EVENTS == 1 && TRC_CFG_FREERTOS_VERSION >= TRC_FREERTOS_VERSION_10_0_0) */
 
 #if (TRC_CFG_RECORDER_MODE == TRC_RECORDER_MODE_STREAMING)
 	
@@ -652,7 +673,7 @@ void vTraceSetEventGroupName(void* object, const char* name)
 }
 #endif /* (TRC_CFG_INCLUDE_TIMER_EVENTS == 1 && TRC_CFG_FREERTOS_VERSION >= TRC_FREERTOS_VERSION_8_X) */
 
-#if (TRC_CFG_FREERTOS_VERSION >= TRC_FREERTOS_VERSION_10_0_0)
+#if (TRC_CFG_INCLUDE_STREAM_BUFFER_EVENTS == 1 && TRC_CFG_FREERTOS_VERSION >= TRC_FREERTOS_VERSION_10_0_0)
 /*******************************************************************************
 * vTraceSetStreamBufferName(void* object, const char* name)
 *
@@ -678,7 +699,7 @@ void vTraceSetMessageBufferName(void* object, const char* name)
 {
 	prvTraceSetObjectName(TRACE_CLASS_MESSAGEBUFFER, TRACE_GET_OBJECT_NUMBER(STREAMBUFFER, object), name);
 }
-#endif /* (TRC_CFG_FREERTOS_VERSION >= TRC_FREERTOS_VERSION_10_0_0) */
+#endif /* (TRC_CFG_INCLUDE_STREAM_BUFFER_EVENTS == 1 && TRC_CFG_FREERTOS_VERSION >= TRC_FREERTOS_VERSION_10_0_0) */
 
 void* prvTraceGetCurrentTaskHandle()
 {

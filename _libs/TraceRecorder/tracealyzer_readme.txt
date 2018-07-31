@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
-          Tracealyzer for FreeRTOS - Trace Recorder Library v3.3.0                      
+          Tracealyzer Recorder Library for FreeRTOS
 -------------------------------------------------------------------------------
 
-Tracealyzer for FreeRTOS is a sophisticated tool for tracing and visualization
+Tracealyzer is a sophisticated tool for tracing and visualization
 of FreeRTOS-based software systems.
 
 Tracealyzer gives an unprecedented insight into the runtime behavior, which 
@@ -16,13 +16,64 @@ To learn more, see these links.
 
  - Getting Started (videos etc): https://percepio.com/gettingstarted
 
- - User Manual (incl. Recorder API): https://percepio.com/docs/FreeRTOS/manual
-
  - FAQ: https://percepio.com/category/faq
 
 In case you have any questions, don't hesitate to contact support@percepio.com
 
 Tracealyzer supports FreeRTOS v7.3 and newer, including Amazon FreeRTOS.
+
+-------------------------------------------------------------------------------
+Changes, v4.1.4 -> v4.1.5
+
+- Fixed a bug in the ITM stream port, that required Port 0 to be enabled.
+- Added missing include of stdio.h (needed by vTraceConsoleChannelPrintF).
+- Moved standard includes from trcRecorder.h into the .c files needing them.
+
+-------------------------------------------------------------------------------
+
+Changes, v4.1.2 -> v4.1.4
+
+- Fixed a compile error when certain FreeRTOS settings were used
+- Disabled filter support for FreeRTOS v7.3 since it uses "char" for object id
+
+-------------------------------------------------------------------------------
+
+Changes, v4.1.0 -> v4.1.2
+
+- Added vTraceConsoleChannelPrintF(...)
+
+-------------------------------------------------------------------------------
+
+Changes, v4.0.3 -> v4.1.0
+
+- Improved performance of User Events
+- Fixed handling of format strings ending with '%'
+- Improved handling of creative user configuration macros
+
+-------------------------------------------------------------------------------
+
+Changes, v4.0.2 -> v4.0.3
+
+- Minor fix for TCP/IP stream port.
+- Corrected default RTT mode setting.
+
+-------------------------------------------------------------------------------
+
+Changes, v4.0.1 -> v4.0.2
+
+- Memory allocation trace events now ignore filters.
+
+-------------------------------------------------------------------------------
+
+Changes, v4.0.0 -> v4.0.1
+
+- Minor fixes to default values.
+
+-------------------------------------------------------------------------------
+
+Changes, v3.3.0 -> v4.0.0
+
+- Fixed some issues with filters.
 
 -------------------------------------------------------------------------------
 
@@ -154,7 +205,6 @@ Changes, v3.1.2 -> v3.2.0
 -------------------------------------------------------------------------------
 
 Changes, v3.1.1 -> v3.1.2
-
 - Fixed two bugs related to User Events, one in vTracePrintF and other in vTracePrint.
 
 - Fixed a build problem related to a single reference of the old FreeRTOS type "xTaskHandle", in trcKernelPort.c.
@@ -284,4 +334,4 @@ Changes, v3.0.9 -> v3.1.0
   
  
 -------------------------------------------------------------------------------
-Copyright Percepio AB, 2017. 
+Copyright Percepio AB, 2018. 

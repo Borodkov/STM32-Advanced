@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Trace Recorder Library for Tracealyzer v3.3.1
+ * Trace Recorder Library for Tracealyzer v4.1.5
  * Percepio AB, www.percepio.com
  *
  * trcStreamingRecorder.c
@@ -38,7 +38,7 @@
  *
  * Tabs are used for indent in this file (1 tab = 4 spaces)
  *
- * Copyright Percepio AB, 2017.
+ * Copyright Percepio AB, 2018.
  * www.percepio.com
  ******************************************************************************/
 
@@ -47,6 +47,9 @@
 #if (TRC_CFG_RECORDER_MODE == TRC_RECORDER_MODE_STREAMING)
 
 #if (TRC_USE_TRACEALYZER_RECORDER == 1)
+
+#include <stdio.h>
+#include <stdarg.h>
 
 typedef struct{
 	uint16_t EventID;
@@ -174,9 +177,6 @@ static uint16_t FormatVersion = 0x0004;
 /* The number of events stored. Used as event sequence number. */
 static uint32_t eventCounter = 0;
 
-/* The user event channel for recorder warnings, defined in trcKernelPort.c */
-extern char* trcWarningChannel;
-
 /* Remembers if an earlier ISR in a sequence of adjacent ISRs has triggered a task switch.
 In that case, vTraceStoreISREnd does not store a return to the previously executing task. */
 int32_t isPendingContextSwitch = 0;
@@ -184,8 +184,8 @@ int32_t isPendingContextSwitch = 0;
 uint32_t uiTraceTickCount = 0;
 uint32_t timestampFrequency = 0;
 uint32_t DroppedEventCounter = 0;
-uint32_t TotalBytesRemaining_LowWaterMark = TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT * TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE;
-uint32_t TotalBytesRemaining = TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT * TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE;
+uint32_t TotalBytesRemaining_LowWaterMark = (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT) * (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE);
+uint32_t TotalBytesRemaining = (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT) * (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE);
 
 PageType PageInfo[TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT];
 
@@ -246,6 +246,7 @@ uint16_t CurrentFilterGroup = FilterGroup0;
 static void prvTraceStoreStringEventHelper(	int nArgs,
 										uint16_t eventID,
 										traceString userEvtChannel,
+										int len,
 										const char* str,
 										va_list* vl);
 
@@ -398,6 +399,37 @@ void vTracePrint(traceString chn, const char* str)
 	prvTraceStoreSimpleStringEventHelper(chn, str);
 }
 
+
+/*******************************************************************************
+* vTraceConsoleChannelPrintF
+*
+* Wrapper for vTracePrint, using the default channel. Can be used as a drop-in
+* replacement for printf and similar functions, e.g. in a debug logging macro.
+*
+* Example:
+*
+*	 // Old: #define LogString debug_console_printf
+*
+*    // New, log to Tracealyzer instead:
+*	 #define LogString vTraceConsoleChannelPrintF
+*	 ...
+*	 LogString("My value is: %d", myValue);
+******************************************************************************/
+void vTraceConsoleChannelPrintF(const char* fmt, ...)
+{
+		va_list vl;
+		char tempBuf[60];
+		static traceString consoleChannel = NULL;
+
+		if (consoleChannel == NULL)
+			consoleChannel = xTraceRegisterString("Debug Console");
+
+		va_start(vl, fmt);
+		vsnprintf(tempBuf, 60, fmt, vl);
+		vTracePrint(consoleChannel, tempBuf);
+		va_end(vl);
+}
+
 /******************************************************************************
  * vTracePrintF
  *
@@ -456,7 +488,7 @@ void vTracePrintF(traceString chn, const char* fmt, ...)
 	{
 		if (fmt[i] == '%')
 		{
-			if (fmt[i + 1] != '%')
+			if (fmt[i + 1] != 0 && fmt[i + 1] != '%')
 			{
 				nArgs++;        /* Found an argument */
 			}
@@ -469,11 +501,11 @@ void vTracePrintF(traceString chn, const char* fmt, ...)
 	
 	if (chn != NULL)
 	{
-		prvTraceStoreStringEventHelper(nArgs, (uint16_t)(PSF_EVENT_USER_EVENT + nArgs + 1), chn, fmt, &vl);
+		prvTraceStoreStringEventHelper(nArgs, (uint16_t)(PSF_EVENT_USER_EVENT + nArgs + 1), chn, i, fmt, &vl);
 	}
 	else
 	{
-		prvTraceStoreStringEventHelper(nArgs, (uint16_t)(PSF_EVENT_USER_EVENT + nArgs), chn, fmt, &vl);
+		prvTraceStoreStringEventHelper(nArgs, (uint16_t)(PSF_EVENT_USER_EVENT + nArgs), chn, i, fmt, &vl);
 	}
 	va_end(vl);
 }
@@ -542,7 +574,7 @@ void vTraceStoreISRBegin(traceHandle handle)
 	if (ISR_stack_index == -1)
 		isPendingContextSwitch = 0; 
 	
-	if (ISR_stack_index < TRC_CFG_MAX_ISR_NESTING - 1)
+	if (ISR_stack_index < (TRC_CFG_MAX_ISR_NESTING) - 1)
 	{
 		ISR_stack_index++;
 		ISR_stack[ISR_stack_index] = (uint32_t)handle;
@@ -586,6 +618,8 @@ void vTraceStoreISREnd(int isTaskSwitchRequired)
 	TRACE_ALLOC_CRITICAL_SECTION();
 
 	TRACE_ENTER_CRITICAL_SECTION();
+	
+	(void)ISR_stack;
 
 	/* Is there a pending task-switch? (perhaps from an earlier ISR) */
 	isPendingContextSwitch |= isTaskSwitchRequired;
@@ -793,6 +827,11 @@ static void prvSetRecorderEnabled(uint32_t isEnabled)
 	
 	TRACE_ALLOC_CRITICAL_SECTION();
 	
+	if (RecorderEnabled == isEnabled)
+	{
+		return;
+	}
+	
 	currentTask = TRACE_GET_CURRENT_TASK();
 
 	TRACE_ENTER_CRITICAL_SECTION();
@@ -907,7 +946,7 @@ static void prvTraceStoreHeader(void)
 			header->symbolSize = SYMBOL_TABLE_SLOT_SIZE;
 			header->symbolCount = (TRC_CFG_SYMBOL_TABLE_SLOTS);
 			header->objectDataSize = 8;
-			header->objectDataCount = TRC_CFG_OBJECT_DATA_SLOTS;
+			header->objectDataCount = (TRC_CFG_OBJECT_DATA_SLOTS);
 			TRC_STREAM_PORT_COMMIT_EVENT(header, sizeof(PSFHeaderInfo));
 		}
 	}
@@ -1088,20 +1127,24 @@ void prvTraceStoreEvent(int nParam, uint16_t eventID, ...)
 /* Stories an event with a string and <nParam> 32-bit integer parameters */
 void prvTraceStoreStringEvent(int nArgs, uint16_t eventID, const char* str, ...)
 {
+	int len;
   	va_list vl;
 
+	for (len = 0; (str[len] != 0) && (len < 52); len++); /* empty loop */
+
 	va_start(vl, str);
-	prvTraceStoreStringEventHelper(nArgs, eventID, NULL, str, &vl);
+	prvTraceStoreStringEventHelper(nArgs, eventID, NULL, len, str, &vl);
 	va_end(vl);
 }
 
 /* Internal common function for storing string events */
-static void prvTraceStoreStringEventHelper(	int nArgs,
+static void prvTraceStoreStringEventHelper(int nArgs,
 										uint16_t eventID,
 										traceString userEvtChannel,
-										const char* str, va_list* vl)
+										int len,
+										const char* str,
+										va_list* vl)
 {
-	int len;
   	int nWords;
 	int nStrWords;
 	int i;
@@ -1109,8 +1152,6 @@ static void prvTraceStoreStringEventHelper(	int nArgs,
   	TRACE_ALLOC_CRITICAL_SECTION();
 
 	PSF_ASSERT(eventID < 4096, PSF_ERROR_EVENT_CODE_TOO_LARGE);
-
-	for (len = 0; (str[len] != 0) && (len < 52); len++); /* empty loop */
 	
 	/* The string length in multiples of 32 bit words (+1 for null character) */
 	nStrWords = (len+1+3)/4;
@@ -1613,7 +1654,7 @@ static uint32_t prvGetTimestamp32(void)
 	
 #if ((TRC_HWTC_TYPE == TRC_OS_TIMER_INCR) || (TRC_HWTC_TYPE == TRC_OS_TIMER_DECR))
 	uint32_t ticks = TRACE_GET_OS_TICKS();
-	return (TRC_HWTC_COUNT & 0x00FFFFFFU) + ((ticks & 0x000000FFU) << 24);
+	return ((TRC_HWTC_COUNT) & 0x00FFFFFFU) + ((ticks & 0x000000FFU) << 24);
 #endif
 }
 
@@ -1631,19 +1672,19 @@ static void prvTraceStoreTSConfig(void)
 		prvTraceStoreEvent(5, 
 							PSF_EVENT_TS_CONFIG,
 							(uint32_t)timestampFrequency,	                    
-							(uint32_t)TRACE_TICK_RATE_HZ,
-							(uint32_t)TRC_HWTC_TYPE,
-							(uint32_t)TRC_CFG_ISR_TAILCHAINING_THRESHOLD,
-							(uint32_t)TRC_HWTC_PERIOD);
+							(uint32_t)(TRACE_TICK_RATE_HZ),
+							(uint32_t)(TRC_HWTC_TYPE),
+							(uint32_t)(TRC_CFG_ISR_TAILCHAINING_THRESHOLD),
+							(uint32_t)(TRC_HWTC_PERIOD));
 	
 	#else
 	
 	prvTraceStoreEvent(4, 
 						PSF_EVENT_TS_CONFIG,
 						(uint32_t)timestampFrequency,	                    
-						(uint32_t)TRACE_TICK_RATE_HZ,
-						(uint32_t)TRC_HWTC_TYPE,
-						(uint32_t)TRC_CFG_ISR_TAILCHAINING_THRESHOLD);	
+						(uint32_t)(TRACE_TICK_RATE_HZ),
+						(uint32_t)(TRC_HWTC_TYPE),
+						(uint32_t)(TRC_CFG_ISR_TAILCHAINING_THRESHOLD));	
 	#endif
 }
 
@@ -1653,11 +1694,11 @@ static int prvAllocateBufferPage(int prevPage)
 	int index;
 	int count = 0;
 
-	index = (prevPage + 1) % TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT;
+	index = (prevPage + 1) % (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT);
 
-	while((PageInfo[index].Status != PAGE_STATUS_FREE) && (count ++ < TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT))
+	while((PageInfo[index].Status != PAGE_STATUS_FREE) && (count ++ < (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT)))
 	{
-		index = (index + 1) % TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT;
+		index = (index + 1) % (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT);
 	}
 
 	if (PageInfo[index].Status == PAGE_STATUS_FREE)
@@ -1674,11 +1715,11 @@ static void prvPageReadComplete(int pageIndex)
   	TRACE_ALLOC_CRITICAL_SECTION();
 
 	TRACE_ENTER_CRITICAL_SECTION();
-	PageInfo[pageIndex].BytesRemaining = TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE;
-	PageInfo[pageIndex].WritePointer = &EventBuffer[pageIndex * TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE];
+	PageInfo[pageIndex].BytesRemaining = (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE);
+	PageInfo[pageIndex].WritePointer = &EventBuffer[pageIndex * (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE)];
 	PageInfo[pageIndex].Status = PAGE_STATUS_FREE;
 
-	TotalBytesRemaining += TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE;
+	TotalBytesRemaining += (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE);
 
 	TRACE_EXIT_CRITICAL_SECTION();
 }
@@ -1688,16 +1729,16 @@ static int prvGetBufferPage(int32_t* bytesUsed)
 {
 	static int8_t lastPage = -1;
 	int count = 0;
-  	int8_t index = (int8_t) ((lastPage + 1) % TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT);
+  	int8_t index = (int8_t) ((lastPage + 1) % (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT));
 
-	while((PageInfo[index].Status != PAGE_STATUS_READ) && (count++ < TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT))
+	while((PageInfo[index].Status != PAGE_STATUS_READ) && (count++ < (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT)))
 	{
-		index = (int8_t)((index + 1) % TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT);
+		index = (int8_t)((index + 1) % (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT));
 	}
 
 	if (PageInfo[index].Status == PAGE_STATUS_READ)
 	{
-		*bytesUsed = TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE - PageInfo[index].BytesRemaining;
+		*bytesUsed = (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE) - PageInfo[index].BytesRemaining;
 		lastPage = index;
 		return index;
 	}
@@ -1741,7 +1782,7 @@ uint32_t prvPagedEventBufferTransfer(void)
         while (1)  /* Keep going until we have transferred all that we intended to */
         {
 			if (TRC_STREAM_PORT_WRITE_DATA(
-					&EventBuffer[pageToTransfer * TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE + bytesTransferredTotal],
+					&EventBuffer[pageToTransfer * (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE) + bytesTransferredTotal],
 					(uint32_t)(bytesToTransfer - bytesTransferredTotal),
 					&bytesTransferredNow) == 0)
 			{
@@ -1840,10 +1881,10 @@ void prvPagedEventBufferInit(char* buffer)
     EventBuffer = buffer;
     
 	TRACE_ENTER_CRITICAL_SECTION();
-	for (i = 0; i < TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT; i++)
+	for (i = 0; i < (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT); i++)
 	{
-		PageInfo[i].BytesRemaining = TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE;
-		PageInfo[i].WritePointer = &EventBuffer[i * TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE];
+		PageInfo[i].BytesRemaining = (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE);
+		PageInfo[i].WritePointer = &EventBuffer[i * (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE)];
 		PageInfo[i].Status = PAGE_STATUS_FREE;
 	}
 	TRACE_EXIT_CRITICAL_SECTION();

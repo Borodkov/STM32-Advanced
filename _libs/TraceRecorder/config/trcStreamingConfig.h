@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Trace Recorder Library for Tracealyzer v3.3.1
+ * Trace Recorder Library for Tracealyzer v4.1.4
  * Percepio AB, www.percepio.com
  *
  * trcStreamingConfig.h
@@ -39,7 +39,7 @@
  *
  * Tabs are used for indent in this file (1 tab = 4 spaces)
  *
- * Copyright Percepio AB, 2017.
+ * Copyright Percepio AB, 2018.
  * www.percepio.com
  ******************************************************************************/
 
@@ -123,7 +123,7 @@ extern "C" {
  * Specifies the number of pages used by the paged event buffer.
  * This may need to be increased if there are a lot of missed events.
  *
- * Note: not used by the J-Link RTT stream port (see SEGGER_RTT_Conf.h instead)
+ * Note: not used by the J-Link RTT stream port (see trcStreamingPort.h instead)
  ******************************************************************************/
 #define TRC_CFG_PAGED_EVENT_BUFFER_PAGE_COUNT 2
 
@@ -134,7 +134,7 @@ extern "C" {
  * to match any internal low-level buffers used by the streaming interface, like
  * the Ethernet MTU (Maximum Transmission Unit).
  *
- * Note: not used by the J-Link RTT stream port (see SEGGER_RTT_Conf.h instead)
+ * Note: not used by the J-Link RTT stream port (see trcStreamingPort.h instead)
  ******************************************************************************/
 #define TRC_CFG_PAGED_EVENT_BUFFER_PAGE_SIZE 2500
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Trace Recorder Library for Tracealyzer v3.3.1
+ * Trace Recorder Library for Tracealyzer v4.1.4
  * Percepio AB, www.percepio.com
  *
  * trcConfig.h
@@ -41,7 +41,7 @@
  *
  * Tabs are used for indent in this file (1 tab = 4 spaces)
  *
- * Copyright Percepio AB, 2016.
+ * Copyright Percepio AB, 2018.
  * www.percepio.com
  ******************************************************************************/
 
@@ -240,17 +240,18 @@ extern "C" {
  *
  * Default value is 0 since dependent on timers.c
  *****************************************************************************/
-#define TRC_CFG_INCLUDE_PEND_FUNC_CALL_EVENTS 1
+#define TRC_CFG_INCLUDE_PEND_FUNC_CALL_EVENTS 0
 
- /*****************************************************************************
- * TRC_CFG_INCLUDE_STREAM_BUFFER_EVENTS
+/*******************************************************************************
+ * Configuration Macro: TRC_CFG_INCLUDE_STREAM_BUFFER_EVENTS
  *
  * Macro which should be defined as either zero (0) or one (1).
  *
- * If this is zero (0), the trace will exclude any Stream Buffer events.
+ * If this is zero (0), the trace will exclude any stream buffer or message
+ * buffer events.
  *
- * Default value is 0 since dependent on stream_buffer.c
- *****************************************************************************/
+ * Default value is 0 since dependent on stream_buffer.c (new in FreeRTOS v10)
+ ******************************************************************************/
 #define TRC_CFG_INCLUDE_STREAM_BUFFER_EVENTS 0
 
 /*******************************************************************************

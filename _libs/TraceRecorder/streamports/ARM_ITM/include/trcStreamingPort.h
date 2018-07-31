@@ -5,8 +5,7 @@
  * trcStreamingPort.h
  *
  * The interface definitions for trace streaming ("stream ports").
- * This "stream port" sets up the recorder to use TCP/IP as streaming channel.
- * The example is for Windows sockets (Winsock), for use with Windows ports.
+ * This "stream port" sets up the recorder to use ARM ITM as streaming channel.
  *
  * Terms of Use
  * This file is part of the trace recorder library (RECORDER), which is the 
@@ -47,26 +46,43 @@
 #ifndef TRC_STREAMING_PORT_H
 #define TRC_STREAMING_PORT_H
 
-#include <stdint.h>
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-int32_t readFromSocket(void* data, uint32_t size, int32_t *ptrBytesRead);
-int32_t writeToSocket(void* data, uint32_t size, int32_t *ptrBytesWritten);
 
-/* This port supports both direct write and buffered mode ...*/
-#define TRC_STREAM_PORT_USE_INTERNAL_BUFFER 0
+int32_t itm_write(void* ptrData, uint32_t size, int32_t* ptrBytesWritten);
+int32_t read_from_host(void* ptrData, uint32_t size, int32_t* ptrBytesRead);
 
-#define TRC_STREAM_PORT_READ_DATA(_ptrData, _size, _ptrBytesRead) readFromSocket(_ptrData, _size, _ptrBytesRead)
+/*******************************************************************************
+ * TRC_CFG_ITM_PORT
+ *
+ * Possible values: 0 - 31
+ *
+ * What ITM port to use for the ITM software events. Make sure the IDE is
+ * configured for the same channel.
+ *
+ * Default: 1 (0 is typically terminal output and 31 is used by Keil)
+ *
+ ******************************************************************************/
+#define TRC_CFG_ITM_PORT 1
 
-#if (TRC_STREAM_PORT_USE_INTERNAL_BUFFER == 1)    
-	#define TRC_STREAM_PORT_WRITE_DATA(_ptrData, _size, _ptrBytesWritten) writeToSocket(_ptrData, _size, _ptrBytesWritten)
-#else
-	/* In the direct mode, _ptrBytesWritten is not used, so it is assumed that "all or nothing" is written. */
-	#define TRC_STREAM_PORT_WRITE_DATA(_ptrData, _size, UNUSED) writeToSocket(_ptrData, _size, NULL)
+#if (TRC_CFG_ITM_PORT < 0) || (TRC_CFG_ITM_PORT > 31)
+#error "Bad ITM port selected."
 #endif
+
+// Not used for ITM - no RAM buffer...
+#define TRC_STREAM_PORT_ALLOCATE_FIELDS()
+
+// Not used for ITM - assume the IDE configures the ITM setup
+#define TRC_STREAM_PORT_INIT()
+
+/* Important for the ITM port - no RAM buffer, direct writes. In most other ports this can be skipped (default is 1) */
+#define TRC_STREAM_PORT_USE_INTERNAL_BUFFER 0
+  
+#define TRC_STREAM_PORT_WRITE_DATA(_ptrData, _size, _ptrBytesWritten) itm_write(_ptrData, _size, _ptrBytesWritten)
+
+#define TRC_STREAM_PORT_READ_DATA(_ptrData, _size, _ptrBytesRead) read_from_host(_ptrData, _size, _ptrBytesRead)
 
 #ifdef __cplusplus
 }

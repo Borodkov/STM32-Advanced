@@ -13,6 +13,8 @@
 
 extern void MX_FREERTOS_Init(void);
 
+void MX_USB_DEVICE_Init(void);
+
 int main(void) {
   BSP_Init();
 
@@ -32,6 +34,10 @@ int main(void) {
   /* Call init function for freertos objects (in freertos.c) */
   MX_FREERTOS_Init();
 
+  // TraceRecorder via USB_CDC
+  TRC_STREAM_PORT_INIT();
+  vTraceEnable(TRC_START_AWAIT_HOST);
+  
   /* Start scheduler */
   osKernelStart();
 
@@ -40,6 +46,22 @@ int main(void) {
   /* Infinite loop */
   while (1)
     ;
+}
+
+/* USB CDC Descriptors */
+
+extern USBD_DescriptorsTypeDef FS_Desc;
+
+/* USB Device Core handle declaration */
+USBD_HandleTypeDef hUsbDeviceFS;
+
+/* init function */
+void MX_USB_DEVICE_Init(void) {
+    /* Init Device Library,Add Supported Class and Start the library*/
+    USBD_Init(&hUsbDeviceFS, &FS_Desc, DEVICE_FS);
+    USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC);
+    USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS);
+    USBD_Start(&hUsbDeviceFS);
 }
 
 /**

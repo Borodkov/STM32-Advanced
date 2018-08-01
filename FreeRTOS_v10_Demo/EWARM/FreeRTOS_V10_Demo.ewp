@@ -351,9 +351,13 @@
                     <state>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS\Source\include</state>
                     <state>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS\Source\portable\IAR\ARM_CM7\r0p1</state>
                     <state>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS\Source\CMSIS_RTOS</state>
+                    <state>$PROJ_DIR$\..\..\_libs\TraceRecorder\include</state>
+                    <state>$PROJ_DIR$\..\..\_libs\TraceRecorder\streamports\USB_CDC\include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy</state>
+                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\ST\STM32_USB_Device_Library\Core\Inc</state>
+                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\CPU</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Log</state>
                 </option>
@@ -2046,36 +2050,33 @@
     </configuration>
     <group>
         <name>Application</name>
-        <group>
-            <name>User</name>
-            <file>
-                <name>$PROJ_DIR$\..\..\_apps\app_mandelbrot.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\freertos.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\main.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\stm32f7xx_hal_msp.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_common\stm32f7xx_hal_timebase_TIM.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\stm32f7xx_it.c</name>
-            </file>
-        </group>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\app_mandelbrot.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\freertos.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\main.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\stm32f7xx_hal_msp.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\stm32f7xx_hal_timebase_TIM.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\stm32f7xx_it.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\usbd_conf.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\usbd_desc_cdc.c</name>
+        </file>
     </group>
     <group>
         <name>Drivers</name>
-        <file>
-            <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
-        </file>
         <group>
             <name>BSP</name>
             <group>
@@ -2409,6 +2410,12 @@
                 <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_ll_utils.c</name>
             </file>
         </group>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
+        </file>
     </group>
     <group>
         <name>Middlewares</name>
@@ -2509,6 +2516,33 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS\Source\timers.c</name>
+            </file>
+        </group>
+        <group>
+            <name>TraceRecorder</name>
+            <file>
+                <name>$PROJ_DIR$\..\..\_libs\TraceRecorder\trcKernelPort.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\_libs\TraceRecorder\streamports\USB_CDC\trcStreamingPort.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\_libs\TraceRecorder\trcStreamingRecorder.c</name>
+            </file>
+        </group>
+        <group>
+            <name>USB_Device_Library</name>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</name>
             </file>
         </group>
     </group>

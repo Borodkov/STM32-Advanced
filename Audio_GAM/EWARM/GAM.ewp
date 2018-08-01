@@ -198,7 +198,7 @@
                 </option>
                 <option>
                     <name>DSPExtension</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
             </data>
         </settings>
@@ -1039,6 +1039,9 @@
             <name>$PROJ_DIR$\..\..\_common\Audio\explorer.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\Src\main.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\..\_common\Audio\menu.c</name>
         </file>
         <file>
@@ -1046,9 +1049,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\_common\Audio\usbh_conf.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Src\main.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\Src\waveplayer.c</name>
@@ -1062,12 +1062,6 @@
     </group>
     <group>
         <name>Drivers</name>
-        <file>
-            <name>$PROJ_DIR$\..\..\_bsp\system_stm32f7xx.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\_IAR\startup_stm32f746xx.s</name>
-        </file>
         <group>
             <name>BSP</name>
             <group>
@@ -1176,6 +1170,12 @@
                 <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_ll_usb.c</name>
             </file>
         </group>
+        <file>
+            <name>$PROJ_DIR$\..\..\_IAR\startup_stm32f746xx.s</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_bsp\system_stm32f7xx.c</name>
+        </file>
     </group>
     <group>
         <name>Middlewares</name>
@@ -1189,6 +1189,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\_libs\FatFs\ff_gen_drv.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\_libs\FatFs\ff13b\source\ffunicode.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\_libs\FatFs\usbh_diskio.c</name>

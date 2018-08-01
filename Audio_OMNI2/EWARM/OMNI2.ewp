@@ -1188,6 +1188,9 @@
                 <name>$PROJ_DIR$\..\..\_libs\FatFs\ff13b\source\ff.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\..\_libs\FatFs\ff13b\source\ffunicode.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\..\_libs\FatFs\ff_gen_drv.c</name>
             </file>
             <file>

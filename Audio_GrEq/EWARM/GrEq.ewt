@@ -1159,36 +1159,24 @@
     </configuration>
     <group>
         <name>Application</name>
-        <group>
-            <name>EWARM</name>
-            <file>
-                <name>$PROJ_DIR$\..\..\_common\Audiostartup_stm32f746xx.s</name>
-            </file>
-        </group>
-        <group>
-            <name>User</name>
-            <file>
-                <name>$PROJ_DIR$\..\..\_common\Audio\explorer.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\main.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_common\Audio\menu.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_common\Audio\stm32f7xx_it.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_common\Audio\usbh_conf.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_common\Audio\usbh_diskio.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\waveplayer.c</name>
-            </file>
-        </group>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\Audio\explorer.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\main.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\Audio\menu.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\Audio\stm32f7xx_it.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\Audio\usbh_conf.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\waveplayer.c</name>
+        </file>
     </group>
     <group>
         <name>Doc</name>
@@ -1203,36 +1191,30 @@
             <group>
                 <name>Components</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\ft5336\ft5336.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\ft5336.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\wm8994\wm8994.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\wm8994.c</name>
                 </file>
             </group>
             <group>
                 <name>STM32746G-Discovery</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_audio.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_audio.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_lcd.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_lcd.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_sdram.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_sdram.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_ts.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_ts.c</name>
                 </file>
             </group>
-        </group>
-        <group>
-            <name>CMSIS</name>
-            <file>
-                <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
-            </file>
         </group>
         <group>
             <name>STM32F7xx_HAL_Driver</name>
@@ -1312,19 +1294,37 @@
                 <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_ll_usb.c</name>
             </file>
         </group>
+        <file>
+            <name>$PROJ_DIR$\..\..\_IAR\startup_stm32f746xx.s</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_bsp\system_stm32f7xx.c</name>
+        </file>
     </group>
     <group>
         <name>Middlewares</name>
         <group>
             <name>FatFs</name>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\Third_Party\FatFs\src\ff.c</name>
+                <name>$PROJ_DIR$\..\..\_libs\FatFs\diskio.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\_libs\FatFs\ff13b\source\ff.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\_libs\FatFs\ff_gen_drv.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\_libs\FatFs\ff13b\source\ffunicode.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\_libs\FatFs\usbh_diskio.c</name>
             </file>
         </group>
         <group>
             <name>GREQ</name>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\ST\STM32_Audio\Addons\GREQ\Lib\GREQ_CM7_IAR.a</name>
+                <name>$PROJ_DIR$\..\..\_libs\STM32_Audio\Addons\GREQ\Lib\GrEq_CM7_IAR.a</name>
             </file>
         </group>
         <group>

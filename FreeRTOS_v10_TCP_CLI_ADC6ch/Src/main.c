@@ -6,6 +6,8 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "cmsis_os.h"
+#include "lcd_log.h"
 #include "board_init.h"
 
 extern void MX_FREERTOS_Init(void);

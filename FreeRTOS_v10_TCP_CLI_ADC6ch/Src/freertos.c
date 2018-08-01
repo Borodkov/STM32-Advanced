@@ -6,8 +6,8 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "FreeRTOS.h"
 #include "main.h"
+#include "cmsis_os.h"
 
 /* Function prototypes -------------------------------------------------------*/
 extern void vStartDHCPTask();

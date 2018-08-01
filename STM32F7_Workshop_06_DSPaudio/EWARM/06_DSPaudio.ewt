@@ -2315,24 +2315,18 @@
     </configuration>
     <group>
         <name>Application</name>
-        <group>
-            <name>User</name>
-            <file>
-                <name>$PROJ_DIR$\..\Src\color waves.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\main.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\scope.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\stm32f7xx_it.c</name>
-            </file>
-        </group>
+        <file>
+            <name>$PROJ_DIR$\..\Src\color waves.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\main.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\scope.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\stm32f7xx_it.c</name>
+        </file>
     </group>
     <group>
         <name>Drivers</name>
@@ -2341,20 +2335,20 @@
             <group>
                 <name>Components</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\wm8994\wm8994.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\wm8994.c</name>
                 </file>
             </group>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_audio.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_audio.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_lcd.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_lcd.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_sdram.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_sdram.c</name>
             </file>
         </group>
         <group>
@@ -2445,7 +2439,10 @@
             </file>
         </group>
         <file>
-            <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
+            <name>$PROJ_DIR$\..\..\_IAR\startup_stm32f746xx.s</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_bsp\system_stm32f7xx.c</name>
         </file>
     </group>
     <group>

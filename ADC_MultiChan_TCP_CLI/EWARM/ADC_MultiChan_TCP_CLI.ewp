@@ -359,7 +359,6 @@
                     <state>$PROJ_DIR$\..\..\_libs\FreeModbus\port</state>
                     <state>$PROJ_DIR$\..\..\_libs\FreeModbus\rtu</state>
                     <state>$PROJ_DIR$\..\..\_libs\FreeModbus\tcp</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\Third_Party\LibJPEG\include</state>
@@ -1119,10 +1118,10 @@
     <group>
         <name>Drivers</name>
         <file>
-            <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
+            <name>$PROJ_DIR$\..\..\_bsp\system_stm32f7xx.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
+            <name>$PROJ_DIR$\..\..\_IAR\startup_stm32f746xx.s</name>
         </file>
         <group>
             <name>BSP</name>

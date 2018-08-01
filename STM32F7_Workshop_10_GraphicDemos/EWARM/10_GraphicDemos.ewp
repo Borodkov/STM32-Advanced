@@ -78,7 +78,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>STM32F756VG	ST STM32F756VG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -138,7 +138,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>STM32F756VG	ST STM32F756VG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -755,7 +755,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>$TOOLKIT_DIR$\config\linker\ST\stm32f756xG.icf</state>
+                    <state>$TOOLKIT_DIR$\config\linker\ST\stm32F746xG.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>

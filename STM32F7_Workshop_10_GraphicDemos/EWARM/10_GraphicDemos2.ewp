@@ -89,7 +89,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>STM32F756ZG	ST STM32F756ZG</state>
+          <state>STM32F746ZG	ST STM32F746ZG</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -149,7 +149,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>STM32F756ZG	ST STM32F756ZG</state>
+          <state>STM32F746ZG	ST STM32F746ZG</state>
         </option>
         <option>
           <name>FPU2</name>

@@ -78,7 +78,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>STM32F756VG	ST STM32F756VG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -138,7 +138,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>STM32F756VG	ST STM32F756VG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -216,7 +216,7 @@
                 <option>
                     <name>CCDefines</name>
                     <state>USE_HAL_DRIVER</state>
-                    <state>STM32F756xx</state>
+                    <state>STM32F746xx</state>
                     <state>USE_STM32746G_DISCO</state>
                     <state>USE_IOEXPANDER</state>
                     <state>__DBG_ITM</state>
@@ -347,13 +347,11 @@
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Inc</state>
                     <state>$PROJ_DIR$\..\..\_apps</state>
+                    <state>$PROJ_DIR$\..\..\_bsp</state>
+                    <state>$PROJ_DIR$\..\..\_bsp\cpp_wrappers</state>
                     <state>$PROJ_DIR$\..\..\_common</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\Common</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Log</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\CPU</state>
                 </option>
                 <option>
@@ -1031,40 +1029,28 @@
     </configuration>
     <group>
         <name>Application</name>
-        <group>
-            <name>User</name>
-            <file>
-                <name>$PROJ_DIR$\..\Src\main.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\stm32f7xx_it.c</name>
-            </file>
-        </group>
+        <file>
+            <name>$PROJ_DIR$\..\Src\main.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\stm32f7xx_it.c</name>
+        </file>
     </group>
     <group>
         <name>Drivers</name>
-        <file>
-            <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
-        </file>
         <group>
             <name>BSP</name>
-            <group>
-                <name>Components</name>
-            </group>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_lcd.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_lcd.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_qspi.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_qspi.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_sdram.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_sdram.c</name>
             </file>
         </group>
         <group>
@@ -1115,6 +1101,12 @@
                 <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_ll_fmc.c</name>
             </file>
         </group>
+        <file>
+            <name>$PROJ_DIR$\..\..\_IAR\startup_stm32f746xx.s</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_bsp\system_stm32f7xx.c</name>
+        </file>
     </group>
     <group>
         <name>Utilities</name>

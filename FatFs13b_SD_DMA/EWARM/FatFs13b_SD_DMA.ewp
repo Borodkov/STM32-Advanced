@@ -344,15 +344,13 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Inc</state>
+                    <state>$PROJ_DIR$\..\..\_bsp</state>
+                    <state>$PROJ_DIR$\..\..\_bsp\cpp_wrappers</state>
                     <state>$PROJ_DIR$\..\..\_common</state>
                     <state>$PROJ_DIR$\..\..\_libs\FatFs\</state>
                     <state>$PROJ_DIR$\..\..\_libs\FatFs\ff13b\source</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\Common</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Log</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\CPU</state>
                 </option>
                 <option>
@@ -1046,20 +1044,20 @@
     <group>
         <name>Drivers</name>
         <file>
-            <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
+            <name>$PROJ_DIR$\..\..\_bsp\system_stm32f7xx.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
+            <name>$PROJ_DIR$\..\..\_IAR\startup_stm32f746xx.s</name>
         </file>
         <group>
             <name>BSP</name>
             <group>
                 <name>STM32746G-Discovery</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_sd.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_sd.c</name>
                 </file>
             </group>
         </group>

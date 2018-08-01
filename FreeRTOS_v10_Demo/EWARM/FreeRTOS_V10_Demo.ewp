@@ -353,7 +353,6 @@
                     <state>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS\Source\CMSIS_RTOS</state>
                     <state>$PROJ_DIR$\..\..\_libs\TraceRecorder\include</state>
                     <state>$PROJ_DIR$\..\..\_libs\TraceRecorder\streamports\USB_CDC\include</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Middlewares\ST\STM32_USB_Device_Library\Core\Inc</state>
@@ -2411,10 +2410,10 @@
             </file>
         </group>
         <file>
-            <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
+            <name>$PROJ_DIR$\..\..\_IAR\startup_stm32f746xx.s</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
+            <name>$PROJ_DIR$\..\..\_bsp\system_stm32f7xx.c</name>
         </file>
     </group>
     <group>

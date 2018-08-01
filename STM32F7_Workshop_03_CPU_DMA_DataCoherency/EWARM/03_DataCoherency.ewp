@@ -78,7 +78,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>STM32F756VG	ST STM32F756VG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -138,7 +138,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>STM32F756VG	ST STM32F756VG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -344,13 +344,11 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Inc</state>
+                    <state>$PROJ_DIR$\..\..\_bsp</state>
+                    <state>$PROJ_DIR$\..\..\_bsp\cpp_wrappers</state>
                     <state>$PROJ_DIR$\..\..\_common</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\Common</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Log</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\CPU</state>
                 </option>
                 <option>
@@ -1057,11 +1055,11 @@
                 </option>
                 <option>
                     <name>Input description</name>
-                    <state>No specifier n, no float nor long long, no scan set, no assignment suppressing.</state>
+                    <state>No specifier n, no float nor long long, no scan set, no assignment suppressing, with multibyte support.</state>
                 </option>
                 <option>
                     <name>Output description</name>
-                    <state>No specifier a, A, no specifier n, no float nor long long.</state>
+                    <state>No specifier a, A, no specifier n, no float nor long long, with multibyte support.</state>
                 </option>
                 <option>
                     <name>GOutputBinary</name>
@@ -1103,7 +1101,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>STM32F756VG	ST STM32F756VG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -1163,7 +1161,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>STM32F756VG	ST STM32F756VG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -1241,11 +1239,8 @@
                 <option>
                     <name>CCDefines</name>
                     <state>USE_HAL_DRIVER</state>
-                    <state>STM32F756xx</state>
+                    <state>STM32F746xx</state>
                     <state>USE_STM32746G_DISCO</state>
-                    <state>USE_IOEXPANDER</state>
-                    <state>__DBG_ITM</state>
-                    <state>ARM_MATH_CM7</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -1257,7 +1252,7 @@
                 </option>
                 <option>
                     <name>CCPreprocLine</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CCListCFile</name>
@@ -1371,13 +1366,10 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Inc</state>
+                    <state>$PROJ_DIR$\..\..\_bsp</state>
                     <state>$PROJ_DIR$\..\..\_common</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\Common</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Log</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Fonts</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\CPU</state>
                 </option>
                 <option>
@@ -2055,567 +2047,286 @@
     </configuration>
     <group>
         <name>Application</name>
-        <group>
-            <name>User</name>
-            <file>
-                <name>$PROJ_DIR$\..\Src\main.c</name>
-                <configuration>
-                    <name>STM32F746-Disco(AXI)</name>
-                    <settings>
-                        <name>ICCARM</name>
-                        <data>
-                            <version>34</version>
-                            <wantNonLocal>0</wantNonLocal>
-                            <debug>1</debug>
-                            <option>
-                                <name>CCOptimizationNoSizeConstraints</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCDefines</name>
-                                <state>USE_HAL_DRIVER</state>
-                                <state>STM32F756xx</state>
-                                <state>USE_STM32756G_EVAL</state>
-                                <state>__DBG_ITM</state>
-                                <state>ARM_MATH_CM7</state>
-                            </option>
-                            <option>
-                                <name>CCPreprocFile</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCPreprocComments</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCPreprocLine</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCListCFile</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCListCMnemonics</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCListCMessages</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCListAssFile</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCListAssSource</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCEnableRemarks</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCDiagSuppress</name>
-                                <state></state>
-                            </option>
-                            <option>
-                                <name>CCDiagRemark</name>
-                                <state></state>
-                            </option>
-                            <option>
-                                <name>CCDiagWarning</name>
-                                <state></state>
-                            </option>
-                            <option>
-                                <name>CCDiagError</name>
-                                <state></state>
-                            </option>
-                            <option>
-                                <name>CCObjPrefix</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>CCAllowList</name>
-                                <version>1</version>
-                                <state>10111110</state>
-                            </option>
-                            <option>
-                                <name>CCDebugInfo</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>IEndianMode</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>IProcessor</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>IExtraOptionsCheck</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>IExtraOptions</name>
-                                <state></state>
-                            </option>
-                            <option>
-                                <name>CCLangConformance</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCSignedPlainChar</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>CCRequirePrototypes</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>CCDiagWarnAreErr</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCCompilerRuntimeInfo</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>IFpuProcessor</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>OutputFile</name>
-                                <state>$FILE_BNAME$.o</state>
-                            </option>
-                            <option>
-                                <name>CCLibConfigHeader</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>PreInclude</name>
-                                <state></state>
-                            </option>
-                            <option>
-                                <name>CompilerMisraOverride</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCIncludePath2</name>
-                                <state>$PROJ_DIR$\..\Inc</state>
-                                <state>$PROJ_DIR$\..\..\_common</state>
-                                <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
-                                <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
-                                <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
-                                <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\Common</state>
-                                <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Log</state>
-                                <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Fonts</state>
-                                <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\CPU</state>
-                            </option>
-                            <option>
-                                <name>CCStdIncCheck</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCCodeSection</name>
-                                <state>.text</state>
-                            </option>
-                            <option>
-                                <name>IProcessorMode2</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>CCOptLevel</name>
-                                <state>3</state>
-                            </option>
-                            <option>
-                                <name>CCOptStrategy</name>
-                                <version>0</version>
-                                <state>2</state>
-                            </option>
-                            <option>
-                                <name>CCOptLevelSlave</name>
-                                <state>3</state>
-                            </option>
-                            <option>
-                                <name>CompilerMisraRules98</name>
-                                <version>0</version>
-                                <state>1000111110110101101110011100111111101110011011000101110111101101100111111111111100110011111001110111001111111111111111111111111</state>
-                            </option>
-                            <option>
-                                <name>CompilerMisraRules04</name>
-                                <version>0</version>
-                                <state>111101110010111111111000110111111111111111111111111110010111101111010101111111111111111111111111101111111011111001111011111011111111111111111</state>
-                            </option>
-                            <option>
-                                <name>CCPosIndRopi</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCPosIndRwpi</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCPosIndNoDynInit</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>IccLang</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>IccCDialect</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>IccAllowVLA</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>IccStaticDestr</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>IccCppInlineSemantics</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>IccCmsis</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>IccFloatSemantics</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCNoLiteralPool</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCOptStrategySlave</name>
-                                <version>0</version>
-                                <state>2</state>
-                            </option>
-                            <option>
-                                <name>CCEncSource</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCEncOutput</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCEncOutputBom</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>CCEncInput</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>IccExceptions2</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>IccRTTI2</name>
-                                <state>0</state>
-                            </option>
-                        </data>
-                    </settings>
-                </configuration>
-                <configuration>
-                    <name>STM32F746-Disco(TCM)</name>
-                    <settings>
-                        <name>ICCARM</name>
-                        <data>
-                            <version>34</version>
-                            <wantNonLocal>0</wantNonLocal>
-                            <debug>1</debug>
-                            <option>
-                                <name>CCOptimizationNoSizeConstraints</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCDefines</name>
-                                <state>USE_HAL_DRIVER</state>
-                                <state>STM32F756xx</state>
-                                <state>USE_STM32746G_DISCO</state>
-                                <state>USE_IOEXPANDER</state>
-                                <state>__DBG_ITM</state>
-                                <state>ARM_MATH_CM7</state>
-                            </option>
-                            <option>
-                                <name>CCPreprocFile</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCPreprocComments</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCPreprocLine</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCListCFile</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCListCMnemonics</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCListCMessages</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCListAssFile</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCListAssSource</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCEnableRemarks</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCDiagSuppress</name>
-                                <state></state>
-                            </option>
-                            <option>
-                                <name>CCDiagRemark</name>
-                                <state></state>
-                            </option>
-                            <option>
-                                <name>CCDiagWarning</name>
-                                <state></state>
-                            </option>
-                            <option>
-                                <name>CCDiagError</name>
-                                <state></state>
-                            </option>
-                            <option>
-                                <name>CCObjPrefix</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>CCAllowList</name>
-                                <version>1</version>
-                                <state>10111110</state>
-                            </option>
-                            <option>
-                                <name>CCDebugInfo</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>IEndianMode</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>IProcessor</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>IExtraOptionsCheck</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>IExtraOptions</name>
-                                <state></state>
-                            </option>
-                            <option>
-                                <name>CCLangConformance</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCSignedPlainChar</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>CCRequirePrototypes</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>CCDiagWarnAreErr</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCCompilerRuntimeInfo</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>IFpuProcessor</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>OutputFile</name>
-                                <state>$FILE_BNAME$.o</state>
-                            </option>
-                            <option>
-                                <name>CCLibConfigHeader</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>PreInclude</name>
-                                <state></state>
-                            </option>
-                            <option>
-                                <name>CompilerMisraOverride</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCIncludePath2</name>
-                                <state>$PROJ_DIR$\..\Inc</state>
-                                <state>$PROJ_DIR$\..\..\_common</state>
-                                <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
-                                <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
-                                <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
-                                <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\Common</state>
-                                <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Log</state>
-                                <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Fonts</state>
-                                <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\CPU</state>
-                                <state>$PROJ_DIR$\..\..\..\..\Middlewares\ST\STemWin\inc</state>
-                            </option>
-                            <option>
-                                <name>CCStdIncCheck</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCCodeSection</name>
-                                <state>.text</state>
-                            </option>
-                            <option>
-                                <name>IProcessorMode2</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>CCOptLevel</name>
-                                <state>3</state>
-                            </option>
-                            <option>
-                                <name>CCOptStrategy</name>
-                                <version>0</version>
-                                <state>2</state>
-                            </option>
-                            <option>
-                                <name>CCOptLevelSlave</name>
-                                <state>3</state>
-                            </option>
-                            <option>
-                                <name>CompilerMisraRules98</name>
-                                <version>0</version>
-                                <state>1000111110110101101110011100111111101110011011000101110111101101100111111111111100110011111001110111001111111111111111111111111</state>
-                            </option>
-                            <option>
-                                <name>CompilerMisraRules04</name>
-                                <version>0</version>
-                                <state>111101110010111111111000110111111111111111111111111110010111101111010101111111111111111111111111101111111011111001111011111011111111111111111</state>
-                            </option>
-                            <option>
-                                <name>CCPosIndRopi</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCPosIndRwpi</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCPosIndNoDynInit</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>IccLang</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>IccCDialect</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>IccAllowVLA</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>IccStaticDestr</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>IccCppInlineSemantics</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>IccCmsis</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>IccFloatSemantics</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCNoLiteralPool</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCOptStrategySlave</name>
-                                <version>0</version>
-                                <state>2</state>
-                            </option>
-                            <option>
-                                <name>CCEncSource</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCEncOutput</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>CCEncOutputBom</name>
-                                <state>1</state>
-                            </option>
-                            <option>
-                                <name>CCEncInput</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>IccExceptions2</name>
-                                <state>0</state>
-                            </option>
-                            <option>
-                                <name>IccRTTI2</name>
-                                <state>0</state>
-                            </option>
-                        </data>
-                    </settings>
-                </configuration>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\stm32f7xx_it.c</name>
-            </file>
-        </group>
+        <file>
+            <name>$PROJ_DIR$\..\Src\main.c</name>
+            <configuration>
+                <name>STM32F746-Disco(AXI)</name>
+                <settings>
+                    <name>ICCARM</name>
+                    <data>
+                        <version>34</version>
+                        <wantNonLocal>0</wantNonLocal>
+                        <debug>1</debug>
+                        <option>
+                            <name>CCOptimizationNoSizeConstraints</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCDefines</name>
+                            <state>USE_HAL_DRIVER</state>
+                            <state>STM32F746xx</state>
+                            <state>USE_STM32756G_EVAL</state>
+                            <state>__DBG_ITM</state>
+                            <state>ARM_MATH_CM7</state>
+                        </option>
+                        <option>
+                            <name>CCPreprocFile</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCPreprocComments</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCPreprocLine</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCListCFile</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCListCMnemonics</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCListCMessages</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCListAssFile</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCListAssSource</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCEnableRemarks</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCDiagSuppress</name>
+                            <state></state>
+                        </option>
+                        <option>
+                            <name>CCDiagRemark</name>
+                            <state></state>
+                        </option>
+                        <option>
+                            <name>CCDiagWarning</name>
+                            <state></state>
+                        </option>
+                        <option>
+                            <name>CCDiagError</name>
+                            <state></state>
+                        </option>
+                        <option>
+                            <name>CCObjPrefix</name>
+                            <state>1</state>
+                        </option>
+                        <option>
+                            <name>CCAllowList</name>
+                            <version>1</version>
+                            <state>10111110</state>
+                        </option>
+                        <option>
+                            <name>CCDebugInfo</name>
+                            <state>1</state>
+                        </option>
+                        <option>
+                            <name>IEndianMode</name>
+                            <state>1</state>
+                        </option>
+                        <option>
+                            <name>IProcessor</name>
+                            <state>1</state>
+                        </option>
+                        <option>
+                            <name>IExtraOptionsCheck</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>IExtraOptions</name>
+                            <state></state>
+                        </option>
+                        <option>
+                            <name>CCLangConformance</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCSignedPlainChar</name>
+                            <state>1</state>
+                        </option>
+                        <option>
+                            <name>CCRequirePrototypes</name>
+                            <state>1</state>
+                        </option>
+                        <option>
+                            <name>CCDiagWarnAreErr</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCCompilerRuntimeInfo</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>IFpuProcessor</name>
+                            <state>1</state>
+                        </option>
+                        <option>
+                            <name>OutputFile</name>
+                            <state>$FILE_BNAME$.o</state>
+                        </option>
+                        <option>
+                            <name>CCLibConfigHeader</name>
+                            <state>1</state>
+                        </option>
+                        <option>
+                            <name>PreInclude</name>
+                            <state></state>
+                        </option>
+                        <option>
+                            <name>CompilerMisraOverride</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCIncludePath2</name>
+                            <state>$PROJ_DIR$\..\Inc</state>
+                            <state>$PROJ_DIR$\..\..\_bsp</state>
+                            <state>$PROJ_DIR$\..\..\_common</state>
+                            <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
+                            <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\Log</state>
+                            <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Utilities\CPU</state>
+                        </option>
+                        <option>
+                            <name>CCStdIncCheck</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCCodeSection</name>
+                            <state>.text</state>
+                        </option>
+                        <option>
+                            <name>IProcessorMode2</name>
+                            <state>1</state>
+                        </option>
+                        <option>
+                            <name>CCOptLevel</name>
+                            <state>3</state>
+                        </option>
+                        <option>
+                            <name>CCOptStrategy</name>
+                            <version>0</version>
+                            <state>2</state>
+                        </option>
+                        <option>
+                            <name>CCOptLevelSlave</name>
+                            <state>3</state>
+                        </option>
+                        <option>
+                            <name>CompilerMisraRules98</name>
+                            <version>0</version>
+                            <state>1000111110110101101110011100111111101110011011000101110111101101100111111111111100110011111001110111001111111111111111111111111</state>
+                        </option>
+                        <option>
+                            <name>CompilerMisraRules04</name>
+                            <version>0</version>
+                            <state>111101110010111111111000110111111111111111111111111110010111101111010101111111111111111111111111101111111011111001111011111011111111111111111</state>
+                        </option>
+                        <option>
+                            <name>CCPosIndRopi</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCPosIndRwpi</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCPosIndNoDynInit</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>IccLang</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>IccCDialect</name>
+                            <state>1</state>
+                        </option>
+                        <option>
+                            <name>IccAllowVLA</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>IccStaticDestr</name>
+                            <state>1</state>
+                        </option>
+                        <option>
+                            <name>IccCppInlineSemantics</name>
+                            <state>1</state>
+                        </option>
+                        <option>
+                            <name>IccCmsis</name>
+                            <state>1</state>
+                        </option>
+                        <option>
+                            <name>IccFloatSemantics</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCNoLiteralPool</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCOptStrategySlave</name>
+                            <version>0</version>
+                            <state>2</state>
+                        </option>
+                        <option>
+                            <name>CCEncSource</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCEncOutput</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>CCEncOutputBom</name>
+                            <state>1</state>
+                        </option>
+                        <option>
+                            <name>CCEncInput</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>IccExceptions2</name>
+                            <state>0</state>
+                        </option>
+                        <option>
+                            <name>IccRTTI2</name>
+                            <state>0</state>
+                        </option>
+                    </data>
+                </settings>
+            </configuration>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\stm32f7xx_it.c</name>
+        </file>
     </group>
     <group>
         <name>Drivers</name>
-        <file>
-            <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
-        </file>
         <group>
             <name>BSP</name>
-            <group>
-                <name>Components</name>
-            </group>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_lcd.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_lcd.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_sdram.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_sdram.c</name>
             </file>
         </group>
         <group>
@@ -2660,6 +2371,12 @@
                 <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_ll_fmc.c</name>
             </file>
         </group>
+        <file>
+            <name>$PROJ_DIR$\..\..\_IAR\startup_stm32f746xx.s</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_bsp\system_stm32f7xx.c</name>
+        </file>
     </group>
     <group>
         <name>Utilities</name>

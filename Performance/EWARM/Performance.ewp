@@ -78,7 +78,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -138,7 +138,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -216,7 +216,7 @@
                 <option>
                     <name>CCDefines</name>
                     <state>PROJ_MENU_NB=1</state>
-                    <state>STM32F756xx</state>
+                    <state>STM32F746xx</state>
                     <state> CORE_CM7</state>
                     <state>USE_HAL_DRIVER</state>
                     <state>USE_IOEXPANDER</state>
@@ -351,11 +351,10 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Inc</state>
+                    <state>$PROJ_DIR$\..\..\_bsp</state>
                     <state>$PROJ_DIR$\..\..\_common</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1107,7 +1106,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -1167,7 +1166,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -1245,7 +1244,7 @@
                 <option>
                     <name>CCDefines</name>
                     <state>PROJ_MENU_NB=2</state>
-                    <state>STM32F756xx</state>
+                    <state>STM32F746xx</state>
                     <state> CORE_CM7</state>
                     <state>USE_HAL_DRIVER</state>
                     <state>USE_IOEXPANDER</state>
@@ -1381,11 +1380,10 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Inc</state>
+                    <state>$PROJ_DIR$\..\..\_bsp</state>
                     <state>$PROJ_DIR$\..\..\_common</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -2137,7 +2135,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -2197,7 +2195,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -2275,7 +2273,7 @@
                 <option>
                     <name>CCDefines</name>
                     <state>PROJ_MENU_NB=3</state>
-                    <state>STM32F756xx</state>
+                    <state>STM32F746xx</state>
                     <state> USE_HAL_DRIVER</state>
                     <state>USE_IOEXPANDER</state>
                     <state>FLASH_WS=FLASH_LATENCY_7</state>
@@ -2409,11 +2407,10 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Inc</state>
+                    <state>$PROJ_DIR$\..\..\_bsp</state>
                     <state>$PROJ_DIR$\..\..\_common</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -3165,7 +3162,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -3225,7 +3222,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -3303,7 +3300,7 @@
                 <option>
                     <name>CCDefines</name>
                     <state>PROJ_MENU_NB=4</state>
-                    <state>STM32F756xx</state>
+                    <state>STM32F746xx</state>
                     <state>USE_HAL_DRIVER</state>
                     <state>USE_IOEXPANDER</state>
                     <state>FLASH_WS=FLASH_LATENCY_7</state>
@@ -3437,11 +3434,10 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Inc</state>
+                    <state>$PROJ_DIR$\..\..\_bsp</state>
                     <state>$PROJ_DIR$\..\..\_common</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -4193,7 +4189,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -4253,7 +4249,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -4331,7 +4327,7 @@
                 <option>
                     <name>CCDefines</name>
                     <state>PROJ_MENU_NB=5</state>
-                    <state>STM32F756xx</state>
+                    <state>STM32F746xx</state>
                     <state>USE_HAL_DRIVER</state>
                     <state>USE_IOEXPANDER</state>
                     <state>FLASH_WS=FLASH_LATENCY_7</state>
@@ -4463,11 +4459,10 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Inc</state>
+                    <state>$PROJ_DIR$\..\..\_bsp</state>
                     <state>$PROJ_DIR$\..\..\_common</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -5219,7 +5214,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -5279,7 +5274,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -5358,7 +5353,7 @@
                     <name>CCDefines</name>
                     <state>PROJ_MENU_NB=6</state>
                     <state>PROJ_SUB_MENU_NB=1</state>
-                    <state>STM32F756xx</state>
+                    <state>STM32F746xx</state>
                     <state>USE_HAL_DRIVER</state>
                     <state>USE_IOEXPANDER</state>
                     <state>FLASH_WS=FLASH_LATENCY_7</state>
@@ -5497,11 +5492,10 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Inc</state>
+                    <state>$PROJ_DIR$\..\..\_bsp</state>
                     <state>$PROJ_DIR$\..\..\_common</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -6253,7 +6247,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -6313,7 +6307,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -6392,7 +6386,7 @@
                     <name>CCDefines</name>
                     <state>PROJ_MENU_NB=6</state>
                     <state>PROJ_SUB_MENU_NB=2</state>
-                    <state>STM32F756xx</state>
+                    <state>STM32F746xx</state>
                     <state>USE_HAL_DRIVER</state>
                     <state>USE_IOEXPANDER</state>
                     <state>FLASH_WS=FLASH_LATENCY_7</state>
@@ -6532,11 +6526,10 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Inc</state>
+                    <state>$PROJ_DIR$\..\..\_bsp</state>
                     <state>$PROJ_DIR$\..\..\_common</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -7288,7 +7281,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -7348,7 +7341,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>STM32F756NG	ST STM32F756NG</state>
+                    <state>STM32F746NG	ST STM32F746NG</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -7426,7 +7419,7 @@
                 <option>
                     <name>CCDefines</name>
                     <state>PROJ_MENU_NB=7</state>
-                    <state>STM32F756xx</state>
+                    <state>STM32F746xx</state>
                     <state> CORE_CM7</state>
                     <state>USE_HAL_DRIVER</state>
                     <state>USE_IOEXPANDER</state>
@@ -7564,11 +7557,10 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Inc</state>
+                    <state>$PROJ_DIR$\..\..\_bsp</state>
                     <state>$PROJ_DIR$\..\..\_common</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy</state>
-                    <state>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -8252,57 +8244,57 @@
     <group>
         <name>Drivers</name>
         <file>
-            <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
+            <name>$PROJ_DIR$\..\..\_bsp\system_stm32f7xx.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
+            <name>$PROJ_DIR$\..\..\_IAR\startup_stm32f746xx.s</name>
         </file>
         <group>
             <name>BSP</name>
             <group>
                 <name>Components</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\ft5336\ft5336.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\ft5336.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\ft5336\ft5336.h</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\ft5336.h</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\ov9655\ov9655.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\ov9655.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\ov9655\ov9655.h</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\ov9655.h</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\wm8994\wm8994.c</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\wm8994.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\Components\wm8994\wm8994.h</name>
+                    <name>$PROJ_DIR$\..\..\_bsp\wm8994.h</name>
                 </file>
             </group>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery.h</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_lcd.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_lcd.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_lcd.h</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_lcd.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_sdram.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_sdram.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_sdram.h</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_sdram.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_ts.c</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_ts.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\STM32Cube_FW_F7\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_ts.h</name>
+                <name>$PROJ_DIR$\..\..\_bsp\stm32746g_discovery_ts.h</name>
             </file>
         </group>
         <group>

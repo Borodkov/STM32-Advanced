@@ -43,6 +43,8 @@ float start_imag = -1.5f;
 
 static TS_StateTypeDef TS_State;
 
+osSemaphoreId xBinSem_TS_Handle;
+
 /* Private function prototypes -----------------------------------------------*/
 void draw_mandelbrot(float x_start, float y_start, float zoom);
 void set_color_map(void);
@@ -58,6 +60,11 @@ static void task(void const *pvParameters) {
     uint16_t xp, yp;
     float pressed_real, pressed_imag;
     akt_color_zones = 0;
+
+    BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
+    BSP_TS_ITConfig();
+    BSP_TS_ITClear();
+
     BSP_LCD_LayerRgb565Init(LTDC_ACTIVE_LAYER, FRACTAL_FRAME_BUFFER);
     BSP_LCD_Clear(LCD_COLOR_WHITE);
     BSP_LCD_SetFont(&Font12);
@@ -70,7 +77,8 @@ static void task(void const *pvParameters) {
 
     /* Infinite loop */
     for (;;) {
-        osDelay(10);
+        osSemaphoreWait(xBinSem_TS_Handle, osWaitForever);
+
         /* Get the IT status register value */
         BSP_TS_GetState(&TS_State);
 
@@ -111,12 +119,16 @@ static void task(void const *pvParameters) {
 /*----------------------------------------------------------------------------*/
 void vStartMandelbrotTask() {
     LCD_UsrLog("vStartMandelbrotTask()\n");
-    /* Create that task */
+
+    osSemaphoreDef(xBinSem_TS);
+    xBinSem_TS_Handle = osSemaphoreCreate(osSemaphore(xBinSem_TS), 1);
+    osSemaphoreWait(xBinSem_TS_Handle, 0);
+
     osThreadDef(Mandelbrot,
                 task,
-                osPriorityNormal,
+                osPriorityLow,
                 0,
-                0x200);
+                configMINIMAL_STACK_SIZE);
     osThreadCreate(osThread(Mandelbrot), NULL);
 }
 

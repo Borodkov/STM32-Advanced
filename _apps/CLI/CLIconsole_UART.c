@@ -9,6 +9,9 @@
 #include "string.h"
 #include "stdio.h"
 
+#include "board.h"
+#include "hr_gettime.h"
+
 /* FreeRTOS includes. */
 #include "FreeRTOS.h"
 #include "task.h"
@@ -17,9 +20,6 @@
 /* Example includes. */
 #include "FreeRTOS_CLI.h"
 
-///* Demo application includes. */
-#include "serial.h"
-
 #define cmdQUEUE_LENGTH 25
 
 /* DEL acts as a backspace. */
@@ -27,73 +27,67 @@
 
 #define cmdMAX_MUTEX_WAIT (((TickType_t)300) / (portTICK_PERIOD_MS))
 
-#ifndef configCLI_BAUD_RATE
-#define configCLI_BAUD_RATE 115200
-#endif
-
 /*-----------------------------------------------------------*/
-
-/*
-    The task that implements the command console processing.
-*/
-static void prvUARTCommandConsoleTask(void *pvParameters);
-void vUARTCommandConsoleStart(uint16_t usStackSize, UBaseType_t uxPriority);
-
-SemaphoreHandle_t xTxMutex = NULL;
-static xComPortHandle xPort = 0;
-
+/*  Used to unblock the task that calls prvEventWaitFunction() after an event has
+    occurred. */
+static SemaphoreHandle_t xTxSemaphore = NULL;
+static SemaphoreHandle_t xTxMutex = NULL;
 /* Serial drivers that use task notifications may need the CLI task's handle. */
 TaskHandle_t xCLITaskHandle = NULL;
 
-/*-----------------------------------------------------------*/
+/* The queue used to hold received characters. */
+static QueueHandle_t xRxedChars;
+uint8_t aRxBuffer[1];
 
-void vUARTCommandConsoleStart(uint16_t usStackSize, UBaseType_t uxPriority) {
-    /* Create the semaphore used to access the UART Tx. */
-    xTxMutex = xSemaphoreCreateMutex();
-    configASSERT(xTxMutex);
-    /* Create that task that handles the console itself. */
-    xTaskCreate(prvUARTCommandConsoleTask, /* The task that implements the command console. */
-                "CLI",                     /* Text name assigned to the task.  This is just to assist debugging.  The kernel does not use this name itself. */
-                usStackSize,               /* The size of the stack allocated to the task. */
-                NULL,                      /* The parameter is not used, so NULL is passed. */
-                uxPriority,                /* The priority allocated to the task. */
-                &xCLITaskHandle);          /* Serial drivers that use task notifications may need the CLI task's handle. */
-}
-/*-----------------------------------------------------------*/
+extern void vRegisterSampleCLICommands(void);
 
+static void xSerialPortInit(unsigned portBASE_TYPE uxQueueLength);
+static void vSerialPutString(const signed char *const pcStr, unsigned short usStrLen);
+static void xSerialPutChar(signed char cOutChar);
+
+/*-----------------------------------------------------------*/
+/*
+    The task that implements the command console processing.
+*/
 static void prvUARTCommandConsoleTask(void *pvParameters) {
+    (void)pvParameters;
+
     char cRxedChar;
     uint8_t ucInputIndex = 0;
     char *pcOutputString;
     static char cInputString[cmdMAX_INPUT_SIZE], cLastInputString[cmdMAX_INPUT_SIZE];
     BaseType_t xReturned;
-    xComPortHandle xPort;
-    (void)pvParameters;
+
+    /*****************************************************************************
+        Register an example set of CLI commands.
+        Then start the tasks (TCP and USB) that manages the CLI.
+    *****************************************************************************/
+    vRegisterSampleCLICommands();
+
     /*  Obtain the address of the output buffer.  Note there is no mutual
         exclusion on this buffer as it is assumed only one command console interface
         will be used at any one time. */
     pcOutputString = FreeRTOS_CLIGetOutputBuffer();
+
     /* Initialise the UART. */
-    xPort = xSerialPortInitMinimal(configCLI_BAUD_RATE, cmdQUEUE_LENGTH);
+    xSerialPortInit(cmdQUEUE_LENGTH);
+
     /* Send the welcome message. */
-    vSerialPutString(xPort, (signed char *)pcWelcomeMessage, strlen(pcWelcomeMessage));
+    vSerialPutString((signed char *)pcWelcomeMessage, strlen(pcWelcomeMessage));
 
     for (;;) {
-        /*  Wait for the next character.  The while loop is used in case
-            INCLUDE_vTaskSuspend is not set to 1 - in which case portMAX_DELAY will
-            be a genuine block time rather than an infinite block time. */
-        while (xSerialGetChar(xPort, (signed char *)&cRxedChar, portMAX_DELAY) != pdPASS)
-            ;
+        /*  Wait for the next character */
+        xQueueReceive(xRxedChars, &cRxedChar, portMAX_DELAY);
 
         /* Ensure exclusive access to the UART Tx. */
         if (xSemaphoreTake(xTxMutex, cmdMAX_MUTEX_WAIT) == pdPASS) {
             /* Echo the character back. */
-            xSerialPutChar(xPort, cRxedChar, portMAX_DELAY);
+            xSerialPutChar(cRxedChar);
 
             /* Was it the end of the line? */
             if ((cRxedChar == '\n') || (cRxedChar == '\r')) {
                 /* Just to space the output from the input. */
-                vSerialPutString(xPort, (signed char *)pcNewLine, strlen(pcNewLine));
+                vSerialPutString((signed char *)pcNewLine, strlen(pcNewLine));
 
                 /*  See if the command is empty, indicating that the last command
                     is to be executed again. */
@@ -102,31 +96,30 @@ static void prvUARTCommandConsoleTask(void *pvParameters) {
                     strcpy(cInputString, cLastInputString);
                 }
 
-                /*  Pass the received command to the command interpreter.  The
-                    command interpreter is called repeatedly until it returns
+                /*  Pass the received command to the command interpreter.
+                    The command interpreter is called repeatedly until it returns
                     pdFALSE (indicating there is no more output) as it might
                     generate more than one string. */
                 do {
                     /* Get the next output string from the command interpreter. */
                     xReturned = FreeRTOS_CLIProcessCommand(cInputString, pcOutputString, configCOMMAND_INT_MAX_OUTPUT_SIZE);
                     /* Write the generated string to the UART. */
-                    vSerialPutString(xPort, (signed char *)pcOutputString, strlen(pcOutputString));
+                    vSerialPutString((signed char *)pcOutputString, strlen(pcOutputString));
                 } while (xReturned != pdFALSE);
 
-                /*  All the strings generated by the input command have been
-                    sent.  Clear the input string ready to receive the next command.
+                /*  All the strings generated by the input command have been sent.
+                    Clear the input string ready to receive the next command.
                     Remember the command that was just processed first in case it is
                     to be processed again. */
                 strcpy(cLastInputString, cInputString);
                 ucInputIndex = 0;
                 memset(cInputString, 0x00, cmdMAX_INPUT_SIZE);
-                vSerialPutString(xPort, (signed char *)pcEndOfOutputMessage, strlen(pcEndOfOutputMessage));
+                vSerialPutString((signed char *)pcEndOfOutputMessage, strlen(pcEndOfOutputMessage));
             } else {
                 if (cRxedChar == '\r') {
                     /* Ignore the character. */
                 } else if ((cRxedChar == '\b') || (cRxedChar == cmdASCII_DEL)) {
-                    /*  Backspace was pressed.  Erase the last character in the
-                        string - if any. */
+                    /*  Backspace was pressed.  Erase the last character in the string - if any. */
                     if (ucInputIndex > 0) {
                         ucInputIndex--;
                         cInputString[ucInputIndex] = '\0';
@@ -149,20 +142,194 @@ static void prvUARTCommandConsoleTask(void *pvParameters) {
         }
     }
 }
-/*-----------------------------------------------------------*/
 
+/* Functions needed when configGENERATE_RUN_TIME_STATS is on */
+void configureTimerForRunTimeStats(void) {
+  vStartHighResolutionTimer();
+}
+
+uint32_t getRunTimeCounterValue(void) {
+  static uint64_t ullHiresTime = 0; /* Is always 0? */
+
+  return ( uint32_t ) ( ullGetHighResolutionTime() - ullHiresTime );
+}
+
+/*-----------------------------------------------------------*/
+void vUARTCommandConsoleStart() {
+    /* Create the mutex used to access the UART Tx. */
+    xTxMutex = xSemaphoreCreateMutex();
+    configASSERT(xTxMutex);
+
+    /* Create the semaphore used to access the UART Tx. */
+    xTxSemaphore = xSemaphoreCreateBinary();
+    configASSERT(xTxSemaphore);
+
+    /* Create that task that handles the console itself. */
+    xTaskCreate(prvUARTCommandConsoleTask, /* The task that implements the command console. */
+                "CLI",                     /* Text name assigned to the task.  This is just to assist debugging.  The kernel does not use this name itself. */
+                configMINIMAL_STACK_SIZE,  /* The size of the stack allocated to the task. */
+                NULL,                      /* The parameter is not used, so NULL is passed. */
+                1,                         /* The priority allocated to the task. */
+                &xCLITaskHandle);          /* Serial drivers that use task notifications may need the CLI task's handle. */
+}
+
+/*-----------------------------------------------------------*/
 void vOutputString(const char *const pcMessage) {
     if (xSemaphoreTake(xTxMutex, cmdMAX_MUTEX_WAIT) == pdPASS) {
-        vSerialPutString(xPort, (signed char *)pcMessage, strlen(pcMessage));
+        vSerialPutString((signed char *)pcMessage, strlen(pcMessage));
         xSemaphoreGive(xTxMutex);
     }
 }
-/*-----------------------------------------------------------*/
 
+/*-----------------------------------------------------------*/
 void vOutputChar(const char cChar, const TickType_t xTicksToWait) {
     if (xSemaphoreTake(xTxMutex, xTicksToWait) == pdPASS) {
-        xSerialPutChar(xPort, cChar, xTicksToWait);
+        xSerialPutChar(cChar);
         xSemaphoreGive(xTxMutex);
     }
 }
+
+
 /*-----------------------------------------------------------*/
+static UART_HandleTypeDef huart;
+
+void xSerialPortInit(unsigned portBASE_TYPE uxQueueLength) {
+    /* Create the queues used to hold Rx/Tx characters. */
+    xRxedChars = xQueueCreate(uxQueueLength, (unsigned portBASE_TYPE) sizeof(signed char));
+
+    /*  If the queues were created correctly then setup the serial port hardware. */
+    if (xRxedChars != NULL) {
+        /* Put the USART peripheral in the Asynchronous mode (UART Mode) */
+        /*  UART configured as follows:
+            - Word Length = 8 Bits
+            - Stop Bit = One Stop bit
+            - Parity = None
+            - BaudRate = 115200 baud
+            - Hardware flow control disabled (RTS and CTS signals) */
+        huart.Instance            = USART1;
+        huart.Init.BaudRate       = 115200;
+        huart.Init.WordLength     = UART_WORDLENGTH_8B;
+        huart.Init.StopBits       = UART_STOPBITS_1;
+        huart.Init.Parity         = UART_PARITY_NONE;
+        huart.Init.HwFlowCtl      = UART_HWCONTROL_NONE;
+        huart.Init.Mode           = UART_MODE_TX_RX;
+        huart.Init.OverSampling   = UART_OVERSAMPLING_16;
+        huart.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+        huart.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+
+        HAL_UART_DeInit(&huart);
+        HAL_UART_Init(&huart);
+
+        /* W8 character */
+        HAL_UART_Receive_IT(&huart, (uint8_t *)aRxBuffer, 1);
+    }
+}
+
+/*-----------------------------------------------------------*/
+void xSerialPutChar(signed char cOutChar) {
+    HAL_UART_Transmit_IT(&huart, (uint8_t *)&cOutChar, 1);
+    xSemaphoreTake(xTxSemaphore, 1);
+}
+
+/*-----------------------------------------------------------*/
+void vSerialPutString(const signed char *const pcString, unsigned short usStringLength) {
+    HAL_UART_Transmit_IT(&huart, (uint8_t *)pcString, usStringLength);
+
+    xSemaphoreTake(xTxSemaphore, 44); // 44 ms = 11520 / 512 bytes
+}
+
+/**
+    @brief UART MSP Initialization
+           This function configures the hardware resources used in this example:
+              - Peripheral's clock enable
+              - Peripheral's GPIO Configuration
+              - NVIC configuration for UART interrupt request enable
+    @param huart: UART handle pointer
+    @retval None
+*/
+void HAL_UART_MspInit(UART_HandleTypeDef *huart) {
+    GPIO_InitTypeDef GPIO_InitStruct;
+
+    if (huart->Instance == USART1) {
+        /* Peripheral clock enable */
+        __HAL_RCC_USART1_CLK_ENABLE();
+        __HAL_RCC_GPIOA_CLK_ENABLE();
+        __HAL_RCC_GPIOB_CLK_ENABLE();
+
+        /** USART1 GPIO Configuration
+            PB7     ------> USART1_RX
+            PA9     ------> USART1_TX
+        */
+        GPIO_InitStruct.Pin = VCP_RX_Pin;
+        GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+        GPIO_InitStruct.Pull = GPIO_NOPULL;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+        GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
+        HAL_GPIO_Init(VCP_RX_GPIO_Port, &GPIO_InitStruct);
+
+        GPIO_InitStruct.Pin = VCP_TX_Pin;
+        GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+        GPIO_InitStruct.Pull = GPIO_NOPULL;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+        GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
+        HAL_GPIO_Init(VCP_TX_GPIO_Port, &GPIO_InitStruct);
+
+        /* USART1 interrupt Init */
+        HAL_NVIC_SetPriority(USART1_IRQn, configLIBRARY_LOWEST_INTERRUPT_PRIORITY, 0);
+        HAL_NVIC_EnableIRQ(USART1_IRQn);
+    }
+}
+
+/**
+    @brief This function handles USART1 global interrupt.
+*/
+void USART1_IRQHandler(void) {
+    HAL_UART_IRQHandler(&huart);
+}
+
+/**
+    @brief  Rx Transfer completed callback
+    @param  UartHandle: UART handle
+    @note   This example shows a simple way to report end of DMA Rx transfer, and
+            you can add your own implementation.
+    @retval None
+*/
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle) {
+    portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
+
+    /*  A character has been received on the USART, send it to the Rx handler task. */
+    char cChar = (char)aRxBuffer[0];
+    xQueueSendFromISR(xRxedChars, &cChar, &xHigherPriorityTaskWoken);
+    /*  If sending or receiving from a queue has caused a task to unblock, and
+        the unblocked task has a priority equal to or higher than the currently
+        running task (the task this ISR interrupted), then xHigherPriorityTaskWoken
+        will have automatically been set to pdTRUE within the queue send or receive
+        function.  portEND_SWITCHING_ISR() will then ensure that this ISR returns
+        directly to the higher priority unblocked task. */
+
+    HAL_UART_Receive_IT(UartHandle, (uint8_t *)aRxBuffer, 1);
+
+    portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
+}
+
+/**
+    @brief  Tx Transfer completed callback
+    @param  UartHandle: UART handle.
+    @note   This example shows...
+    @retval None
+*/
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle) {
+    BaseType_t xHigherPriorityTaskWoken = 0;
+	xSemaphoreGiveFromISR(xTxSemaphore, &xHigherPriorityTaskWoken);
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+}
+
+/**
+    @brief  UART error callbacks
+    @param  UartHandle: UART handle
+    @note   This example shows a simple way to report transfer error...
+    @retval None
+*/
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *UartHandle) {
+    //Error_Handler();
+}

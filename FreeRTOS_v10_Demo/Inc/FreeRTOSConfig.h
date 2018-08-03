@@ -30,9 +30,9 @@ extern uint32_t SystemCoreClock;
 #define configMINIMAL_STACK_SIZE                 ((uint16_t)0x100)
 #define configTOTAL_HEAP_SIZE                    ((size_t)0x8000)
 #define configMAX_TASK_NAME_LEN                  ( 16 )
-#define configGENERATE_RUN_TIME_STATS            0
+#define configGENERATE_RUN_TIME_STATS            1
 #define configUSE_TRACE_FACILITY                 1
-#define configUSE_STATS_FORMATTING_FUNCTIONS     0
+#define configUSE_STATS_FORMATTING_FUNCTIONS     1
 #define configUSE_16_BIT_TICKS                   0
 #define configUSE_MUTEXES                        1
 #define configQUEUE_REGISTRY_SIZE                8
@@ -47,7 +47,10 @@ extern uint32_t SystemCoreClock;
 #define configMAX_CO_ROUTINE_PRIORITIES          ( 2 )
 
 /* Software timer definitions. */
-#define configUSE_TIMERS                0
+#define configUSE_TIMERS                1
+#define configTIMER_TASK_PRIORITY       (configMAX_PRIORITIES - 3)
+#define configTIMER_QUEUE_LENGTH        5
+#define configTIMER_TASK_STACK_DEPTH    (configMINIMAL_STACK_SIZE * 2)
 
 /*  Terminate the task stack from with NULL, rather than the function that
     asserts on an invalid task exit.  This is done to stop the GDB debugger getting
@@ -108,9 +111,6 @@ extern uint32_t SystemCoreClock;
 #define traceTASK_SWITCHED_IN()  extern void StartIdleMonitor(void); StartIdleMonitor()
 #define traceTASK_SWITCHED_OUT() extern void EndIdleMonitor(void); EndIdleMonitor()
 
-/* Set configINCLUDE_QUERY_HEAP_COMMAND to 1 to include the query-heap command in the CLI. */
-#define configINCLUDE_QUERY_HEAP_COMMAND    1
-
 #if defined(__ICCARM__) || defined(__CC_ARM) || defined(__GNUC__)
 void PreSleepProcessing(uint32_t *ulExpectedIdleTime);
 void PostSleepProcessing(uint32_t *ulExpectedIdleTime);
@@ -131,5 +131,40 @@ void PostSleepProcessing(uint32_t *ulExpectedIdleTime);
 #include "trcRecorder.h"
 #endif
 #endif
+
+/* FreeRTOS+CLI definitions. */
+/* Dimensions a buffer into which command outputs can be written. The buffer
+ * can be declared in the CLI code itself, to allow multiple command consoles to
+ * share the same buffer. For example, an application may allow access to the
+ * command interpreter by UART and by Ethernet. Sharing a buffer is done purely
+ * to save RAM. Note, however, that the command console itself is not re-entrant,
+ * so only one command interpreter interface can be used at any one time. For
+ * that reason, no attempt at providing mutual exclusion to the buffer is
+ * attempted.
+ */
+#define configCOMMAND_INT_MAX_OUTPUT_SIZE	512
+
+/* Dimensions the buffer into which input characters are placed. */
+#define cmdMAX_INPUT_SIZE 60
+
+/* DEL acts as a backspace. */
+#define cmdASCII_DEL (0x7F)
+ 
+/* Const messages output by the command console. */
+#define pcWelcomeMessage     "FreeRTOS CLI server.\r\nEnter 'help' to view a list of available commands.\r\n\r\n>>\r\n"
+#define pcEndOfOutputMessage "\r\n[Press ENTER to execute the previous command again]\r\n>>\r\n"
+#define pcNewLine            "********************************************************************************\r\n"
+
+/* Run time stats parameters.  http://www.freertos.org/rtos-run-time-stats.html */
+/* Ensure this code is only used by the compiler, and not the assembler. */
+#if defined(__ICCARM__) || defined(__CC_ARM) || defined(__GNUC__)
+    extern void configureTimerForRunTimeStats(void);
+    extern uint32_t getRunTimeCounterValue(void); 
+#endif
+#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS configureTimerForRunTimeStats
+#define portGET_RUN_TIME_COUNTER_VALUE getRunTimeCounterValue
+    
+/* Set configINCLUDE_QUERY_HEAP_COMMAND to 1 to include the query-heap command in the CLI. */
+#define configINCLUDE_QUERY_HEAP_COMMAND    1
 
 #endif /* FREERTOS_CONFIG_H */

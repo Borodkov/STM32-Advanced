@@ -23,10 +23,6 @@ int main(void) {
   BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER);
   BSP_LCD_SetFont(&LCD_DEFAULT_FONT);
 
-  BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
-  BSP_TS_ITConfig();
-  BSP_TS_ITClear();
-
   LCD_LOG_Init();
   LCD_LOG_SetHeader("Advanced STM32F746-Discovery");
   LCD_LOG_SetFooter("Press BTN or rotate encoder to switch apps | Load 00%");
@@ -62,20 +58,6 @@ void MX_USB_DEVICE_Init(void) {
     USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC);
     USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS);
     USBD_Start(&hUsbDeviceFS);
-}
-
-/**
-  * @brief  Period elapsed callback in non blocking mode
-  * @note   This function is called  when TIM14 interrupt took place, inside
-  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
-  * a global variable "uwTick" used as application time base.
-  * @param  htim : TIM handle
-  * @retval None
-  */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-  if (htim->Instance == TIM14) {
-    HAL_IncTick();
-  }
 }
 
 /**

@@ -2319,7 +2319,19 @@
             <name>$PROJ_DIR$\..\..\_apps\app_mandelbrot.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\..\_apps\app_rtc.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\CLI\CLIcommands_Sample.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\CLI\CLIconsole_UART.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\Src\freertos.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\hr_gettime.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\Src\main.c</name>
@@ -2676,10 +2688,10 @@
             </file>
         </group>
         <file>
-            <name>$PROJ_DIR$\..\..\_common\startup_stm32f746xx.s</name>
+            <name>$PROJ_DIR$\..\..\_IAR\startup_stm32f746xx.s</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\_common\system_stm32f7xx.c</name>
+            <name>$PROJ_DIR$\..\..\_bsp\system_stm32f7xx.c</name>
         </file>
     </group>
     <group>
@@ -2781,6 +2793,15 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS\Source\timers.c</name>
+            </file>
+        </group>
+        <group>
+            <name>FreeRTOS-CLI</name>
+            <file>
+                <name>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS-Plus\Source\FreeRTOS-Plus-CLI\FreeRTOS_CLI.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS-Plus\Source\FreeRTOS-Plus-CLI\FreeRTOS_CLI.h</name>
             </file>
         </group>
         <group>

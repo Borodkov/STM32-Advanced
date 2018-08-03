@@ -211,7 +211,7 @@
                 <debug>1</debug>
                 <option>
                     <name>CCOptimizationNoSizeConstraints</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CCDefines</name>
@@ -344,7 +344,6 @@
                     <state>$PROJ_DIR$\..\Inc</state>
                     <state>$PROJ_DIR$\..\..\_apps</state>
                     <state>$PROJ_DIR$\..\..\_apps\CLI</state>
-                    <state>$PROJ_DIR$\..\..\_apps\JPG</state>
                     <state>$PROJ_DIR$\..\..\_bsp</state>
                     <state>$PROJ_DIR$\..\..\_common</state>
                     <state>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS-Plus\Source\FreeRTOS-Plus-CLI</state>
@@ -379,7 +378,7 @@
                 <option>
                     <name>CCOptStrategy</name>
                     <version>0</version>
-                    <state>0</state>
+                    <state>2</state>
                 </option>
                 <option>
                     <name>CCOptLevelSlave</name>
@@ -442,7 +441,7 @@
                 <option>
                     <name>CCOptStrategySlave</name>
                     <version>0</version>
-                    <state>0</state>
+                    <state>2</state>
                 </option>
                 <option>
                     <name>CCGuardCalls</name>
@@ -773,7 +772,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>$PROJ_DIR$\..\..\_IAR\stm32f746xx_QSPI_flash.icf</state>
+                    <state>D:\projectsStudy\STM32\_Projects\_IAR\stm32f746xx_flash.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
@@ -2053,7 +2052,19 @@
             <name>$PROJ_DIR$\..\..\_apps\app_mandelbrot.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\..\_apps\app_rtc.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\CLI\CLIcommands_Sample.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_apps\CLI\CLIconsole_UART.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\Src\freertos.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\_common\hr_gettime.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\Src\main.c</name>
@@ -2515,6 +2526,15 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS\Source\timers.c</name>
+            </file>
+        </group>
+        <group>
+            <name>FreeRTOS-CLI</name>
+            <file>
+                <name>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS-Plus\Source\FreeRTOS-Plus-CLI\FreeRTOS_CLI.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\_libs\FreeRTOSv10.0.0\FreeRTOS-Plus\Source\FreeRTOS-Plus-CLI\FreeRTOS_CLI.h</name>
             </file>
         </group>
         <group>

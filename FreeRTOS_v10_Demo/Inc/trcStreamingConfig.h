@@ -106,7 +106,7 @@ extern "C" {
  * For such ports, make sure the TzCtrl priority is high enough to ensure
  * reliable periodic execution and transfer of the data.
  ******************************************************************************/
-#define TRC_CFG_CTRL_TASK_PRIORITY 1
+#define TRC_CFG_CTRL_TASK_PRIORITY 3
 
 /*******************************************************************************
  * Configuration Macro: TRC_CFG_CTRL_TASK_DELAY

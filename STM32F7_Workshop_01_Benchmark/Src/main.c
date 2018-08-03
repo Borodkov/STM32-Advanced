@@ -13,6 +13,8 @@
 /* Private define ------------------------------------------------------------*/
 #define NUM_SAMPLES 500
 /* Private macro -------------------------------------------------------------*/
+#define TIM_MEASURE_START time_start = SysTick->VAL
+#define TIM_MEASURE_END   time_end   = SysTick->VAL; time_diff = time_start - time_end
 /* Private variables ---------------------------------------------------------*/
 volatile uint32_t result = 0;
 uint32_t array1[NUM_SAMPLES];

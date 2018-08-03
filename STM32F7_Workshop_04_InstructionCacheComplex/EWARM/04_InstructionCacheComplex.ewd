@@ -2,7 +2,7 @@
 <project>
     <fileVersion>3</fileVersion>
     <configuration>
-        <name>STM32F7(AXI)</name>
+        <name>STM32F746-Disco(AXI)</name>
         <toolchain>
             <name>ARM</name>
         </toolchain>
@@ -44,7 +44,7 @@
                 </option>
                 <option>
                     <name>MemFile</name>
-                    <state>$TOOLKIT_DIR$\CONFIG\debugger\ST\STM32F756VG.ddf</state>
+                    <state>$TOOLKIT_DIR$\CONFIG\debugger\ST\STM32F746NG.ddf</state>
                 </option>
                 <option>
                     <name>RunToEnable</name>
@@ -76,7 +76,7 @@
                 </option>
                 <option>
                     <name>OCDownloadVerifyAll</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>OCProductVersion</name>
@@ -84,7 +84,7 @@
                 </option>
                 <option>
                     <name>OCDynDriverList</name>
-                    <state>ARMSIM_ID</state>
+                    <state>STLINK_ID</state>
                 </option>
                 <option>
                     <name>OCLastSavedByProductVersion</name>
@@ -987,7 +987,7 @@
                 </option>
                 <option>
                     <name>CCSTLinkInterfaceRadio</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CCSTLinkInterfaceCmdLine</name>
@@ -1000,7 +1000,7 @@
                 </option>
                 <option>
                     <name>CCCpuClockEdit</name>
-                    <state></state>
+                    <state>216.0</state>
                 </option>
                 <option>
                     <name>CCSwoClockAuto</name>
@@ -1417,7 +1417,7 @@
         </debuggerPlugins>
     </configuration>
     <configuration>
-        <name>STM32F7(TCM)</name>
+        <name>STM32F746-Disco(TCM)</name>
         <toolchain>
             <name>ARM</name>
         </toolchain>
@@ -1459,7 +1459,7 @@
                 </option>
                 <option>
                     <name>MemFile</name>
-                    <state></state>
+                    <state>$TOOLKIT_DIR$\CONFIG\debugger\ST\STM32F746NG.ddf</state>
                 </option>
                 <option>
                     <name>RunToEnable</name>
@@ -1491,7 +1491,7 @@
                 </option>
                 <option>
                     <name>OCDownloadVerifyAll</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>OCProductVersion</name>
@@ -1499,11 +1499,11 @@
                 </option>
                 <option>
                     <name>OCDynDriverList</name>
-                    <state>ARMSIM_ID</state>
+                    <state>STLINK_ID</state>
                 </option>
                 <option>
                     <name>OCLastSavedByProductVersion</name>
-                    <state></state>
+                    <state>8.11.3.13977</state>
                 </option>
                 <option>
                     <name>UseFlashLoader</name>
@@ -1527,7 +1527,7 @@
                 </option>
                 <option>
                     <name>FlashLoadersV3</name>
-                    <state></state>
+                    <state>$TOOLKIT_DIR$\config\flashloader\ST\FlashSTM32F74xxG.board</state>
                 </option>
                 <option>
                     <name>OCImagesSuppressCheck1</name>
@@ -1595,7 +1595,7 @@
                 </option>
                 <option>
                     <name>OCMulticoreNrOfCores</name>
-                    <state></state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>OCMulticoreMaster</name>
@@ -2402,7 +2402,7 @@
                 </option>
                 <option>
                     <name>CCSTLinkInterfaceRadio</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CCSTLinkInterfaceCmdLine</name>
@@ -2415,7 +2415,7 @@
                 </option>
                 <option>
                     <name>CCCpuClockEdit</name>
-                    <state></state>
+                    <state>216.0</state>
                 </option>
                 <option>
                     <name>CCSwoClockAuto</name>
@@ -2832,7 +2832,7 @@
         </debuggerPlugins>
     </configuration>
     <configuration>
-        <name>STM32F7(TCMRAM)</name>
+        <name>STM32F746-Disco(TCMRAM)</name>
         <toolchain>
             <name>ARM</name>
         </toolchain>
@@ -2874,7 +2874,7 @@
                 </option>
                 <option>
                     <name>MemFile</name>
-                    <state></state>
+                    <state>$TOOLKIT_DIR$\CONFIG\debugger\ST\STM32F746NG.ddf</state>
                 </option>
                 <option>
                     <name>RunToEnable</name>
@@ -2906,7 +2906,7 @@
                 </option>
                 <option>
                     <name>OCDownloadVerifyAll</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>OCProductVersion</name>
@@ -2914,11 +2914,11 @@
                 </option>
                 <option>
                     <name>OCDynDriverList</name>
-                    <state>ARMSIM_ID</state>
+                    <state>STLINK_ID</state>
                 </option>
                 <option>
                     <name>OCLastSavedByProductVersion</name>
-                    <state></state>
+                    <state>8.11.3.13977</state>
                 </option>
                 <option>
                     <name>UseFlashLoader</name>
@@ -2942,7 +2942,7 @@
                 </option>
                 <option>
                     <name>FlashLoadersV3</name>
-                    <state></state>
+                    <state>$TOOLKIT_DIR$\config\flashloader\ST\FlashSTM32F74xxG.board</state>
                 </option>
                 <option>
                     <name>OCImagesSuppressCheck1</name>
@@ -3010,7 +3010,7 @@
                 </option>
                 <option>
                     <name>OCMulticoreNrOfCores</name>
-                    <state></state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>OCMulticoreMaster</name>
@@ -3817,7 +3817,7 @@
                 </option>
                 <option>
                     <name>CCSTLinkInterfaceRadio</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CCSTLinkInterfaceCmdLine</name>
@@ -3830,7 +3830,7 @@
                 </option>
                 <option>
                     <name>CCCpuClockEdit</name>
-                    <state></state>
+                    <state>216.0</state>
                 </option>
                 <option>
                     <name>CCSwoClockAuto</name>

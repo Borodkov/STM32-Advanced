@@ -4,7 +4,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f7xx_hal.h"
-#include "stm32746g_discovery.h"
 
 /* Exported types ------------------------------------------------------------*/
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;

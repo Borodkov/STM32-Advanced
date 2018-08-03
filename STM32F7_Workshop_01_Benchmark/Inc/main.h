@@ -7,9 +7,6 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-#define TIM_MEASURE_START time_start = SysTick->VAL
-#define TIM_MEASURE_END   time_end   = SysTick->VAL; time_diff = time_start - time_end
-
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 
